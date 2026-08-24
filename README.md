@@ -48,10 +48,9 @@
 │       └── media/                    # Video assets
 │
 ├── Exp 3/                            # JavaScript Programs (as per Teacher's Presentation)
-│   ├── index.html                    # Experiment 3 Navigation Dashboard Hub
-│   ├── 1_simple.html                 # Program 1: Simple JavaScript (Variables, Operators, Control & Loops)
-│   ├── 2_functions.html              # Program 2: Functions, Objects, Constructor, Events & DOM
-│   └── 3_form_validation.html        # Program 3: Interactive Form Validation & Error Handling
+│   ├── 1_simple.html                 # Program 1: Simple JavaScript (DOM Manipulation)
+│   ├── 2_functions.html              # Program 2: Functions & Events (onclick, onmouseover)
+│   └── 3_form_validation.html        # Program 3: Form Validation
 │
 └── JavaScript.pptx                   # Reference Presentation
 ```
@@ -79,29 +78,17 @@ Demonstrates progressive CSS3 features:
 - **Responsive Web Design** via media queries (`@media (max-width: 700px)`) for mobile compatibility
 
 ### ⚡ Experiment 3: Client-Side JavaScript Programming
-Implements 3 comprehensive programs strictly adhering to the lecture presentation topics:
+Implements 3 programs strictly adhering to the lecture presentation topics:
 1. **Program 1 (`1_simple.html`) — Simple JavaScript Program**:
-   - Variables (`var`), Data Types (String, Number, Boolean, Array)
-   - Arithmetic, comparison, and logical operators
-   - Conditional structures (`if-else`, `switch` on Date)
-   - Loops (`for`, `while`)
-   - DOM manipulation (`innerHTML`, style modification, hide/show toggle)
-2. **Program 2 (`2_functions.html`) — Use of Functions & Objects**:
-   - Parameterized functions with return values
-   - Object literals with methods
-   - Constructor Functions with `this` keyword & `new` instantiation
-   - Event Handling (`onclick`, `onmouseover`, `onmouseout`, `onchange`)
-   - DOM querying via `getElementsByName()` and `getElementsByTagName()`
+   - Simple DOM manipulation changing element text dynamically on button click.
+2. **Program 2 (`2_functions.html`) — Use of Functions & Events**:
+   - Event handling using `onclick` alert function and `onmouseover` / `onmouseout` dynamic hover effects.
 3. **Program 3 (`3_form_validation.html`) — Form & Validation**:
-   - Event interception using `onsubmit="return validateForm()"`
-   - Client-side validation: Name alphabetic check, 10-digit mobile number, regex email format, Plot ID code formatting, and numeric bounds (0-100% moisture)
-   - Dynamic error spans with red input borders and green valid state feedback
-   - Exception Handling (`try ... catch`)
+   - Client-side validation: Name, 10-digit mobile number, email format, dropdown selection, and password length.
 
 ---
 
 ## 🚀 How to Run Locally
 
 1. Clone or download this repository.
-2. Open any `.html` file in your preferred web browser (Chrome, Firefox, Safari, Edge).
-3. To view Experiment 3, launch [`Exp 3/index.html`](Exp%203/index.html) to navigate between all three JavaScript programs.
+2. Open any `.html` file directly in your web browser.
