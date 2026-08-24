@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Farmer Registration</title>
+</head>
+<body>
+
+<header>
+  <h1>Smart Irrigation Advisory System (KJS-AGR-01)</h1>
+  <p>Smart Irrigation using AI &amp; Sensor Technology</p>
+</header>
+
+<nav>
+  <a href="index.html">Home</a> |
+  <a href="farm-info.html">Farm Dashboard</a> |
+  <a href="advisory.html">Irrigation Advisory</a> |
+  <a href="irrigation-table.html">Sensor Data</a> |
+  <a href="index.html#contact">Contact</a>
+</nav>
+
+<section>
+  <h2>Farmer Registration Form</h2>
+
+  <form action="#" method="post">
+
+    <fieldset>
+      <legend>Personal Details</legend>
+
+      <label for="name">Name:</label><br>
+      <input type="text" id="name" name="name" placeholder="Enter your name" required autofocus><br><br>
+
+      <label for="mobile">Mobile Number:</label><br>
+      <input type="tel" id="mobile" name="mobile" placeholder="10 digit number" pattern="[0-9]{10}" required><br><br>
+
+      <label for="email">Email:</label><br>
+      <input type="email" id="email" name="email" placeholder="you@example.com" required><br><br>
+    </fieldset>
+
+    <fieldset>
+      <legend>Farm Details</legend>
+
+      <label for="plotid">Plot ID:</label><br>
+      <input type="text" id="plotid" name="plotid" placeholder="e.g. PLT-A-07" required><br><br>
+
+      <label for="village">Village:</label><br>
+      <input type="text" id="village" name="village" placeholder="Enter village name" required><br><br>
+
+      <label for="cropstage">Crop Stage:</label><br>
+      <select id="cropstage" name="cropstage" required>
+        <option value="">--Select--</option>
+        <option value="germination">Germination</option>
+        <option value="tillering">Tillering</option>
+        <option value="grand-growth">Grand Growth</option>
+        <option value="maturity">Maturity</option>
+      </select><br><br>
+
+      <label for="soiltype">Soil Type:</label><br>
+      <select id="soiltype" name="soiltype" required>
+        <option value="">--Select--</option>
+        <option value="clay">Clay</option>
+        <option value="loamy">Loamy</option>
+        <option value="sandy">Sandy</option>
+      </select><br><br>
+
+      <label for="irrigation-method">Irrigation Method:</label><br>
+      <select id="irrigation-method" name="irrigation-method" required>
+        <option value="">--Select--</option>
+        <option value="drip">Drip Irrigation</option>
+        <option value="sprinkler">Sprinkler</option>
+        <option value="flood">Flood/Furrow</option>
+      </select><br><br>
+
+      <label for="regdate">Date:</label><br>
+      <input type="date" id="regdate" name="regdate" required><br><br>
+
+      <label for="farmphoto">Upload Farm Photo:</label><br>
+      <input type="file" id="farmphoto" name="farmphoto" accept="image/*"><br><br>
+    </fieldset>
+
+    <input type="submit" value="Register">
+
+  </form>
+</section>
+
+<footer>
+  <p>&copy; 2026 Smart Irrigation Advisory System</p>
+</footer>
+
+</body>
+</html>

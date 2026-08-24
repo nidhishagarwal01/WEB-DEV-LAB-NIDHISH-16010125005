@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Farm Plot Map</title>
+</head>
+<body>
+
+<header>
+  <h1>Smart Irrigation Advisory System (KJS-AGR-01)</h1>
+  <p>Smart Irrigation using AI &amp; Sensor Technology</p>
+</header>
+
+<nav>
+  <a href="index.html">Home</a> |
+  <a href="farm-info.html">Farm Dashboard</a> |
+  <a href="advisory.html">Irrigation Advisory</a> |
+  <a href="irrigation-table.html">Sensor Data</a> |
+  <a href="index.html#contact">Contact</a>
+</nav>
+
+<section>
+  <h2>Farm Plot Map</h2>
+  <p>Click on a plot to see its details.</p>
+
+  <img src="images/farm-map.png" alt="Farm map with Plot A, Plot B and Plot C"
+       usemap="#farmmap" width="600" height="400">
+
+  <map name="farmmap">
+    <area shape="rect" coords="30,30,280,180" href="#plotA" alt="Plot A">
+    <area shape="rect" coords="320,30,570,180" href="#plotB" alt="Plot B">
+    <area shape="rect" coords="30,220,570,370" href="#plotC" alt="Plot C">
+  </map>
+</section>
+
+<section id="plotA">
+  <h3>Plot A</h3>
+  <p>Area: 2.1 hectares, Crop Stage: Tillering, Soil Moisture: 34%</p>
+</section>
+
+<section id="plotB">
+  <h3>Plot B</h3>
+  <p>Area: 1.8 hectares, Crop Stage: Grand Growth, Soil Moisture: 22%</p>
+</section>
+
+<section id="plotC">
+  <h3>Plot C</h3>
+  <p>Area: 3.4 hectares, Crop Stage: Maturity, Soil Moisture: 41%</p>
+</section>
+
+<footer>
+  <p>&copy; 2026 Smart Irrigation Advisory System</p>
+</footer>
+
+</body>
+</html>
