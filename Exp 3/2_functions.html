@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Practical 2: Use of Functions & Objects</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f4f8;
+            color: #1e293b;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #123c69;
+            border-bottom: 3px solid #1f6f8b;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        h2 {
+            color: #1f6f8b;
+            margin-top: 25px;
+            font-size: 1.25rem;
+        }
+        .card {
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-left: 5px solid #1f6f8b;
+            padding: 16px 20px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+        input, select {
+            padding: 8px 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+        button {
+            background: linear-gradient(135deg, #123c69, #1f6f8b);
+            color: white;
+            border: none;
+            padding: 9px 18px;
+            font-size: 0.95rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-right: 6px;
+            margin-bottom: 8px;
+        }
+        button:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+        .hover-target {
+            display: inline-block;
+            padding: 12px 18px;
+            background-color: #e2e8f0;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s, color 0.3s;
+        }
+        .output-box {
+            background: #eef4f9;
+            border: 1px solid #cbd5e1;
+            padding: 14px;
+            border-radius: 6px;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 0.95rem;
+            margin-top: 10px;
+            line-height: 1.6;
+        }
+        .radio-group {
+            margin: 10px 0;
+        }
+        .radio-group label {
+            margin-right: 15px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Experiment 3 &mdash; Program 2: Functions, Objects &amp; Events</h1>
+    <p><strong>Topic:</strong> Function Declarations with Parameters &amp; Return Values, JavaScript Objects (Literals &amp; Constructors), Event Handlers, and DOM Access Methods.</p>
+
+    <!-- Section 1: Functions with Parameters & Return Value -->
+    <div class="card">
+        <h2>1. Functions with Parameters &amp; Return Values</h2>
+        <p>Calculate required irrigation duration based on farm area (hectares) and current soil moisture percentage.</p>
+        <label for="plotArea">Plot Area (ha):</label>
+        <input type="number" id="plotArea" value="2.5" step="0.1" min="0.1">
+        <label for="currentMoisture">Soil Moisture (%):</label>
+        <input type="number" id="currentMoisture" value="25" min="0" max="100">
+        <br>
+        <button onclick="handleCalculation()">Calculate Water Requirement</button>
+        <div id="calc-output" class="output-box">Enter values and click Calculate.</div>
+    </div>
+
+    <!-- Section 2: JavaScript Objects (Literal & Constructor) -->
+    <div class="card">
+        <h2>2. JavaScript Objects (Literals &amp; Constructors)</h2>
+        <p>Demonstrates object literals with methods and Constructor Functions using the <code>this</code> keyword (Slide 52-57).</p>
+        <button onclick="displayObjects()">Inspect Objects</button>
+        <div id="object-output" class="output-box">Click above to instantiate and inspect JavaScript objects.</div>
+    </div>
+
+    <!-- Section 3: Event Handlers (Mouse & Change Events) -->
+    <div class="card">
+        <h2>3. Event Handling (onclick, onmouseover, onmouseout, onchange)</h2>
+        <p>Interact with the elements below to trigger real-time JavaScript events.</p>
+        <div id="hoverBox" class="hover-target" 
+             onmouseover="handleMouseOver()" 
+             onmouseout="handleMouseOut()">
+            Hover cursor over this box
+        </div>
+        <div style="margin-top: 15px;">
+            <label for="cropSelect">Change Crop Stage (onchange):</label>
+            <select id="cropSelect" onchange="handleCropChange(this.value)">
+                <option value="">-- Select Stage --</option>
+                <option value="Germination">Germination</option>
+                <option value="Tillering">Tillering</option>
+                <option value="Grand Growth">Grand Growth</option>
+                <option value="Maturity">Maturity</option>
+            </select>
+        </div>
+        <div id="event-output" class="output-box">Event status will appear here.</div>
+    </div>
+
+    <!-- Section 4: DOM Methods (getElementsByName & getElementsByTagName) -->
+    <div class="card">
+        <h2>4. DOM Selection Methods (getElementsByName &amp; getElementsByTagName)</h2>
+        <p>Demonstrating element counting and attribute retrieval as illustrated in PPT Slides 58-61.</p>
+        
+        <div class="radio-group">
+            <strong>Select Soil Type:</strong>
+            <label><input type="radio" name="soilType" value="Clay"> Clay</label>
+            <label><input type="radio" name="soilType" value="Loamy" checked> Loamy</label>
+            <label><input type="radio" name="soilType" value="Sandy"> Sandy</label>
+        </div>
+
+        <button onclick="countRadioElements()">Count Radio Elements (getElementsByName)</button>
+        <button onclick="countTagElements()">Count Heading Tags (getElementsByTagName)</button>
+        <div id="dom-output" class="output-box">Click a selection button above.</div>
+    </div>
+</div>
+
+<script>
+    // 1. Function with Parameters & Return Value (Slide 51)
+    function calculateIrrigationDuration(areaHectares, moisturePercentage) {
+        // Base rate: 20 mins per hectare at 0% moisture deficit
+        var targetMoisture = 50;
+        if (moisturePercentage >= targetMoisture) {
+            return 0; // No irrigation needed
+        }
+        var moistureDeficit = targetMoisture - moisturePercentage;
+        var durationMinutes = areaHectares * (moistureDeficit * 0.8);
+        return Math.round(durationMinutes);
+    }
+
+    function handleCalculation() {
+        var area = parseFloat(document.getElementById("plotArea").value);
+        var moisture = parseFloat(document.getElementById("currentMoisture").value);
+
+        if (isNaN(area) || isNaN(moisture)) {
+            document.getElementById("calc-output").innerHTML = "<span style='color:red;'>Please enter valid numerical values.</span>";
+            return;
+        }
+
+        // Call user-defined function
+        var requiredTime = calculateIrrigationDuration(area, moisture);
+        var resultText = "<strong>Calculation Result:</strong><br>" +
+                         "&bull; Target Field Area: " + area + " Hectares<br>" +
+                         "&bull; Current Moisture: " + moisture + "%<br>" +
+                         "&bull; Recommended Irrigation Duration: <strong>" + requiredTime + " minutes</strong> (" + (requiredTime / 60).toFixed(1) + " hours)";
+
+        document.getElementById("calc-output").innerHTML = resultText;
+    }
+
+    // 2. JavaScript Objects: Literal and Constructor (Slides 52 - 57)
+    function displayObjects() {
+        // Object Literal with properties and method (Slides 53-54)
+        var sensorHub = {
+            hubId: "HUB-AGR-09",
+            location: "Sugarcane Field Sector 4",
+            activeSensors: 8,
+            getSummary: function() {
+                return "Hub ID: " + this.hubId + " | Location: " + this.location + " (" + this.activeSensors + " sensors online)";
+            }
+        };
+
+        // Constructor Function using 'this' and 'new' (Slides 56-57)
+        function FarmerPlot(plotId, ownerName, cropType, areaHectares) {
+            this.plotId = plotId;
+            this.ownerName = ownerName;
+            this.cropType = cropType;
+            this.areaHectares = areaHectares;
+            this.getDetails = function() {
+                return "[" + this.plotId + "] Farmer: " + this.ownerName + " | Crop: " + this.cropType + " (" + this.areaHectares + " ha)";
+            };
+        }
+
+        // Instantiate using 'new'
+        var plot1 = new FarmerPlot("PLT-A-07", "Ramesh Patil", "Sugarcane", 2.1);
+        var plot2 = new FarmerPlot("PLT-B-03", "Suresh Jadhav", "Sugarcane", 1.8);
+
+        var outputHTML = "<strong>1. Object Literal Method Call:</strong><br>" + sensorHub.getSummary() + "<br><br>" +
+                         "<strong>2. Constructor-instantiated Objects (using new):</strong><br>" +
+                         "&bull; " + plot1.getDetails() + "<br>" +
+                         "&bull; " + plot2.getDetails();
+
+        document.getElementById("object-output").innerHTML = outputHTML;
+    }
+
+    // 3. Event Handlers (Slides 62-66)
+    function handleMouseOver() {
+        var box = document.getElementById("hoverBox");
+        box.style.backgroundColor = "#ff8c42";
+        box.style.color = "#ffffff";
+        box.innerHTML = "Mouse is OVER the element! (onmouseover event)";
+        document.getElementById("event-output").innerHTML = "Event triggered: <code>onmouseover</code> at " + new Date().toLocaleTimeString();
+    }
+
+    function handleMouseOut() {
+        var box = document.getElementById("hoverBox");
+        box.style.backgroundColor = "#e2e8f0";
+        box.style.color = "#1e293b";
+        box.innerHTML = "Hover cursor over this box";
+        document.getElementById("event-output").innerHTML = "Event triggered: <code>onmouseout</code> at " + new Date().toLocaleTimeString();
+    }
+
+    function handleCropChange(selectedStage) {
+        if (!selectedStage) {
+            document.getElementById("event-output").innerHTML = "Select a stage to trigger <code>onchange</code> event.";
+            return;
+        }
+        var advice = "";
+        if (selectedStage === "Grand Growth") {
+            advice = "Peak irrigation required (High water intake).";
+        } else if (selectedStage === "Maturity") {
+            advice = "Minimal irrigation required (Sugar accumulation phase).";
+        } else {
+            advice = "Moderate water supply needed.";
+        }
+
+        document.getElementById("event-output").innerHTML = "Event triggered: <code>onchange</code>. Selected: <strong>" + selectedStage + "</strong> &mdash; " + advice;
+    }
+
+    // 4. DOM Selection Methods (Slides 58 - 61)
+    function countRadioElements() {
+        // getElementsByName (Slide 60)
+        var soilRadios = document.getElementsByName("soilType");
+        var selectedValue = "";
+        for (var i = 0; i < soilRadios.length; i++) {
+            if (soilRadios[i].checked) {
+                selectedValue = soilRadios[i].value;
+            }
+        }
+        var msg = "<strong>document.getElementsByName('soilType'):</strong><br>" +
+                  "&bull; Total radio input elements found: <strong>" + soilRadios.length + "</strong><br>" +
+                  "&bull; Currently checked soil type: <strong>" + selectedValue + "</strong>";
+
+        document.getElementById("dom-output").innerHTML = msg;
+    }
+
+    function countTagElements() {
+        // getElementsByTagName (Slide 61)
+        var h2Tags = document.getElementsByTagName("h2");
+        var buttonTags = document.getElementsByTagName("button");
+
+        var msg = "<strong>document.getElementsByTagName():</strong><br>" +
+                  "&bull; Total &lt;h2&gt; heading tags on this page: <strong>" + h2Tags.length + "</strong><br>" +
+                  "&bull; Total &lt;button&gt; elements on this page: <strong>" + buttonTags.length + "</strong>";
+
+        document.getElementById("dom-output").innerHTML = msg;
+    }
+</script>
+
+</body>
+</html>

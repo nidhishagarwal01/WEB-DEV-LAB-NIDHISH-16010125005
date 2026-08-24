@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Practical 1: Simple JavaScript Program</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f4f8;
+            color: #1e293b;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #123c69;
+            border-bottom: 3px solid #1f6f8b;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        h2 {
+            color: #1f6f8b;
+            margin-top: 25px;
+            font-size: 1.25rem;
+        }
+        .card {
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-left: 5px solid #ff8c42;
+            padding: 16px 20px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+        button {
+            background: linear-gradient(135deg, #123c69, #1f6f8b);
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            font-size: 0.95rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+        button:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+        .output-box {
+            background: #eef4f9;
+            border: 1px solid #cbd5e1;
+            padding: 14px;
+            border-radius: 6px;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 0.95rem;
+            margin-top: 10px;
+            line-height: 1.6;
+        }
+        .highlight {
+            font-weight: bold;
+            color: #0f172a;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Experiment 3 &mdash; Program 1: Simple JavaScript</h1>
+    <p><strong>Topic:</strong> Basic JavaScript Syntax, Variables, Data Types, Operators, Conditional Statements, Loops, and DOM Output.</p>
+
+    <!-- Section 1: Variables, Data Types & Operators -->
+    <div class="card">
+        <h2>1. Variables, Data Types &amp; Arithmetic Operators</h2>
+        <p>Demonstrating <code>var</code> declaration, String, Number, Boolean, and Array types with arithmetic operations.</p>
+        <button onclick="runBasicVariables()">Execute Variables &amp; Operations</button>
+        <div id="var-output" class="output-box">Click the button above to view output.</div>
+    </div>
+
+    <!-- Section 2: Conditional Statements (if-else & switch) -->
+    <div class="card">
+        <h2>2. Conditional Statements (if-else &amp; switch)</h2>
+        <p>Checks soil moisture status using <code>if-else</code> and determines crop season using <code>switch</code> on the current month.</p>
+        <button onclick="runConditionals()">Evaluate Conditions</button>
+        <div id="cond-output" class="output-box">Click the button above to evaluate conditions.</div>
+    </div>
+
+    <!-- Section 3: Loops (for & while) -->
+    <div class="card">
+        <h2>3. Loops (for Loop &amp; while Loop)</h2>
+        <p>Iterates through an array of farm sensor readings using <code>for</code> and calculates cumulative water requirement with <code>while</code>.</p>
+        <button onclick="runLoops()">Execute Loops</button>
+        <div id="loop-output" class="output-box">Click the button above to execute loops.</div>
+    </div>
+
+    <!-- Section 4: Dynamic DOM Style & Visibility Manipulation -->
+    <div class="card">
+        <h2>4. DOM Element Modification &amp; Display Control</h2>
+        <p id="dom-target">This text can be dynamically modified in content, style, and visibility via JavaScript DOM methods.</p>
+        <button onclick="changeContent()">Change Content</button>
+        <button onclick="changeStyle()">Change Style</button>
+        <button onclick="toggleVisibility()">Toggle Hide / Show</button>
+        <button onclick="resetDOM()">Reset</button>
+    </div>
+</div>
+
+<script>
+    // 1. Basic Variables, Data Types, and Operators Demo
+    function runBasicVariables() {
+        // Variables & Data Types (Slides 23 - 35)
+        var systemName = "Smart Irrigation Controller"; // String
+        var baseMoisture = 28.5;                        // Number (Float)
+        var requiredMoisture = 45;                      // Number (Integer)
+        var isPumpActive = true;                        // Boolean
+        var sensors = ["Soil Moisture", "Temperature", "Humidity", "Rainfall"]; // Array
+
+        // Array operations (Slides 34-35)
+        sensors.push("Pressure Sensor");
+
+        // Arithmetic operations (Slide 36)
+        var moistureDeficit = requiredMoisture - baseMoisture;
+        var efficiencyRatio = (baseMoisture / requiredMoisture) * 100;
+
+        // Output to DOM using innerHTML (Slides 14, 21)
+        var resultHTML = "<strong>System:</strong> " + systemName + "<br>" +
+            "<strong>Base Moisture:</strong> " + baseMoisture + "% (Type: " + typeof(baseMoisture) + ")<br>" +
+            "<strong>Required Moisture:</strong> " + requiredMoisture + "%<br>" +
+            "<strong>Moisture Deficit:</strong> " + moistureDeficit.toFixed(1) + "%<br>" +
+            "<strong>Current Efficiency:</strong> " + efficiencyRatio.toFixed(2) + "%<br>" +
+            "<strong>Pump Status:</strong> " + (isPumpActive ? "ACTIVE" : "INACTIVE") + "<br>" +
+            "<strong>Total Connected Sensors (" + sensors.length + "):</strong> " + sensors.join(", ");
+
+        document.getElementById("var-output").innerHTML = resultHTML;
+
+        // Console log demonstration (Slide 21)
+        console.log("Variables and operations executed successfully.", { baseMoisture, requiredMoisture, moistureDeficit });
+    }
+
+    // 2. Conditional Statements Demo (Slides 40, 49-50)
+    function runConditionals() {
+        var moisture = 22; // Current soil moisture percentage
+        var statusMessage = "";
+
+        // if-else if-else structure (Slide 40)
+        if (moisture < 25) {
+            statusMessage = "CRITICAL: Soil moisture is " + moisture + "%. Immediate irrigation required!";
+        } else if (moisture >= 25 && moisture < 40) {
+            statusMessage = "MODERATE: Soil moisture is " + moisture + "%. Scheduled irrigation advised.";
+        } else {
+            statusMessage = "OPTIMAL: Soil moisture is " + moisture + "%. No irrigation needed.";
+        }
+
+        // Switch Statement based on Date Month (Slides 49-50, 81)
+        var currentMonth = new Date().getMonth(); // 0 = Jan, 11 = Dec
+        var season = "";
+        switch (currentMonth) {
+            case 2: case 3: case 4: case 5:
+                season = "Summer Season (High Water Demand)";
+                break;
+            case 6: case 7: case 8: case 9:
+                season = "Monsoon Season (Rainfall Dependent)";
+                break;
+            case 10: case 11: case 0: case 1:
+                season = "Winter Season (Low Water Demand)";
+                break;
+            default:
+                season = "Standard Growing Season";
+        }
+
+        var result = "<strong>Moisture Check (if-else):</strong> " + statusMessage + "<br>" +
+                     "<strong>Seasonal Schedule (switch):</strong> " + season + " (Month Index: " + currentMonth + ")";
+
+        document.getElementById("cond-output").innerHTML = result;
+    }
+
+    // 3. Loops Demo (Slides 41 - 48)
+    function runLoops() {
+        var sensorReadings = [28, 32, 22, 19, 41];
+        var forLoopOutput = "<strong>1. for Loop (Sensor Readings):</strong><br>";
+
+        // for Loop (Slides 47-48)
+        for (var i = 0; i < sensorReadings.length; i++) {
+            forLoopOutput += "&bull; Sensor Plot #" + (i + 1) + ": " + sensorReadings[i] + "% moisture<br>";
+        }
+
+        // while Loop (Slides 41-43)
+        var whileLoopOutput = "<br><strong>2. while Loop (Irrigation Water Flow Simulation):</strong><br>";
+        var waterLiter = 10;
+        while (waterLiter <= 50) {
+            whileLoopOutput += "Discharged: " + waterLiter + " Liters | ";
+            waterLiter += 10;
+        }
+
+        document.getElementById("loop-output").innerHTML = forLoopOutput + whileLoopOutput;
+    }
+
+    // 4. DOM Manipulation (Slides 14 - 17)
+    function changeContent() {
+        document.getElementById("dom-target").innerHTML = "<strong>Content Updated!</strong> JavaScript successfully modified the DOM innerHTML at " + new Date().toLocaleTimeString() + ".";
+    }
+
+    function changeStyle() {
+        var elem = document.getElementById("dom-target");
+        elem.style.color = "#d97706";
+        elem.style.fontWeight = "bold";
+        elem.style.fontSize = "1.1rem";
+        elem.style.backgroundColor = "#fef3c7";
+        elem.style.padding = "10px";
+        elem.style.borderRadius = "6px";
+    }
+
+    function toggleVisibility() {
+        var elem = document.getElementById("dom-target");
+        if (elem.style.display === "none") {
+            elem.style.display = "block";
+        } else {
+            elem.style.display = "none";
+        }
+    }
+
+    function resetDOM() {
+        var elem = document.getElementById("dom-target");
+        elem.innerHTML = "This text can be dynamically modified in content, style, and visibility via JavaScript DOM methods.";
+        elem.style = "";
+    }
+</script>
+
+</body>
+</html>
