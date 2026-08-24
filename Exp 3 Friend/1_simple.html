@@ -1,72 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Experiment 3 - Program 1: Simple JavaScript</title>
+    <title>Program 1 - Simple JavaScript</title>
 </head>
 <body>
-    <h2>Experiment 3: Program 1 - Simple JavaScript Program</h2>
-    <p>This program demonstrates variables, arithmetic operators, if-else conditional logic, loops, and DOM manipulation.</p>
-    <hr>
-
-    <h3>1. Simple Interest &amp; Arithmetic Calculation</h3>
-    <script>
-        var principal = 5000;
-        var rate = 7.5;
-        var time = 2; // in years
-
-        var simpleInterest = (principal * rate * time) / 100;
-        var totalAmount = principal + simpleInterest;
-
-        document.write("Principal Amount: Rs. " + principal + "<br>");
-        document.write("Rate of Interest: " + rate + "% per annum<br>");
-        document.write("Time Period: " + time + " years<br>");
-        document.write("<b>Simple Interest = Rs. " + simpleInterest + "</b><br>");
-        document.write("<b>Total Amount Payable = Rs. " + totalAmount + "</b><br>");
-    </script>
-
-    <hr>
-    <h3>2. Conditional Statement (if - else if - else)</h3>
-    <script>
-        var temperature = 32; // in degree Celsius
-        document.write("Current Temperature: " + temperature + "&deg;C<br>");
-
-        if (temperature >= 35) {
-            document.write("Weather Status: <b>Hot Weather</b> (Turn on AC)<br>");
-        } else if (temperature >= 20) {
-            document.write("Weather Status: <b>Pleasant / Moderate Weather</b><br>");
-        } else {
-            document.write("Weather Status: <b>Cold Weather</b> (Wear warm clothes)<br>");
-        }
-    </script>
-
-    <hr>
-    <h3>3. Loops (for Loop and while Loop)</h3>
-    <script>
-        document.write("<b>Multiplication Table of 5 using for loop:</b><br>");
-        for (var i = 1; i <= 5; i++) {
-            document.write("5 &times; " + i + " = " + (5 * i) + "<br>");
-        }
-
-        document.write("<br><b>Countdown from 5 to 1 using while loop:</b><br>");
-        var count = 5;
-        while (count >= 1) {
-            document.write(count + " ");
-            count--;
-        }
-        document.write("<br>");
-    </script>
-
-    <hr>
-    <h3>4. Simple DOM Manipulation</h3>
-    <p id="msg">This is a default paragraph text.</p>
-    <button onclick="updateMessage()">Click to Change Message</button>
+    <h2>Simple JavaScript Program</h2>
+    <p id="msg">This is default message text.</p>
+    <button onclick="updateText()">Click to Update</button>
 
     <script>
-        function updateMessage() {
-            var elem = document.getElementById("msg");
-            elem.innerHTML = "Welcome! JavaScript successfully changed this content.";
-            elem.style.color = "blue";
-            elem.style.fontWeight = "bold";
+        function updateText() {
+            document.getElementById("msg").innerHTML = "Welcome! The message has been updated via JavaScript.";
         }
     </script>
 </body>

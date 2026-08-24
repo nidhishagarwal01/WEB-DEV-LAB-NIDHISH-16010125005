@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Experiment 3 - Program 3: Form Validation</title>
+    <title>Program 3 - Form Validation</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
         }
         .form-box {
-            width: 400px;
+            width: 420px;
             padding: 20px;
             border: 1px solid #bbb;
             border-radius: 6px;
-            background-color: #fcfcfc;
+            background-color: #fafafa;
         }
-        .form-field {
-            margin-bottom: 15px;
+        .form-row {
+            margin-bottom: 14px;
         }
         label {
             display: block;
@@ -23,7 +23,7 @@
             font-weight: bold;
         }
         input[type="text"],
-        input[type="number"],
+        input[type="password"],
         select {
             width: 95%;
             padding: 8px;
@@ -31,7 +31,7 @@
             border-radius: 4px;
             box-sizing: border-box;
         }
-        .error-text {
+        .err-msg {
             color: red;
             font-size: 13px;
             display: block;
@@ -51,69 +51,69 @@
         }
     </style>
     <script>
-        function validateLibraryForm() {
-            var name = document.getElementById("name").value;
-            var email = document.getElementById("email").value;
-            var phone = document.getElementById("phone").value;
-            var age = document.getElementById("age").value;
-            var membership = document.getElementById("membership").value;
+        function checkForm() {
+            var studentName = document.getElementById("studentName").value;
+            var studentEmail = document.getElementById("studentEmail").value;
+            var contactNo = document.getElementById("contactNo").value;
+            var department = document.getElementById("department").value;
+            var userPass = document.getElementById("userPass").value;
 
-            // Clear previous errors
+            // Clear previous error messages
             document.getElementById("nameError").innerHTML = "";
             document.getElementById("emailError").innerHTML = "";
-            document.getElementById("phoneError").innerHTML = "";
-            document.getElementById("ageError").innerHTML = "";
-            document.getElementById("membershipError").innerHTML = "";
+            document.getElementById("contactError").innerHTML = "";
+            document.getElementById("deptError").innerHTML = "";
+            document.getElementById("passError").innerHTML = "";
 
-            var status = true;
+            var formValid = true;
 
-            // 1. Name Check
-            if (name == "") {
-                document.getElementById("nameError").innerHTML = "Name cannot be empty.";
-                status = false;
-            } else if (name.length < 3) {
-                document.getElementById("nameError").innerHTML = "Name must be at least 3 characters.";
-                status = false;
+            // 1. Name check
+            if (studentName == "") {
+                document.getElementById("nameError").innerHTML = "Please enter student name.";
+                formValid = false;
+            } else if (studentName.length < 3) {
+                document.getElementById("nameError").innerHTML = "Name must have at least 3 characters.";
+                formValid = false;
             }
 
-            // 2. Email Check
-            var atSymbol = email.indexOf("@");
-            var dotSymbol = email.lastIndexOf(".");
-            if (email == "") {
-                document.getElementById("emailError").innerHTML = "Email is required.";
-                status = false;
-            } else if (atSymbol < 1 || dotSymbol < atSymbol + 2 || dotSymbol + 2 >= email.length) {
+            // 2. Email check
+            var atIndex = studentEmail.indexOf("@");
+            var dotIndex = studentEmail.lastIndexOf(".");
+            if (studentEmail == "") {
+                document.getElementById("emailError").innerHTML = "Email address is required.";
+                formValid = false;
+            } else if (atIndex < 1 || (dotIndex - atIndex < 2) || (dotIndex + 2 >= studentEmail.length)) {
                 document.getElementById("emailError").innerHTML = "Enter a valid email address.";
-                status = false;
+                formValid = false;
             }
 
-            // 3. Phone Number Check (10 digits)
-            if (phone == "") {
-                document.getElementById("phoneError").innerHTML = "Contact number is required.";
-                status = false;
-            } else if (isNaN(phone) || phone.length != 10) {
-                document.getElementById("phoneError").innerHTML = "Contact must be a 10-digit number.";
-                status = false;
+            // 3. Contact number check (10 digits)
+            if (contactNo == "") {
+                document.getElementById("contactError").innerHTML = "Contact number is required.";
+                formValid = false;
+            } else if (isNaN(contactNo) || contactNo.length != 10) {
+                document.getElementById("contactError").innerHTML = "Enter a valid 10-digit mobile number.";
+                formValid = false;
             }
 
-            // 4. Age Check (15 - 80)
-            if (age == "") {
-                document.getElementById("ageError").innerHTML = "Age is required.";
-                status = false;
-            } else if (isNaN(age) || age < 15 || age > 80) {
-                document.getElementById("ageError").innerHTML = "Age must be between 15 and 80.";
-                status = false;
+            // 4. Department dropdown check
+            if (department == "") {
+                document.getElementById("deptError").innerHTML = "Please choose a department.";
+                formValid = false;
             }
 
-            // 5. Membership Type Check
-            if (membership == "") {
-                document.getElementById("membershipError").innerHTML = "Please select a membership plan.";
-                status = false;
+            // 5. Password check
+            if (userPass == "") {
+                document.getElementById("passError").innerHTML = "Password cannot be empty.";
+                formValid = false;
+            } else if (userPass.length < 6) {
+                document.getElementById("passError").innerHTML = "Password must be minimum 6 characters.";
+                formValid = false;
             }
 
-            // If all validations succeed
-            if (status) {
-                alert("Library Membership Form Submitted Successfully!\nMember Name: " + name);
+            // Form validation result
+            if (formValid) {
+                alert("Registration Complete!\nWelcome, " + studentName);
                 return true;
             }
 
@@ -123,46 +123,46 @@
 </head>
 <body>
 
-    <h2>Experiment 3: Program 3 - Library Membership Form Validation</h2>
-
+    <h2>Student Admission Form Validation</h2>
+    
     <div class="form-box">
-        <form onsubmit="return validateLibraryForm()">
-            <div class="form-field">
-                <label>Member Name:</label>
-                <input type="text" id="name" placeholder="Enter your full name">
-                <span id="nameError" class="error-text"></span>
+        <form onsubmit="return checkForm()">
+            <div class="form-row">
+                <label>Student Name:</label>
+                <input type="text" id="studentName" placeholder="Enter student name">
+                <span id="nameError" class="err-msg"></span>
             </div>
 
-            <div class="form-field">
+            <div class="form-row">
                 <label>Email Address:</label>
-                <input type="text" id="email" placeholder="name@domain.com">
-                <span id="emailError" class="error-text"></span>
+                <input type="text" id="studentEmail" placeholder="student@somaiya.edu">
+                <span id="emailError" class="err-msg"></span>
             </div>
 
-            <div class="form-field">
-                <label>Phone Number:</label>
-                <input type="text" id="phone" placeholder="10-digit mobile number">
-                <span id="phoneError" class="error-text"></span>
+            <div class="form-row">
+                <label>Contact Number:</label>
+                <input type="text" id="contactNo" placeholder="10-digit phone number">
+                <span id="contactError" class="err-msg"></span>
             </div>
 
-            <div class="form-field">
-                <label>Age:</label>
-                <input type="number" id="age" placeholder="e.g. 20">
-                <span id="ageError" class="error-text"></span>
-            </div>
-
-            <div class="form-field">
-                <label>Membership Plan:</label>
-                <select id="membership">
-                    <option value="">-- Select Plan --</option>
-                    <option value="Standard">Standard (1 Month)</option>
-                    <option value="Silver">Silver (6 Months)</option>
-                    <option value="Gold">Gold (1 Year)</option>
+            <div class="form-row">
+                <label>Department:</label>
+                <select id="department">
+                    <option value="">-- Choose Department --</option>
+                    <option value="Computer">Computer Engineering</option>
+                    <option value="IT">Information Technology</option>
+                    <option value="AIDS">Artificial Intelligence &amp; Data Science</option>
                 </select>
-                <span id="membershipError" class="error-text"></span>
+                <span id="deptError" class="err-msg"></span>
             </div>
 
-            <input type="submit" value="Submit Form">
+            <div class="form-row">
+                <label>Password:</label>
+                <input type="password" id="userPass" placeholder="Min 6 characters">
+                <span id="passError" class="err-msg"></span>
+            </div>
+
+            <input type="submit" value="Register Now">
         </form>
     </div>
 

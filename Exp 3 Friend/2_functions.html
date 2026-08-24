@@ -1,85 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Experiment 3 - Program 2: Use of Functions</title>
+    <title>Program 2 - Functions &amp; Events</title>
 </head>
 <body>
-    <h2>Experiment 3: Program 2 - Functions, Objects &amp; Events</h2>
-    <p>This program demonstrates user-defined functions with return values, object creation, and event handling.</p>
-    <hr>
+    <h2>JavaScript Functions &amp; Events</h2>
 
-    <h3>1. User-Defined Function (Electricity Bill Calculation)</h3>
-    <script>
-        // Function with parameters and return value
-        function calculateElectricityBill(units, ratePerUnit) {
-            var total = units * ratePerUnit;
-            return total;
-        }
-
-        var consumedUnits = 120;
-        var unitPrice = 6.50;
-        var billAmount = calculateElectricityBill(consumedUnits, unitPrice);
-
-        document.write("Units Consumed: " + consumedUnits + " units<br>");
-        document.write("Rate per Unit: Rs. " + unitPrice + "<br>");
-        document.write("<b>Total Electricity Bill = Rs. " + billAmount + "</b><br>");
-    </script>
-
-    <hr>
-    <h3>2. JavaScript Objects</h3>
-    <script>
-        // Object Literal
-        var book = {
-            title: "Web Technologies & Programming",
-            author: "A. P. Godse",
-            price: 499
-        };
-
-        document.write("<b>Book Details (Object Literal):</b><br>");
-        document.write("Title: " + book.title + "<br>");
-        document.write("Author: " + book.author + "<br>");
-        document.write("Price: Rs. " + book.price + "<br><br>");
-
-        // Object Constructor Function
-        function Car(brand, model, price) {
-            this.brand = brand;
-            this.model = model;
-            this.price = price;
-        }
-
-        var car1 = new Car("Tata", "Harrier", "Rs. 18 Lakhs");
-        document.write("<b>Car Details (Constructor Object):</b><br>");
-        document.write("Brand: " + car1.brand + ", Model: " + car1.model + ", Price: " + car1.price + "<br>");
-    </script>
-
-    <hr>
-    <h3>3. Event Handling (onclick &amp; onmouseover)</h3>
-    
-    <button onclick="showNotification()">Click Me (onclick)</button>
+    <button onclick="showAlert()">Click Here</button>
     <br><br>
-    
-    <div id="cardBox" onmouseover="onHover()" onmouseout="onLeave()" 
-         style="background-color: #e0f2fe; padding: 12px; display: inline-block; border: 1px solid #7dd3fc; border-radius: 5px;">
-        Move cursor here (onmouseover)
+
+    <div id="cardBox" onmouseover="mouseEnter()" onmouseout="mouseLeave()" 
+         style="background-color: #e0f2fe; padding: 10px; display: inline-block; border: 1px solid #7dd3fc; border-radius: 4px;">
+        Place cursor over this box
     </div>
 
     <script>
-        function showNotification() {
-            alert("Notification: JavaScript Function called on button click!");
+        function showAlert() {
+            alert("Hello! JavaScript function triggered on click.");
         }
 
-        function onHover() {
-            var box = document.getElementById("cardBox");
-            box.innerHTML = "Cursor is now OVER this box!";
-            box.style.backgroundColor = "#fed7aa";
-            box.style.borderColor = "#fb923c";
+        function mouseEnter() {
+            document.getElementById("cardBox").innerHTML = "Cursor is now OVER this box!";
+            document.getElementById("cardBox").style.backgroundColor = "#fed7aa";
         }
 
-        function onLeave() {
-            var box = document.getElementById("cardBox");
-            box.innerHTML = "Move cursor here (onmouseover)";
-            box.style.backgroundColor = "#e0f2fe";
-            box.style.borderColor = "#7dd3fc";
+        function mouseLeave() {
+            document.getElementById("cardBox").innerHTML = "Place cursor over this box";
+            document.getElementById("cardBox").style.backgroundColor = "#e0f2fe";
         }
     </script>
 </body>
