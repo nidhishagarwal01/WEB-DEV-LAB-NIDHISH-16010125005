@@ -1,385 +1,170 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JavaScript Practical 3: Form and Validation</title>
+    <title>Experiment 3 - Program 3: Form Validation</title>
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f0f4f8;
-            color: #1e293b;
-            margin: 0;
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .form-container {
+            width: 420px;
             padding: 20px;
-        }
-        .container {
-            max-width: 720px;
-            margin: 0 auto;
-            background: #ffffff;
-            padding: 32px;
-            border-radius: 12px;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-        }
-        h1 {
-            color: #123c69;
-            border-bottom: 3px solid #ff8c42;
-            padding-bottom: 10px;
-            margin-top: 0;
-        }
-        p.subtitle {
-            color: #64748b;
-            margin-bottom: 24px;
-        }
-        fieldset {
-            border: 1px solid #cbd5e1;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 20px;
-            background-color: #f8fafc;
-        }
-        legend {
-            font-weight: bold;
-            color: #123c69;
-            padding: 0 8px;
-            font-size: 1.05rem;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            background-color: #f9f9f9;
         }
         .form-group {
-            margin-bottom: 16px;
+            margin-bottom: 14px;
         }
         label {
             display: block;
-            font-weight: 600;
-            margin-bottom: 6px;
-            color: #334155;
+            margin-bottom: 4px;
+            font-weight: bold;
         }
         input[type="text"],
-        input[type="tel"],
-        input[type="email"],
-        input[type="number"],
+        input[type="password"],
         select {
-            width: 100%;
+            width: 95%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
             box-sizing: border-box;
-            padding: 10px 12px;
-            border: 1.5px solid #cbd5e1;
-            border-radius: 6px;
-            font-size: 0.95rem;
-            transition: border-color 0.2s, box-shadow 0.2s;
         }
-        input:focus, select:focus {
-            outline: none;
-            border-color: #1f6f8b;
-            box-shadow: 0 0 0 3px rgba(31, 111, 139, 0.15);
-        }
-        .input-error {
-            border-color: #e53e3e !important;
-            background-color: #fff5f5;
-        }
-        .input-valid {
-            border-color: #38a169 !important;
-            background-color: #f0fff4;
-        }
-        .error-message {
-            color: #e53e3e;
-            font-size: 0.85rem;
-            margin-top: 4px;
+        .error {
+            color: red;
+            font-size: 13px;
             display: block;
-            font-weight: 500;
+            margin-top: 3px;
         }
-        .checkbox-group {
-            display: flex;
-            align-items: center;
-            margin-top: 15px;
-        }
-        .checkbox-group input {
-            margin-right: 10px;
-            width: 18px;
-            height: 18px;
-            cursor: pointer;
-        }
-        .checkbox-group label {
-            margin-bottom: 0;
-            cursor: pointer;
-        }
-        .button-group {
-            display: flex;
-            gap: 12px;
-            margin-top: 20px;
-        }
-        button[type="submit"] {
-            background: linear-gradient(135deg, #123c69, #1f6f8b);
+        input[type="submit"] {
+            background-color: #007bff;
             color: white;
+            padding: 9px 18px;
             border: none;
-            padding: 12px 26px;
-            font-size: 1rem;
-            font-weight: 600;
-            border-radius: 6px;
+            border-radius: 4px;
             cursor: pointer;
-            transition: 0.2s;
+            font-size: 14px;
         }
-        button[type="submit"]:hover {
-            opacity: 0.95;
-            transform: translateY(-1px);
-        }
-        button[type="reset"] {
-            background: #e2e8f0;
-            color: #475569;
-            border: none;
-            padding: 12px 20px;
-            font-size: 1rem;
-            font-weight: 600;
-            border-radius: 6px;
-            cursor: pointer;
-        }
-        button[type="reset"]:hover {
-            background: #cbd5e1;
-        }
-        .success-box {
-            display: none;
-            background: #dcfce7;
-            border: 1.5px solid #86efac;
-            color: #166534;
-            padding: 16px 20px;
-            border-radius: 8px;
-            margin-top: 20px;
-            line-height: 1.6;
+        input[type="submit"]:hover {
+            background-color: #0056b3;
         }
     </style>
+    <script>
+        function validateForm() {
+            var name = document.getElementById("name").value;
+            var email = document.getElementById("email").value;
+            var mobile = document.getElementById("mobile").value;
+            var course = document.getElementById("course").value;
+            var password = document.getElementById("password").value;
+
+            // Clear previous error messages
+            document.getElementById("nameErr").innerHTML = "";
+            document.getElementById("emailErr").innerHTML = "";
+            document.getElementById("mobileErr").innerHTML = "";
+            document.getElementById("courseErr").innerHTML = "";
+            document.getElementById("passErr").innerHTML = "";
+
+            var isValid = true;
+
+            // 1. Name validation
+            if (name == "") {
+                document.getElementById("nameErr").innerHTML = "Name is required.";
+                isValid = false;
+            } else if (name.length < 3) {
+                document.getElementById("nameErr").innerHTML = "Name must be at least 3 characters.";
+                isValid = false;
+            }
+
+            // 2. Email validation
+            var atpos = email.indexOf("@");
+            var dotpos = email.lastIndexOf(".");
+            if (email == "") {
+                document.getElementById("emailErr").innerHTML = "Email is required.";
+                isValid = false;
+            } else if (atpos < 1 || (dotpos - atpos < 2) || (dotpos + 2 >= email.length)) {
+                document.getElementById("emailErr").innerHTML = "Please enter a valid email address.";
+                isValid = false;
+            }
+
+            // 3. Mobile validation (10 digits)
+            if (mobile == "") {
+                document.getElementById("mobileErr").innerHTML = "Mobile number is required.";
+                isValid = false;
+            } else if (isNaN(mobile) || mobile.length != 10) {
+                document.getElementById("mobileErr").innerHTML = "Mobile must be a 10-digit number.";
+                isValid = false;
+            }
+
+            // 4. Course dropdown validation
+            if (course == "") {
+                document.getElementById("courseErr").innerHTML = "Please select a course.";
+                isValid = false;
+            }
+
+            // 5. Password validation (min 6 characters)
+            if (password == "") {
+                document.getElementById("passErr").innerHTML = "Password is required.";
+                isValid = false;
+            } else if (password.length < 6) {
+                document.getElementById("passErr").innerHTML = "Password must be at least 6 characters.";
+                isValid = false;
+            }
+
+            // If all checks pass
+            if (isValid) {
+                alert("Form Submitted Successfully!\nWelcome, " + name);
+                return true;
+            }
+
+            return false;
+        }
+    </script>
 </head>
 <body>
 
-<div class="container">
-    <h1>Experiment 3 &mdash; Program 3: Form &amp; Validation</h1>
-    <p class="subtitle"><strong>Topic:</strong> Client-Side Form Validation using JavaScript, Regular Expressions, Event Interception (onsubmit), and Error Handling.</p>
-
-    <!-- Farmer Registration Form with onsubmit validation -->
-    <form id="registrationForm" onsubmit="return validateFarmerForm(event)" onreset="handleFormReset()">
-        
-        <!-- Fieldset 1: Personal Details -->
-        <fieldset>
-            <legend>1. Personal Information</legend>
-
+    <h2>Experiment 3: Program 3 - Student Registration Form Validation</h2>
+    
+    <div class="form-container">
+        <form name="regForm" onsubmit="return validateForm()">
             <div class="form-group">
-                <label for="farmerName">Farmer Full Name:</label>
-                <input type="text" id="farmerName" name="farmerName" placeholder="Enter your full name">
-                <span id="nameError" class="error-message"></span>
+                <label>Full Name:</label>
+                <input type="text" id="name" placeholder="Enter full name">
+                <span id="nameErr" class="error"></span>
             </div>
 
             <div class="form-group">
-                <label for="farmerMobile">Mobile Number:</label>
-                <input type="tel" id="farmerMobile" name="farmerMobile" placeholder="10-digit mobile number (e.g. 9876543210)">
-                <span id="mobileError" class="error-message"></span>
+                <label>Email ID:</label>
+                <input type="text" id="email" placeholder="example@domain.com">
+                <span id="emailErr" class="error"></span>
             </div>
 
             <div class="form-group">
-                <label for="farmerEmail">Email Address:</label>
-                <input type="email" id="farmerEmail" name="farmerEmail" placeholder="farmer@example.com">
-                <span id="emailError" class="error-message"></span>
-            </div>
-        </fieldset>
-
-        <!-- Fieldset 2: Farm & Irrigation Parameters -->
-        <fieldset>
-            <legend>2. Farm &amp; Crop Parameters</legend>
-
-            <div class="form-group">
-                <label for="plotId">Plot ID:</label>
-                <input type="text" id="plotId" name="plotId" placeholder="Format: PLT-X-00 (e.g. PLT-A-07)">
-                <span id="plotIdError" class="error-message"></span>
+                <label>Mobile Number:</label>
+                <input type="text" id="mobile" placeholder="10-digit number">
+                <span id="mobileErr" class="error"></span>
             </div>
 
             <div class="form-group">
-                <label for="soilMoisture">Current Soil Moisture Percentage (0 - 100%):</label>
-                <input type="number" id="soilMoisture" name="soilMoisture" min="0" max="100" placeholder="Enter percentage (0-100)">
-                <span id="moistureError" class="error-message"></span>
-            </div>
-
-            <div class="form-group">
-                <label for="cropStage">Sugarcane Crop Growth Stage:</label>
-                <select id="cropStage" name="cropStage">
-                    <option value="">-- Please Select Stage --</option>
-                    <option value="Germination">Germination (0-60 Days)</option>
-                    <option value="Tillering">Tillering (60-120 Days)</option>
-                    <option value="Grand Growth">Grand Growth (120-270 Days)</option>
-                    <option value="Maturity">Maturity (270-360 Days)</option>
+                <label>Course:</label>
+                <select id="course">
+                    <option value="">-- Select Course --</option>
+                    <option value="BTech Computer">B.Tech Computer</option>
+                    <option value="BTech IT">B.Tech IT</option>
+                    <option value="BTech AI-DS">B.Tech AI &amp; DS</option>
                 </select>
-                <span id="cropStageError" class="error-message"></span>
+                <span id="courseErr" class="error"></span>
             </div>
 
-            <div class="checkbox-group">
-                <input type="checkbox" id="termsAgreement" name="termsAgreement">
-                <label for="termsAgreement">I verify that the sensor parameters entered are accurate.</label>
+            <div class="form-group">
+                <label>Password:</label>
+                <input type="password" id="password" placeholder="Min 6 characters">
+                <span id="passErr" class="error"></span>
             </div>
-            <span id="termsError" class="error-message"></span>
-        </fieldset>
 
-        <div class="button-group">
-            <button type="submit">Submit &amp; Validate Registration</button>
-            <button type="reset">Reset Form</button>
-        </div>
-    </form>
-
-    <!-- Success Message Box -->
-    <div id="successSummary" class="success-box"></div>
-</div>
-
-<script>
-    // Comprehensive Form Validation Function (Slides 67-71)
-    function validateFarmerForm(event) {
-        // Prevent default submission to handle validation in JS
-        event.preventDefault();
-
-        // Clear existing errors
-        clearAllErrors();
-
-        var isValid = true;
-
-        try {
-            // 1. Validate Farmer Name
-            var name = document.getElementById("farmerName").value.trim();
-            var nameRegex = /^[A-Za-z\s]{3,40}$/;
-            if (name === "") {
-                setError("farmerName", "nameError", "Farmer name is required.");
-                isValid = false;
-            } else if (!nameRegex.test(name)) {
-                setError("farmerName", "nameError", "Name must contain only alphabets and be at least 3 characters long.");
-                isValid = false;
-            } else {
-                setValid("farmerName", "nameError");
-            }
-
-            // 2. Validate Mobile Number (10 Digits)
-            var mobile = document.getElementById("farmerMobile").value.trim();
-            var mobileRegex = /^[0-9]{10}$/;
-            if (mobile === "") {
-                setError("farmerMobile", "mobileError", "Mobile number is required.");
-                isValid = false;
-            } else if (!mobileRegex.test(mobile)) {
-                setError("farmerMobile", "mobileError", "Please enter a valid 10-digit mobile number.");
-                isValid = false;
-            } else {
-                setValid("farmerMobile", "mobileError");
-            }
-
-            // 3. Validate Email Address
-            var email = document.getElementById("farmerEmail").value.trim();
-            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (email === "") {
-                setError("farmerEmail", "emailError", "Email address is required.");
-                isValid = false;
-            } else if (!emailRegex.test(email)) {
-                setError("farmerEmail", "emailError", "Please enter a valid email address (e.g. name@domain.com).");
-                isValid = false;
-            } else {
-                setValid("farmerEmail", "emailError");
-            }
-
-            // 4. Validate Plot ID
-            var plotId = document.getElementById("plotId").value.trim();
-            var plotRegex = /^PLT-[A-Z]-[0-9]{2}$/i;
-            if (plotId === "") {
-                setError("plotId", "plotIdError", "Plot ID is required.");
-                isValid = false;
-            } else if (!plotRegex.test(plotId)) {
-                setError("plotId", "plotIdError", "Plot ID must follow format PLT-X-00 (e.g. PLT-A-07).");
-                isValid = false;
-            } else {
-                setValid("plotId", "plotIdError");
-            }
-
-            // 5. Validate Soil Moisture (0 - 100)
-            var moistureStr = document.getElementById("soilMoisture").value.trim();
-            var moistureNum = parseFloat(moistureStr);
-            if (moistureStr === "" || isNaN(moistureNum)) {
-                setError("soilMoisture", "moistureError", "Soil moisture reading is required.");
-                isValid = false;
-            } else if (moistureNum < 0 || moistureNum > 100) {
-                setError("soilMoisture", "moistureError", "Moisture value must be between 0% and 100%.");
-                isValid = false;
-            } else {
-                setValid("soilMoisture", "moistureError");
-            }
-
-            // 6. Validate Crop Stage Dropdown
-            var cropStage = document.getElementById("cropStage").value;
-            if (cropStage === "") {
-                setError("cropStage", "cropStageError", "Please select a crop growth stage.");
-                isValid = false;
-            } else {
-                setValid("cropStage", "cropStageError");
-            }
-
-            // 7. Validate Agreement Checkbox
-            var terms = document.getElementById("termsAgreement").checked;
-            if (!terms) {
-                document.getElementById("termsError").innerText = "You must confirm accuracy before submitting.";
-                isValid = false;
-            } else {
-                document.getElementById("termsError").innerText = "";
-            }
-
-            // If all fields are valid
-            if (isValid) {
-                var summaryBox = document.getElementById("successSummary");
-                summaryBox.style.display = "block";
-                summaryBox.innerHTML = "<strong>&#10004; Validation Successful! Form is valid and submitted.</strong><br>" +
-                    "&bull; <strong>Farmer:</strong> " + name + "<br>" +
-                    "&bull; <strong>Contact:</strong> " + mobile + " | " + email + "<br>" +
-                    "&bull; <strong>Plot:</strong> " + plotId.toUpperCase() + " (" + cropStage + " Stage)<br>" +
-                    "&bull; <strong>Moisture Reading:</strong> " + moistureNum + "%";
-
-                alert("Success! Form validated successfully for " + name);
-                return true;
-            } else {
-                document.getElementById("successSummary").style.display = "none";
-                return false;
-            }
-
-        } catch (err) {
-            // Try-Catch error handling (Slide 69-71)
-            console.error("Validation Exception: ", err);
-            alert("An error occurred during form validation: " + err.message);
-            return false;
-        }
-    }
-
-    // Helper functions for UI feedback
-    function setError(fieldId, errorSpanId, message) {
-        var field = document.getElementById(fieldId);
-        var span = document.getElementById(errorSpanId);
-        field.classList.add("input-error");
-        field.classList.remove("input-valid");
-        span.innerText = message;
-    }
-
-    function setValid(fieldId, errorSpanId) {
-        var field = document.getElementById(fieldId);
-        var span = document.getElementById(errorSpanId);
-        field.classList.remove("input-error");
-        field.classList.add("input-valid");
-        span.innerText = "";
-    }
-
-    function clearAllErrors() {
-        var errorSpans = document.getElementsByClassName("error-message");
-        for (var i = 0; i < errorSpans.length; i++) {
-            errorSpans[i].innerText = "";
-        }
-        var inputs = document.querySelectorAll("input, select");
-        for (var j = 0; j < inputs.length; j++) {
-            inputs[j].classList.remove("input-error");
-        }
-    }
-
-    function handleFormReset() {
-        clearAllErrors();
-        document.getElementById("successSummary").style.display = "none";
-        var inputs = document.querySelectorAll("input, select");
-        for (var j = 0; j < inputs.length; j++) {
-            inputs[j].classList.remove("input-valid");
-            inputs[j].classList.remove("input-error");
-        }
-    }
-</script>
+            <input type="submit" value="Register">
+        </form>
+    </div>
 
 </body>
 </html>
