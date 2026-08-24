@@ -4,40 +4,11 @@
     <title>Program 2 - Functions &amp; Events</title>
 </head>
 <body>
-    <h3>1. Function with Parameters and Return Value</h3>
-    <script>
-        function calculateArea(length, width) {
-            return length * width;
-        }
+    <h2>JavaScript Functions &amp; Events</h2>
 
-        var area = calculateArea(15, 10);
-        document.write("Area of Rectangle (15 x 10) = " + area + "<br>");
-    </script>
-    <hr>
-
-    <h3>2. Objects</h3>
-    <script>
-        // Object Literal
-        var student = {
-            name: "Nidhish Agarwal",
-            rollNo: 16010125005
-        };
-        document.write("Student Name: " + student.name + ", Roll No: " + student.rollNo + "<br><br>");
-
-        // Constructor Function
-        function Employee(id, name, salary) {
-            this.id = id;
-            this.name = name;
-            this.salary = salary;
-        }
-        var emp1 = new Employee(101, "Ramesh Patil", 45000);
-        document.write("Employee ID: " + emp1.id + ", Name: " + emp1.name + ", Salary: " + emp1.salary + "<br>");
-    </script>
-    <hr>
-
-    <h3>3. Events (onclick &amp; onmouseover)</h3>
     <button onclick="greet()">Click Me</button>
     <br><br>
+
     <p id="hoverBox" onmouseover="mouseOver()" onmouseout="mouseOut()" style="background-color: lightyellow; padding: 10px; display: inline-block; border: 1px solid #ccc;">
         Keep cursor over me
     </p>

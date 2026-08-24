@@ -4,59 +4,13 @@
     <title>Program 1 - Simple JavaScript</title>
 </head>
 <body>
-    <h3>1. Variables and Arithmetic Operators</h3>
-    <script>
-        var num1 = 20;
-        var num2 = 10;
-
-        document.write("Number 1: " + num1 + "<br>");
-        document.write("Number 2: " + num2 + "<br>");
-        document.write("Addition = " + (num1 + num2) + "<br>");
-        document.write("Subtraction = " + (num1 - num2) + "<br>");
-        document.write("Multiplication = " + (num1 * num2) + "<br>");
-        document.write("Division = " + (num1 / num2) + "<br>");
-    </script>
-    <hr>
-
-    <h3>2. Conditional Statement (if-else)</h3>
-    <script>
-        var marks = 75;
-        document.write("Marks: " + marks + "<br>");
-
-        if (marks >= 75) {
-            document.write("Result: Distinction<br>");
-        } else if (marks >= 40) {
-            document.write("Result: Pass<br>");
-        } else {
-            document.write("Result: Fail<br>");
-        }
-    </script>
-    <hr>
-
-    <h3>3. Loops</h3>
-    <script>
-        document.write("for loop (1 to 5): ");
-        for (var i = 1; i <= 5; i++) {
-            document.write(i + " ");
-        }
-
-        document.write("<br>while loop (even numbers): ");
-        var j = 2;
-        while (j <= 10) {
-            document.write(j + " ");
-            j += 2;
-        }
-        document.write("<br>");
-    </script>
-    <hr>
-
-    <h3>4. DOM Manipulation</h3>
+    <h2>Simple JavaScript Program</h2>
     <p id="demo">This is original text.</p>
     <button onclick="changeText()">Change Text</button>
 
     <script>
         function changeText() {
-            document.getElementById("demo").innerHTML = "Text changed using JavaScript!";
+            document.getElementById("demo").innerHTML = "Hello! Text changed using JavaScript.";
         }
     </script>
 </body>
