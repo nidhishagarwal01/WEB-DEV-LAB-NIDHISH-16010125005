@@ -1,76 +1,60 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Experiment 3 - Program 2: Use of Functions</title>
+    <title>Program 2 - Functions &amp; Events</title>
 </head>
 <body>
-    <h2>Experiment 3: Program 2 - Functions, Objects &amp; Events</h2>
-    <p>This program demonstrates user-defined functions, objects, and event handling.</p>
-    <hr>
-
     <h3>1. Function with Parameters and Return Value</h3>
     <script>
-        // Function definition
         function calculateArea(length, width) {
             return length * width;
         }
 
-        var l = 15;
-        var w = 10;
-        var area = calculateArea(l, w);
-
-        document.write("Length: " + l + " meters<br>");
-        document.write("Width: " + w + " meters<br>");
-        document.write("<b>Area of Rectangle = " + area + " sq meters</b><br>");
+        var area = calculateArea(15, 10);
+        document.write("Area of Rectangle (15 x 10) = " + area + "<br>");
     </script>
-
     <hr>
-    <h3>2. JavaScript Objects</h3>
+
+    <h3>2. Objects</h3>
     <script>
         // Object Literal
         var student = {
             name: "Nidhish Agarwal",
-            rollNo: 16010125005,
-            branch: "Computer Engineering"
+            rollNo: 16010125005
         };
-        document.write("<b>Student Details (Object Literal):</b><br>");
-        document.write("Name: " + student.name + "<br>");
-        document.write("Roll No: " + student.rollNo + "<br>");
-        document.write("Branch: " + student.branch + "<br><br>");
+        document.write("Student Name: " + student.name + ", Roll No: " + student.rollNo + "<br><br>");
 
-        // Object using Constructor Function
+        // Constructor Function
         function Employee(id, name, salary) {
             this.id = id;
             this.name = name;
             this.salary = salary;
         }
-
         var emp1 = new Employee(101, "Ramesh Patil", 45000);
-        document.write("<b>Employee Details (Constructor Object):</b><br>");
-        document.write("ID: " + emp1.id + ", Name: " + emp1.name + ", Salary: Rs. " + emp1.salary + "<br>");
+        document.write("Employee ID: " + emp1.id + ", Name: " + emp1.name + ", Salary: " + emp1.salary + "<br>");
     </script>
-
     <hr>
-    <h3>3. JavaScript Events (onclick and onmouseover)</h3>
-    <button onclick="greetUser()">Click Me (onclick event)</button>
+
+    <h3>3. Events (onclick &amp; onmouseover)</h3>
+    <button onclick="greet()">Click Me</button>
     <br><br>
-    <p id="hoverText" onmouseover="mouseOver()" onmouseout="mouseOut()" style="background-color: lightyellow; padding: 10px; display: inline-block; border: 1px solid #ccc;">
-        Keep cursor over me (onmouseover event)
+    <p id="hoverBox" onmouseover="mouseOver()" onmouseout="mouseOut()" style="background-color: lightyellow; padding: 10px; display: inline-block; border: 1px solid #ccc;">
+        Keep cursor over me
     </p>
 
     <script>
-        function greetUser() {
-            alert("Hello! Welcome to JavaScript Lab.");
+        function greet() {
+            alert("Hello! Welcome to JavaScript.");
         }
 
         function mouseOver() {
-            document.getElementById("hoverText").innerHTML = "Mouse is OVER me!";
-            document.getElementById("hoverText").style.backgroundColor = "lightgreen";
+            document.getElementById("hoverBox").innerHTML = "Mouse is OVER me!";
+            document.getElementById("hoverBox").style.backgroundColor = "lightgreen";
         }
 
         function mouseOut() {
-            document.getElementById("hoverText").innerHTML = "Keep cursor over me (onmouseover event)";
-            document.getElementById("hoverText").style.backgroundColor = "lightyellow";
+            document.getElementById("hoverBox").innerHTML = "Keep cursor over me";
+            document.getElementById("hoverBox").style.backgroundColor = "lightyellow";
         }
     </script>
 </body>
