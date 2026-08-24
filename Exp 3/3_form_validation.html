@@ -58,7 +58,7 @@
             var course = document.getElementById("course").value;
             var password = document.getElementById("password").value;
 
-            // Clear previous error messages
+            
             document.getElementById("nameErr").innerHTML = "";
             document.getElementById("emailErr").innerHTML = "";
             document.getElementById("mobileErr").innerHTML = "";
@@ -67,7 +67,7 @@
 
             var isValid = true;
 
-            // 1. Name validation
+          
             if (name == "") {
                 document.getElementById("nameErr").innerHTML = "Name is required.";
                 isValid = false;
@@ -76,7 +76,7 @@
                 isValid = false;
             }
 
-            // 2. Email validation
+           
             var atpos = email.indexOf("@");
             var dotpos = email.lastIndexOf(".");
             if (email == "") {
@@ -87,7 +87,7 @@
                 isValid = false;
             }
 
-            // 3. Mobile validation (10 digits)
+         
             if (mobile == "") {
                 document.getElementById("mobileErr").innerHTML = "Mobile number is required.";
                 isValid = false;
@@ -96,13 +96,13 @@
                 isValid = false;
             }
 
-            // 4. Course dropdown validation
+           
             if (course == "") {
                 document.getElementById("courseErr").innerHTML = "Please select a course.";
                 isValid = false;
             }
 
-            // 5. Password validation (min 6 characters)
+   
             if (password == "") {
                 document.getElementById("passErr").innerHTML = "Password is required.";
                 isValid = false;
@@ -111,7 +111,7 @@
                 isValid = false;
             }
 
-            // If all checks pass
+       
             if (isValid) {
                 alert("Form Submitted Successfully!\nWelcome, " + name);
                 return true;
