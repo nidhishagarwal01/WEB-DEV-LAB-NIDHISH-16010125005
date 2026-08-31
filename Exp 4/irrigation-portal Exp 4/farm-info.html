@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Farm Information</title>
+<title>Farm Status & Pump Control</title>
 <link rel="stylesheet" href="style.css">
 
 <style>
@@ -31,8 +31,8 @@
     background-color: #ffffff;
     border: 1px solid #dcdcdc;
     border-radius: 6px;
-    padding: 16px;
-    margin: 18px 0;
+    padding: 18px;
+    margin: 20px 0;
   }
   .btn-blue {
     background-color: #0056b3;
@@ -50,12 +50,12 @@
     background-color: #004085;
   }
   .obj-output {
-    margin-top: 12px;
-    padding: 12px 14px;
+    margin-top: 14px;
+    padding: 12px 16px;
     background-color: #f0f4f8;
     border-left: 3px solid #0056b3;
     font-size: 0.95em;
-    line-height: 1.6;
+    line-height: 1.7;
   }
 </style>
 </head>
@@ -68,55 +68,19 @@
 
 <nav>
   <ul>
-    <li><a href="index.html">Home</a></li>
-    <li><a href="farm-info.html">Farm Dashboard</a></li>
+    <li><a href="index.html">Water Calculator</a></li>
     <li><a href="advisory.html">Irrigation Advisory</a></li>
-    <li><a href="irrigation-table.html">Sensor Data</a></li>
-    <li><a href="index.html#contact">Contact</a></li>
+    <li><a href="farm-info.html">Farm Status</a></li>
+    <li><a href="irrigation-table.html">Sensor Analytics</a></li>
+    <li><a href="registration.html">Farmer Registration</a></li>
   </ul>
 </nav>
 
 <section>
-  <h2>Irrigation Workflow</h2>
-  <ol>
-    <li>Sensors collect data from the field.</li>
-    <li>Data is sent to the AI advisory engine.</li>
-    <li>The system checks <b>soil moisture</b>, weather and crop stage.</li>
-    <li>The system gives an <i>irrigation recommendation</i>.</li>
-    <li>The farmer is informed about the recommendation.</li>
-    <li>Farmer irrigates the field.</li>
-  </ol>
-</section>
-
-<section>
-  <h2>Sensors Used</h2>
-
-  <div class="sensor-card">
-    <h3>Soil Moisture Sensor</h3>
-    <p>Checks water level in soil.</p>
-  </div>
-
-  <div class="sensor-card">
-    <h3>Temperature Sensor</h3>
-    <p>Checks field temperature.</p>
-  </div>
-
-  <div class="sensor-card">
-    <h3>Humidity Sensor</h3>
-    <p>Checks air humidity.</p>
-  </div>
-
-  <div class="sensor-card">
-    <h3>Rainfall Sensor</h3>
-    <p><mark>Detects rainfall</mark> in the field.</p>
-  </div>
-</section>
-
-<section>
-  <h2>Farm Status &amp; Pump Control</h2>
+  <h2>Sugarcane Farm Status &amp; Pump Control</h2>
 
   <div class="box-card">
-    <p>Manage and inspect the farm object status:</p>
+    <p>Manage and inspect the sugarcane farm object parameters and pump state:</p>
 
     <button class="btn-blue" onclick="showFarmInfo()">Display Farm Details</button>
     <button class="btn-blue" onclick="checkIrrigation()">Check Irrigation Need</button>
@@ -126,23 +90,6 @@
       Click any button above to view or update farm details.
     </div>
   </div>
-</section>
-
-<section>
-  <h2>Crop Stages</h2>
-  <dl>
-    <dt><b>Germination</b></dt>
-    <dd>First stage after planting.</dd>
-
-    <dt><b>Tillering</b></dt>
-    <dd>Side shoots start forming.</dd>
-
-    <dt><b>Grand Growth</b></dt>
-    <dd><mark>Highest water need</mark> stage.</dd>
-
-    <dt><b>Maturity</b></dt>
-    <dd>Sugar content increases, less water needed.</dd>
-  </dl>
 </section>
 
 <footer>
@@ -160,7 +107,7 @@
     pumpStatus: "OFF",
 
     displayFarmInfo: function() {
-      return "<b>Farm Information:</b><br>" +
+      return "<b>Sugarcane Farm Details:</b><br>" +
              "Farmer Name: " + this.farmerName + "<br>" +
              "Plot ID: " + this.plotId + "<br>" +
              "Crop Stage: " + this.cropStage + "<br>" +

@@ -54,64 +54,51 @@
 │
 ├── Exp 4/                            # Advanced Client-Side JavaScript Logic & Analytics
 │   ├── JavaScript-tasks-WDL.docx     # Experiment 4 Task Requirements Manual
-│   └── irrigation-portal Exp 4/      # Full-Stack JavaScript Smart Irrigation Portal
-│       ├── index.html                # Experiment 4 Hub & Module Directory
-│       ├── task1_calculator.html     # Task 1: Soil Moisture & Water Deficit Calculator
-│       ├── task2_advisory.html       # Task 2: Irrigation Recommendation Engine (Decision Rules)
-│       ├── task3_farm_object.html    # Task 3: Sugarcane Farm JavaScript Object & Methods
-│       ├── task4_sensor_array.html   # Task 4: 24-Hour Soil Sensor Array Analytics
-│       ├── task5_validation.html     # Task 5: Farmer Name, Mobile & Plot ID Validator
-│       ├── task6_registration_form.html # Task 6: Interactive Registration & Advisory Request Form
-│       ├── farm-info.html            # Farm Information Dashboard
-│       ├── gallery.html              # Farm Photo Gallery
-│       ├── plot-map.html             # Farm Plot Map
-│       ├── irrigation-table.html     # Sensor Data Table
-│       ├── weather.html              # Weather Forecast Module
-│       ├── media.html                # Multimedia Awareness Module
-│       ├── style.css                 # Global Theme Stylesheet
+│   └── irrigation-portal Exp 4/      # JavaScript Smart Irrigation Web Portal
+│       ├── index.html                # Task 1: Soil Moisture & Water Deficit Calculator
+│       ├── advisory.html             # Task 2: Irrigation Advisory Engine (Decision Rules)
+│       ├── farm-info.html            # Task 3: Sugarcane Farm Object & Pump Status Controller
+│       ├── irrigation-table.html     # Task 4: 24-Hour Soil Moisture Sensor Array Analytics
+│       ├── registration.html         # Tasks 5 & 6: Farmer Registration & Form Validation
+│       ├── style.css                 # Portal Global Stylesheet
 │       ├── layout.css                # Flexbox Page Layout Stylesheet
-│       ├── form.css                  # Form UI Stylesheet
-│       └── table.css                 # Table UI Stylesheet
+│       └── form.css                  # Form UI Stylesheet
 │
 └── JavaScript.pptx                   # Reference Presentation
 ```
 
 ---
 
-## 🧪 Experiments Overview
+## 🧪 Experiment 4: JavaScript Logic & Analytics Tasks Overview
 
-### 🌾 Experiment 1: HTML5 Front-End Development
-- Semantic document structure (`<header>`, `<nav>`, `<section>`, `<article>`, `<aside>`, `<footer>`)
-- Lists (`<ol>`, `<ul>`, `<dl>`) and text formatting tags
-- Accessible image maps (`<map>`, `<area>`) for farm plot navigation
-- Data tables (`<caption>`, `<thead>`, `<tbody>`, `<tfoot>`, `rowspan`, `colspan`)
-- HTML5 Form input validation and embedded widgets (`<iframe>`, `<video>`, `<audio>`)
+1. **Task 1: Soil Moisture & Water Deficit Calculator (`index.html`)**
+   - Declares variables (`farmerName`, `plotId`, `currentSoilMoisture`, `requiredSoilMoisture`).
+   - Calculates moisture deficit.
+   - Outputs status via `document.write()` on load and an interactive calculator with `alert()`.
 
-### 🎨 Experiment 2: CSS3 Styling & Responsive Design
-- **Inline, Internal, and External CSS** styling techniques
-- **CSS Box Model & Flexbox** for card layouts and multi-column web design
-- **Transitions & Hover Effects** (`transform: scale()`, translateY)
-- **Table Zebra-Striping & Form Styling** with glowing focus rings
-- **Keyframe Animations** (`@keyframes glow`) for advisory alerts
+2. **Task 2: Irrigation Advisory Engine (`advisory.html`)**
+   - Applies decision rules:
+     - Rain expected $\rightarrow$ *Postpone Irrigation*
+     - Soil moisture $< 30\%$ $\rightarrow$ *Irrigation Required Immediately*
+     - Soil moisture between $30\%$ and $50\%$ $\rightarrow$ *Monitor Soil Moisture*
+     - Soil moisture $> 50\%$ $\rightarrow$ *Irrigation Not Required*
 
-### ⚡ Experiment 3: Client-Side JavaScript Basics
-- Core syntax, variables, operators, conditions, loops, and DOM manipulation
-- Functions with event handlers (`onclick`, `onmouseover`, `onmouseout`)
-- Form validation with real-time feedback
+3. **Task 3: Sugarcane Farm Object & Methods (`farm-info.html`)**
+   - Object properties: `farmerName`, `plotId`, `cropStage`, `soilMoisture`, `area`, `pumpStatus`.
+   - Encapsulates methods: `displayFarmInfo()`, `checkIrrigationRequirement()`, `updatePumpStatus()`.
 
-### 🌾 Experiment 4: JavaScript Logic, Analytics & Verification for Smart Irrigation
-Full integration of JavaScript modules into the Smart Irrigation Advisory Portal:
-1. **Task 1 (`task1_calculator.html`)**: Soil Moisture & Water Requirement Calculator (evaluating moisture deficit with `alert()` and `document.write()`).
-2. **Task 2 (`task2_advisory.html`)**: Irrigation Recommendation Engine using decision rules for soil moisture, rainfall forecasts, and crop growth stages.
-3. **Task 3 (`task3_farm_object.html`)**: Sugarcane Farm Object encapsulation with properties (`farmerName`, `plotId`, `cropStage`, `soilMoisture`, `area`, `pumpStatus`) and methods (`displayFarmInfo()`, `checkIrrigationRequirement()`, `updatePumpStatus()`).
-4. **Task 4 (`task4_sensor_array.html`)**: Hourly Soil Sensor Array Analytics computing Minimum, Maximum, Average moisture, and critical limit count (< 25%).
-5. **Task 5 (`task5_validation.html`)**: Parameter validation engine for Farmer Name (alphabets/spaces), 10-digit Mobile Number, and Plot ID (`AGR-1234`).
-6. **Task 6 (`task6_registration_form.html`)**: Interactive Farmer Registration and Advisory Request Form with client-side field validation.
+4. **Task 4: Hourly Sensor Array Analytics (`irrigation-table.html`)**
+   - Analyzes a 24-hour soil moisture sensor array.
+   - Displays all readings, computes minimum, maximum, average moisture, and counts readings below critical threshold ($< 25\%$).
+
+5. **Tasks 5 & 6: Farmer Registration & Validation Form (`registration.html`)**
+   - Validates that no field is empty.
+   - Enforces Farmer Name with only alphabets and spaces, Mobile Number of exactly 10 digits, and Plot ID matching pattern **`AGR-1234`**.
+   - Validates Soil Moisture ($0\text{--}100\%$), Crop Stage, and Irrigation Date.
 
 ---
 
 ## 🚀 How to Run Locally
 
 1. Clone or download this repository.
-2. Open any `.html` file directly in your web browser.
-3. To view the complete portal for Experiment 4, open [`Exp 4/irrigation-portal Exp 4/index.html`](Exp%204/irrigation-portal%20Exp%204/index.html).
+2. To run Experiment 4, open [`Exp 4/irrigation-portal Exp 4/index.html`](Exp%204/irrigation-portal%20Exp%204/index.html) directly in your browser.

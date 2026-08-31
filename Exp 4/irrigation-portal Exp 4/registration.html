@@ -46,40 +46,32 @@
 
 <nav>
   <ul>
-    <li><a href="index.html">Home</a></li>
-    <li><a href="farm-info.html">Farm Dashboard</a></li>
+    <li><a href="index.html">Water Calculator</a></li>
     <li><a href="advisory.html">Irrigation Advisory</a></li>
-    <li><a href="irrigation-table.html">Sensor Data</a></li>
-    <li><a href="index.html#contact">Contact</a></li>
+    <li><a href="farm-info.html">Farm Status</a></li>
+    <li><a href="irrigation-table.html">Sensor Analytics</a></li>
+    <li><a href="registration.html">Farmer Registration</a></li>
   </ul>
 </nav>
 
 <section>
-  <h2>Farmer Registration Form</h2>
+  <h2>Farmer Registration &amp; Irrigation Request Form</h2>
 
   <form id="regForm" onsubmit="return validateForm()">
 
     <fieldset>
-      <legend>Personal Details</legend>
+      <legend>Farmer &amp; Plot Details</legend>
 
       <label for="name">Farmer Name:</label><br>
       <input type="text" id="name" name="name" placeholder="Enter full name"><br>
       <span id="nameErr" class="error-msg"></span>
 
       <label for="mobile">Mobile Number:</label><br>
-      <input type="text" id="mobile" name="mobile" placeholder="10-digit number"><br>
+      <input type="text" id="mobile" name="mobile" placeholder="10-digit mobile number"><br>
       <span id="mobileErr" class="error-msg"></span>
 
-      <label for="email">Email:</label><br>
-      <input type="text" id="email" name="email" placeholder="you@example.com"><br>
-      <span id="emailErr" class="error-msg"></span>
-    </fieldset>
-
-    <fieldset>
-      <legend>Farm &amp; Irrigation Details</legend>
-
-      <label for="plotid">Plot ID (e.g. AGR-1024):</label><br>
-      <input type="text" id="plotid" name="plotid" placeholder="AGR-1234"><br>
+      <label for="plotid">Plot ID (Pattern: AGR-1234):</label><br>
+      <input type="text" id="plotid" name="plotid" placeholder="e.g. AGR-1024"><br>
       <span id="plotErr" class="error-msg"></span>
 
       <label for="moisture">Current Soil Moisture (%):</label><br>
@@ -88,7 +80,7 @@
 
       <label for="cropstage">Crop Stage:</label><br>
       <select id="cropstage" name="cropstage">
-        <option value="">-- Select --</option>
+        <option value="">-- Select Crop Stage --</option>
         <option value="Germination">Germination</option>
         <option value="Tillering">Tillering</option>
         <option value="Grand Growth">Grand Growth</option>
@@ -96,21 +88,12 @@
       </select><br>
       <span id="stageErr" class="error-msg"></span>
 
-      <label for="method">Irrigation Method:</label><br>
-      <select id="method" name="method">
-        <option value="">-- Select --</option>
-        <option value="Drip">Drip Irrigation</option>
-        <option value="Sprinkler">Sprinkler</option>
-        <option value="Flood">Flood/Furrow</option>
-      </select><br>
-      <span id="methodErr" class="error-msg"></span>
-
       <label for="regdate">Irrigation Date:</label><br>
       <input type="date" id="regdate" name="regdate"><br>
       <span id="dateErr" class="error-msg"></span>
     </fieldset>
 
-    <input type="submit" value="Register Farmer">
+    <input type="submit" value="Submit Registration">
   </form>
 
 </section>
@@ -123,21 +106,17 @@
   function validateForm() {
     var name = document.getElementById("name").value.trim();
     var mobile = document.getElementById("mobile").value.trim();
-    var email = document.getElementById("email").value.trim();
     var plotid = document.getElementById("plotid").value.trim();
     var moisture = document.getElementById("moisture").value.trim();
     var cropstage = document.getElementById("cropstage").value;
-    var method = document.getElementById("method").value;
     var regdate = document.getElementById("regdate").value;
 
     // Reset error messages
     document.getElementById("nameErr").innerHTML = "";
     document.getElementById("mobileErr").innerHTML = "";
-    document.getElementById("emailErr").innerHTML = "";
     document.getElementById("plotErr").innerHTML = "";
     document.getElementById("moistureErr").innerHTML = "";
     document.getElementById("stageErr").innerHTML = "";
-    document.getElementById("methodErr").innerHTML = "";
     document.getElementById("dateErr").innerHTML = "";
 
     var isValid = true;
@@ -161,18 +140,7 @@
       isValid = false;
     }
 
-    // 3. Email
-    var atpos = email.indexOf("@");
-    var dotpos = email.lastIndexOf(".");
-    if (email === "") {
-      document.getElementById("emailErr").innerHTML = "Email is required.";
-      isValid = false;
-    } else if (atpos < 1 || dotpos - atpos < 2 || dotpos + 2 >= email.length) {
-      document.getElementById("emailErr").innerHTML = "Please enter a valid email address.";
-      isValid = false;
-    }
-
-    // 4. Plot ID: AGR-1234
+    // 3. Plot ID: AGR-1234
     var plotRegex = /^AGR-[0-9]{4}$/i;
     if (plotid === "") {
       document.getElementById("plotErr").innerHTML = "Plot ID is required.";
@@ -182,7 +150,7 @@
       isValid = false;
     }
 
-    // 5. Soil Moisture: between 0 and 100
+    // 4. Soil Moisture: between 0 and 100
     var moistNum = parseFloat(moisture);
     if (moisture === "" || isNaN(moistNum)) {
       document.getElementById("moistureErr").innerHTML = "Soil moisture is required.";
@@ -192,19 +160,13 @@
       isValid = false;
     }
 
-    // 6. Crop Stage
+    // 5. Crop Stage
     if (cropstage === "") {
       document.getElementById("stageErr").innerHTML = "Please select crop stage.";
       isValid = false;
     }
 
-    // 7. Method
-    if (method === "") {
-      document.getElementById("methodErr").innerHTML = "Please select irrigation method.";
-      isValid = false;
-    }
-
-    // 8. Date
+    // 6. Date
     if (regdate === "") {
       document.getElementById("dateErr").innerHTML = "Please select irrigation date.";
       isValid = false;

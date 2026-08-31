@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Irrigation Table</title>
+<title>Sensor Analytics</title>
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="table.css">
 
@@ -32,8 +32,8 @@
     background-color: #ffffff;
     border: 1px solid #dcdcdc;
     border-radius: 6px;
-    padding: 16px;
-    margin-top: 24px;
+    padding: 18px;
+    margin: 20px 0;
   }
   .btn-blue {
     background-color: #0056b3;
@@ -67,75 +67,21 @@
 
 <nav>
   <ul>
-    <li><a href="index.html">Home</a></li>
-    <li><a href="farm-info.html">Farm Dashboard</a></li>
+    <li><a href="index.html">Water Calculator</a></li>
     <li><a href="advisory.html">Irrigation Advisory</a></li>
-    <li><a href="irrigation-table.html">Sensor Data</a></li>
-    <li><a href="index.html#contact">Contact</a></li>
+    <li><a href="farm-info.html">Farm Status</a></li>
+    <li><a href="irrigation-table.html">Sensor Analytics</a></li>
+    <li><a href="registration.html">Farmer Registration</a></li>
   </ul>
 </nav>
 
 <section>
-  <h2>Irrigation Recommendations for Multiple Plots</h2>
-
-  <table>
-    <caption>Soil Moisture and Irrigation Recommendation - August 2026</caption>
-    <thead>
-      <tr>
-        <th>Plot ID</th>
-        <th>Farmer Name</th>
-        <th>Soil Moisture (%)</th>
-        <th>Weather</th>
-        <th>Irrigation Recommendation</th>
-        <th>Water Requirement</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>AGR-1024</td>
-        <td>Ramesh Patil</td>
-        <td>28</td>
-        <td>Sunny</td>
-        <td>Irrigate within 6 hours</td>
-        <td>45 min (drip)</td>
-      </tr>
-      <tr>
-        <td>AGR-2048</td>
-        <td>Suresh Jadhav</td>
-        <td>22</td>
-        <td>Sunny</td>
-        <td rowspan="2">Irrigate immediately</td>
-        <td>60 min (drip)</td>
-      </tr>
-      <tr>
-        <td>AGR-2049</td>
-        <td>Suresh Jadhav</td>
-        <td>20</td>
-        <td>Sunny</td>
-        <td>65 min (drip)</td>
-      </tr>
-      <tr>
-        <td>AGR-3056</td>
-        <td>Anita More</td>
-        <td>41</td>
-        <td>Cloudy</td>
-        <td>No irrigation needed</td>
-        <td>0 min</td>
-      </tr>
-    </tbody>
-    <tfoot>
-      <tr>
-        <td colspan="5">Average Soil Moisture</td>
-        <td>27.75%</td>
-      </tr>
-    </tfoot>
-  </table>
+  <h2>24-Hour Soil Moisture Sensor Log &amp; Array Analysis</h2>
 
   <div class="box-card">
-    <h3>24-Hour Soil Moisture Sensor Log Analysis</h3>
-    <p>Hourly moisture readings collected from field sensor. Click below to view the statistical summary:</p>
+    <p>A soil sensor logs field moisture readings every hour. Click the button below to process and analyze the 24-hour array data:</p>
 
-    <button class="btn-blue" onclick="processSensorData()">Calculate Sensor Summary</button>
+    <button class="btn-blue" onclick="processSensorData()">Run Array Analysis</button>
 
     <div id="sensorSummaryDiv" class="summary-box" style="display:none;"></div>
   </div>
@@ -191,12 +137,12 @@
 
     var out = document.getElementById("sensorSummaryDiv");
     out.style.display = "block";
-    out.innerHTML = "<b>24-Hour Sensor Readings (%):</b><br>" + sensorReadings.join(", ") + "<br><br>" +
-                    "<b>Analysis Summary:</b><br>" +
+    out.innerHTML = "<b>1. All Sensor Readings (24 Hours):</b><br>" + sensorReadings.join(", ") + "<br><br>" +
+                    "<b>2. Statistical Summary:</b><br>" +
                     "&bull; Minimum Soil Moisture: <b>" + minVal + "%</b><br>" +
                     "&bull; Maximum Soil Moisture: <b>" + maxVal + "%</b><br>" +
                     "&bull; Average Soil Moisture: <b>" + avgVal + "%</b><br>" +
-                    "&bull; Hourly Readings Below Critical (&lt; 25%): <b>" + criticalCount + " out of 24</b>";
+                    "&bull; Number of Readings Below Critical (&lt; 25%): <b>" + criticalCount + " out of 24</b>";
   }
 </script>
 
