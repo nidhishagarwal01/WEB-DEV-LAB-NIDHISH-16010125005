@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Task 1: Soil Moisture & Water Requirement Calculator</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  nav {
+    background-color: #123C69;
+  }
+  nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  nav ul li a {
+    display: block;
+    padding: 14px 20px;
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: 500;
+    transition: background-color 0.2s;
+  }
+  nav ul li a:hover {
+    background-color: #FF8C42;
+    color: #0A2540;
+  }
+  .card-box {
+    background-color: #ffffff;
+    border: 1px solid #DCE4EC;
+    border-radius: 10px;
+    padding: 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 14px rgba(18, 60, 105, 0.08);
+  }
+  .form-row {
+    margin-bottom: 14px;
+  }
+  .form-row label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #1E293B;
+  }
+  .form-row input {
+    width: 100%;
+    max-width: 320px;
+    padding: 8px 10px;
+    border: 1px solid #C7D3DE;
+    border-radius: 6px;
+    font-size: 0.95em;
+  }
+  .btn {
+    background: linear-gradient(135deg, #123C69, #1F6F8B);
+    color: white;
+    padding: 10px 22px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+  .btn:hover {
+    opacity: 0.9;
+  }
+  .result-box {
+    margin-top: 18px;
+    padding: 16px;
+    background-color: #F0F6FA;
+    border-left: 4px solid #1F6F8B;
+    border-radius: 6px;
+    display: none;
+    line-height: 1.6;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Smart Irrigation Advisory System (KJS-AGR-01)</h1>
+  <p>Experiment 4 &mdash; Task 1: Soil Moisture &amp; Water Requirement Calculator</p>
+</header>
+
+<nav>
+  <ul>
+    <li><a href="index.html">Portal Dashboard</a></li>
+    <li><a href="task1_calculator.html">Task 1: Calculator</a></li>
+    <li><a href="task2_advisory.html">Task 2: Advisory</a></li>
+    <li><a href="task3_farm_object.html">Task 3: Farm Object</a></li>
+    <li><a href="task4_sensor_array.html">Task 4: Sensor Array</a></li>
+    <li><a href="task5_validation.html">Task 5: Validation</a></li>
+    <li><a href="task6_registration_form.html">Task 6: Registration Form</a></li>
+  </ul>
+</nav>
+
+<section>
+  <h2>Task 1: Calculate Moisture Deficit &amp; Irrigation Water Requirement</h2>
+
+  <!-- Static document.write() Demonstration on Page Load -->
+  <div class="card-box">
+    <h3>1. Default Calculation (Demonstrating document.write)</h3>
+    <script>
+      // Variables declaration
+      var farmerName = "Ramesh Patil";
+      var plotId = "AGR-1024";
+      var currentSoilMoisture = 24.5;
+      var requiredSoilMoisture = 45.0;
+
+      // Calculate moisture deficit
+      var moistureDeficit = requiredSoilMoisture - currentSoilMoisture;
+
+      // Display irrigation status using document.write()
+      document.write("<p>");
+      document.write("<strong>Farmer Name:</strong> " + farmerName + "<br>");
+      document.write("<strong>Plot ID:</strong> " + plotId + "<br>");
+      document.write("<strong>Current Soil Moisture:</strong> " + currentSoilMoisture + "%<br>");
+      document.write("<strong>Required Soil Moisture:</strong> " + requiredSoilMoisture + "%<br>");
+      document.write("<strong>Moisture Deficit:</strong> <span style='color:#BA532B; font-weight:bold;'>" + moistureDeficit.toFixed(1) + "%</span><br>");
+      document.write("<strong>Irrigation Status:</strong> Irrigation Required (" + (moistureDeficit * 2).toFixed(0) + " minutes drip cycle)");
+      document.write("</p>");
+    </script>
+  </div>
+
+  <!-- Interactive Form with alert() and Dynamic Output -->
+  <div class="card-box">
+    <h3>2. Interactive Soil Moisture Calculator</h3>
+    <p>Enter current field parameters to compute deficit and trigger alert():</p>
+
+    <div class="form-row">
+      <label for="fName">Farmer Name:</label>
+      <input type="text" id="fName" value="Suresh Jadhav">
+    </div>
+
+    <div class="form-row">
+      <label for="pId">Plot ID:</label>
+      <input type="text" id="pId" value="AGR-2048">
+    </div>
+
+    <div class="form-row">
+      <label for="curMoist">Current Soil Moisture (%):</label>
+      <input type="number" id="curMoist" value="28" min="0" max="100">
+    </div>
+
+    <div class="form-row">
+      <label for="reqMoist">Required Soil Moisture (%):</label>
+      <input type="number" id="reqMoist" value="50" min="0" max="100">
+    </div>
+
+    <button class="btn" onclick="calculateWaterRequirement()">Calculate &amp; Alert Status</button>
+
+    <div id="outputDiv" class="result-box"></div>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2026 Smart Irrigation Advisory System | Experiment 4: JavaScript</p>
+</footer>
+
+<script>
+  function calculateWaterRequirement() {
+    var name = document.getElementById("fName").value;
+    var plot = document.getElementById("pId").value;
+    var current = parseFloat(document.getElementById("curMoist").value);
+    var required = parseFloat(document.getElementById("reqMoist").value);
+
+    if (isNaN(current) || isNaN(required)) {
+      alert("Please enter valid numeric values for moisture levels.");
+      return;
+    }
+
+    var deficit = required - current;
+    var status = "";
+    var duration = 0;
+
+    if (deficit > 0) {
+      duration = Math.round(deficit * 2.5); // Approx 2.5 min per 1% deficit
+      status = "Irrigation Required (" + duration + " minutes drip duration)";
+    } else {
+      deficit = 0;
+      status = "Optimal Moisture Level &mdash; No Irrigation Required";
+    }
+
+    // Trigger alert() as required by Task 1
+    alert("Irrigation Status for Plot " + plot + " (" + name + "):\n" +
+          "Current Moisture: " + current + "%\n" +
+          "Moisture Deficit: " + deficit.toFixed(1) + "%\n" +
+          "Status: " + status);
+
+    // Display formatted results on page
+    var outBox = document.getElementById("outputDiv");
+    outBox.style.display = "block";
+    outBox.innerHTML = "<strong>Calculation Summary:</strong><br>" +
+      "&bull; <strong>Farmer:</strong> " + name + "<br>" +
+      "&bull; <strong>Plot ID:</strong> " + plot + "<br>" +
+      "&bull; <strong>Current Moisture:</strong> " + current + "%<br>" +
+      "&bull; <strong>Target Moisture:</strong> " + required + "%<br>" +
+      "&bull; <strong>Moisture Deficit:</strong> " + deficit.toFixed(1) + "%<br>" +
+      "&bull; <strong>Irrigation Recommendation:</strong> <span style='color:#123C69; font-weight:bold;'>" + status + "</span>";
+  }
+</script>
+
+</body>
+</html>

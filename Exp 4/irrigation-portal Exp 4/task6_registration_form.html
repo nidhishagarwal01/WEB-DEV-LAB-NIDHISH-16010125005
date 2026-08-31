@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Task 6: Farmer Registration & Irrigation Request Form</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="form.css">
+<style>
+  nav {
+    background-color: #123C69;
+  }
+  nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  nav ul li a {
+    display: block;
+    padding: 14px 20px;
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: 500;
+    transition: background-color 0.2s;
+  }
+  nav ul li a:hover {
+    background-color: #FF8C42;
+    color: #0A2540;
+  }
+  .form-container {
+    max-width: 600px;
+  }
+  .form-group {
+    margin-bottom: 16px;
+  }
+  .error-text {
+    color: #DC2626;
+    font-size: 0.85rem;
+    display: block;
+    margin-top: 3px;
+    font-weight: 500;
+  }
+  .input-invalid {
+    border-color: #DC2626 !important;
+    background-color: #FEF2F2 !important;
+  }
+  .input-valid {
+    border-color: #16A34A !important;
+    background-color: #F0FDF4 !important;
+  }
+  .confirmation-box {
+    display: none;
+    background-color: #DCFCE7;
+    border: 1.5px solid #86EFAC;
+    color: #166534;
+    padding: 18px 22px;
+    border-radius: 8px;
+    margin-top: 20px;
+    line-height: 1.6;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Smart Irrigation Advisory System (KJS-AGR-01)</h1>
+  <p>Experiment 4 &mdash; Task 6: Farmer Registration &amp; Irrigation Request Form</p>
+</header>
+
+<nav>
+  <ul>
+    <li><a href="index.html">Portal Dashboard</a></li>
+    <li><a href="task1_calculator.html">Task 1: Calculator</a></li>
+    <li><a href="task2_advisory.html">Task 2: Advisory</a></li>
+    <li><a href="task3_farm_object.html">Task 3: Farm Object</a></li>
+    <li><a href="task4_sensor_array.html">Task 4: Sensor Array</a></li>
+    <li><a href="task5_validation.html">Task 5: Validation</a></li>
+    <li><a href="task6_registration_form.html">Task 6: Registration Form</a></li>
+  </ul>
+</nav>
+
+<section>
+  <h2>Task 6: Farmer Registration &amp; Irrigation Advisory Request</h2>
+
+  <div class="form-container">
+    <form id="irrigationForm" onsubmit="return validateRegistrationForm(event)" onreset="handleReset()">
+
+      <fieldset>
+        <legend>Farmer &amp; Plot Verification</legend>
+
+        <!-- 1. Farmer Name -->
+        <div class="form-group">
+          <label for="farmerName">Farmer Name:</label>
+          <input type="text" id="farmerName" name="farmerName" placeholder="Enter full name">
+          <span id="nameError" class="error-text"></span>
+        </div>
+
+        <!-- 2. Mobile Number -->
+        <div class="form-group">
+          <label for="mobileNum">Mobile Number:</label>
+          <input type="text" id="mobileNum" name="mobileNum" placeholder="10-digit mobile number">
+          <span id="mobileError" class="error-text"></span>
+        </div>
+
+        <!-- 3. Plot ID -->
+        <div class="form-group">
+          <label for="plotIdentifier">Plot ID (Format: AGR-1234):</label>
+          <input type="text" id="plotIdentifier" name="plotIdentifier" placeholder="e.g. AGR-1024">
+          <span id="plotError" class="error-text"></span>
+        </div>
+
+        <!-- 4. Soil Moisture -->
+        <div class="form-group">
+          <label for="soilMoistureVal">Current Soil Moisture (%):</label>
+          <input type="number" id="soilMoistureVal" name="soilMoistureVal" placeholder="0 to 100">
+          <span id="moistureError" class="error-text"></span>
+        </div>
+
+        <!-- 5. Crop Stage -->
+        <div class="form-group">
+          <label for="cropStageSelect">Sugarcane Crop Stage:</label>
+          <select id="cropStageSelect" name="cropStageSelect">
+            <option value="">-- Select Crop Stage --</option>
+            <option value="Germination">Germination</option>
+            <option value="Tillering">Tillering</option>
+            <option value="Grand Growth">Grand Growth</option>
+            <option value="Maturity">Maturity</option>
+          </select>
+          <span id="stageError" class="error-text"></span>
+        </div>
+
+        <!-- 6. Irrigation Date -->
+        <div class="form-group">
+          <label for="irrigationDate">Preferred Irrigation Date:</label>
+          <input type="date" id="irrigationDate" name="irrigationDate">
+          <span id="dateError" class="error-text"></span>
+        </div>
+
+      </fieldset>
+
+      <input type="submit" value="Submit Registration">
+      <input type="reset" value="Clear Form" style="background:#E2E8F0; color:#475569; width:auto; padding:10px 20px; border:none; border-radius:6px; cursor:pointer; font-weight:600; margin-left:10px;">
+
+    </form>
+
+    <!-- Confirmation Banner -->
+    <div id="confirmBox" class="confirmation-box"></div>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2026 Smart Irrigation Advisory System | Experiment 4: JavaScript</p>
+</footer>
+
+<script>
+  function validateRegistrationForm(event) {
+    event.preventDefault();
+
+    // Field value extraction
+    var name = document.getElementById("farmerName").value.trim();
+    var mobile = document.getElementById("mobileNum").value.trim();
+    var plot = document.getElementById("plotIdentifier").value.trim();
+    var moisture = document.getElementById("soilMoistureVal").value.trim();
+    var stage = document.getElementById("cropStageSelect").value;
+    var date = document.getElementById("irrigationDate").value;
+
+    // Reset error messages and styles
+    clearFormErrors();
+
+    var isValid = true;
+
+    // 1. Farmer Name: Not empty, letters only
+    var namePattern = /^[A-Za-z\s]+$/;
+    if (name === "") {
+      showError("farmerName", "nameError", "Farmer Name cannot be empty.");
+      isValid = false;
+    } else if (!namePattern.test(name)) {
+      showError("farmerName", "nameError", "Farmer Name must contain only alphabets and spaces.");
+      isValid = false;
+    } else {
+      showSuccess("farmerName");
+    }
+
+    // 2. Mobile Number: Not empty, exactly 10 digits
+    var mobilePattern = /^[0-9]{10}$/;
+    if (mobile === "") {
+      showError("mobileNum", "mobileError", "Mobile Number cannot be empty.");
+      isValid = false;
+    } else if (!mobilePattern.test(mobile)) {
+      showError("mobileNum", "mobileError", "Mobile Number must contain exactly 10 numeric digits.");
+      isValid = false;
+    } else {
+      showSuccess("mobileNum");
+    }
+
+    // 3. Plot ID: Not empty, pattern AGR-1234
+    var plotPattern = /^AGR-[0-9]{4}$/i;
+    if (plot === "") {
+      showError("plotIdentifier", "plotError", "Plot ID cannot be empty.");
+      isValid = false;
+    } else if (!plotPattern.test(plot)) {
+      showError("plotIdentifier", "plotError", "Plot ID must follow pattern AGR-1234 (e.g. AGR-1024).");
+      isValid = false;
+    } else {
+      showSuccess("plotIdentifier");
+    }
+
+    // 4. Soil Moisture: Not empty, between 0 and 100
+    var moistNum = parseFloat(moisture);
+    if (moisture === "" || isNaN(moistNum)) {
+      showError("soilMoistureVal", "moistureError", "Soil Moisture value cannot be empty.");
+      isValid = false;
+    } else if (moistNum < 0 || moistNum > 100) {
+      showError("soilMoistureVal", "moistureError", "Soil Moisture must be between 0 and 100%.");
+      isValid = false;
+    } else {
+      showSuccess("soilMoistureVal");
+    }
+
+    // 5. Crop Stage: Not empty
+    if (stage === "") {
+      showError("cropStageSelect", "stageError", "Please select a Crop Stage.");
+      isValid = false;
+    } else {
+      showSuccess("cropStageSelect");
+    }
+
+    // 6. Irrigation Date: Not empty
+    if (date === "") {
+      showError("irrigationDate", "dateError", "Irrigation Date cannot be empty.");
+      isValid = false;
+    } else {
+      showSuccess("irrigationDate");
+    }
+
+    // If all validation rules pass
+    if (isValid) {
+      var confirmDiv = document.getElementById("confirmBox");
+      confirmDiv.style.display = "block";
+      confirmDiv.innerHTML = "<strong>&#10004; Registration &amp; Irrigation Request Submitted Successfully!</strong><br>" +
+        "&bull; <strong>Farmer:</strong> " + name + "<br>" +
+        "&bull; <strong>Contact:</strong> " + mobile + "<br>" +
+        "&bull; <strong>Plot ID:</strong> " + plot.toUpperCase() + "<br>" +
+        "&bull; <strong>Soil Moisture:</strong> " + moistNum + "% (" + (moistNum < 30 ? "Irrigate Immediately" : "Optimal") + ")<br>" +
+        "&bull; <strong>Stage:</strong> " + stage + "<br>" +
+        "&bull; <strong>Scheduled Date:</strong> " + date;
+
+      alert("Success! Registration validated and recorded for " + name + " (Plot: " + plot.toUpperCase() + ")");
+    }
+
+    return isValid;
+  }
+
+  function showError(inputId, spanId, message) {
+    var input = document.getElementById(inputId);
+    input.classList.add("input-invalid");
+    input.classList.remove("input-valid");
+    document.getElementById(spanId).innerText = message;
+  }
+
+  function showSuccess(inputId) {
+    var input = document.getElementById(inputId);
+    input.classList.remove("input-invalid");
+    input.classList.add("input-valid");
+  }
+
+  function clearFormErrors() {
+    var errors = document.querySelectorAll(".error-text");
+    for (var i = 0; i < errors.length; i++) {
+      errors[i].innerText = "";
+    }
+    var inputs = document.querySelectorAll("input, select");
+    for (var j = 0; j < inputs.length; j++) {
+      inputs[j].classList.remove("input-invalid");
+      inputs[j].classList.remove("input-valid");
+    }
+  }
+
+  function handleReset() {
+    clearFormErrors();
+    document.getElementById("confirmBox").style.display = "none";
+  }
+</script>
+
+</body>
+</html>

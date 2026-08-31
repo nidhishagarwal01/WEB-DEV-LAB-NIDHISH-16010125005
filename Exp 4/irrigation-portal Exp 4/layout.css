@@ -1,0 +1,45 @@
+/* Task 9: Page layout using flexbox - header, sidebar, content, footer */
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-area {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px 30px;
+  flex: 1;
+}
+
+.main-area aside {
+  order: 1;
+  flex: 0 0 230px;
+}
+
+.main-area article {
+  order: 2;
+  flex: 1 1 300px;
+  min-width: 0;
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 24px 28px;
+  box-shadow: 0 4px 14px rgba(18, 60, 105, 0.08);
+}
+
+@media (max-width: 700px) {
+  .main-area {
+    flex-direction: column;
+    padding: 15px;
+  }
+  .main-area aside {
+    flex: 1 1 auto;
+    width: 100%;
+  }
+  .main-area article {
+    flex: 1 1 auto;
+    width: 100%;
+    padding: 20px;
+  }
+}

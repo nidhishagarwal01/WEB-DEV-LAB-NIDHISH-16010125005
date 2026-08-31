@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Smart Irrigation Advisory System - Experiment 4</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="layout.css">
+
+<!-- Internal CSS for navigation menu -->
+<style>
+  nav {
+    background-color: #123C69;
+  }
+  nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  nav ul li a {
+    display: block;
+    padding: 14px 20px;
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: 500;
+    transition: background-color 0.2s;
+  }
+  nav ul li a:hover {
+    background-color: #FF8C42;
+    color: #0A2540;
+  }
+  .task-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 18px;
+    margin-top: 20px;
+  }
+  .task-card {
+    background-color: #ffffff;
+    border: 1px solid #DCE4EC;
+    border-top: 4px solid #1F6F8B;
+    border-radius: 8px;
+    padding: 18px;
+    box-shadow: 0 4px 12px rgba(18, 60, 105, 0.08);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .task-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(18, 60, 105, 0.14);
+  }
+  .task-card h3 {
+    margin-top: 0;
+    color: #123C69;
+    font-size: 1.15rem;
+  }
+  .task-card p {
+    color: #475569;
+    font-size: 0.92rem;
+    line-height: 1.5;
+    flex-grow: 1;
+  }
+  .task-card .task-link {
+    display: inline-block;
+    background: linear-gradient(135deg, #123C69, #1F6F8B);
+    color: white;
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 12px;
+  }
+  .task-card .task-link:hover {
+    background: #FF8C42;
+    color: #0A2540;
+  }
+</style>
+</head>
+<body>
+
+<div class="page-wrapper">
+
+<!-- Inline CSS on homepage header (continuing Exp 2) -->
+<header style="background:linear-gradient(135deg,#123C69,#1F6F8B); padding:28px 30px; border-bottom:4px solid #FF8C42;">
+  <h1 style="color:white; margin:0 0 6px 0; font-size:2rem; letter-spacing:0.5px;">Smart Irrigation Advisory System (KJS-AGR-01)</h1>
+  <p style="text-align:center; color:#dcecf5; margin:0; font-style:italic;">Experiment 4 &mdash; Client-Side JavaScript Logic, Analytics &amp; Form Validation</p>
+</header>
+
+<nav>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="task1_calculator.html">Task 1: Calculator</a></li>
+    <li><a href="task2_advisory.html">Task 2: Advisory</a></li>
+    <li><a href="task3_farm_object.html">Task 3: Farm Object</a></li>
+    <li><a href="task4_sensor_array.html">Task 4: Sensor Array</a></li>
+    <li><a href="task5_validation.html">Task 5: Validation</a></li>
+    <li><a href="task6_registration_form.html">Task 6: Registration Form</a></li>
+  </ul>
+</nav>
+
+<div class="main-area">
+  <aside>
+    <h3>Experiment 4 Modules</h3>
+    <ul>
+      <li><a href="task1_calculator.html">Task 1: Moisture Deficit</a></li>
+      <li><a href="task2_advisory.html">Task 2: Decision Rules</a></li>
+      <li><a href="task3_farm_object.html">Task 3: Farm Object</a></li>
+      <li><a href="task4_sensor_array.html">Task 4: Hourly Analytics</a></li>
+      <li><a href="task5_validation.html">Task 5: Field Validator</a></li>
+      <li><a href="task6_registration_form.html">Task 6: Request Form</a></li>
+    </ul>
+  </aside>
+
+  <article>
+    <h2>Experiment 4: JavaScript Advisory &amp; Analytics Hub</h2>
+    <p>This module implements all client-side JavaScript logic for the Smart Irrigation Advisory System for Sugarcane Crop (KJS-AGR-01), extending the HTML5 layout (Exp 1) and CSS3 styling (Exp 2).</p>
+
+    <div class="task-grid">
+      <!-- Task 1 -->
+      <div class="task-card">
+        <h3>Task 1: Moisture &amp; Water Calculator</h3>
+        <p>Accepts soil moisture, calculates deficit, and displays water requirement status using <code>alert()</code> and <code>document.write()</code>.</p>
+        <a href="task1_calculator.html" class="task-link">Open Task 1 &rarr;</a>
+      </div>
+
+      <!-- Task 2 -->
+      <div class="task-card">
+        <h3>Task 2: Decision Rules &amp; Advisory</h3>
+        <p>Recommends irrigation actions based on soil moisture thresholds, rainfall forecast, and sugarcane growth stage.</p>
+        <a href="task2_advisory.html" class="task-link">Open Task 2 &rarr;</a>
+      </div>
+
+      <!-- Task 3 -->
+      <div class="task-card">
+        <h3>Task 3: Sugarcane Farm Object</h3>
+        <p>JavaScript farm object with properties and methods to display farm info, check irrigation need, and update pump status.</p>
+        <a href="task3_farm_object.html" class="task-link">Open Task 3 &rarr;</a>
+      </div>
+
+      <!-- Task 4 -->
+      <div class="task-card">
+        <h3>Task 4: Hourly Sensor Array</h3>
+        <p>Analyzes 24-hour sensor logs to compute minimum, maximum, average moisture, and count readings below critical limit.</p>
+        <a href="task4_sensor_array.html" class="task-link">Open Task 4 &rarr;</a>
+      </div>
+
+      <!-- Task 5 -->
+      <div class="task-card">
+        <h3>Task 5: Farmer &amp; Plot Validation</h3>
+        <p>Validates Farmer Name (alphabets only), Mobile Number (10 digits), and Plot ID (pattern: AGR-1234).</p>
+        <a href="task5_validation.html" class="task-link">Open Task 5 &rarr;</a>
+      </div>
+
+      <!-- Task 6 -->
+      <div class="task-card">
+        <h3>Task 6: Registration &amp; Request Form</h3>
+        <p>Complete HTML form for farmer registration and irrigation requests with client-side JavaScript validation.</p>
+        <a href="task6_registration_form.html" class="task-link">Open Task 6 &rarr;</a>
+      </div>
+    </div>
+
+    <h2 id="contact">Contact</h2>
+    <p>Department of Computer Engineering<br>
+    K. J. Somaiya School of Engineering, Mumbai-77</p>
+  </article>
+</div>
+
+<footer>
+  <p>&copy; 2026 Smart Irrigation Advisory System | Experiment 4: JavaScript</p>
+</footer>
+
+</div>
+
+</body>
+</html>

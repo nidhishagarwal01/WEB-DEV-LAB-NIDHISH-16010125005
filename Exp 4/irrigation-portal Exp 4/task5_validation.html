@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Task 5: Farmer & Plot Validation</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  nav {
+    background-color: #123C69;
+  }
+  nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  nav ul li a {
+    display: block;
+    padding: 14px 20px;
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: 500;
+    transition: background-color 0.2s;
+  }
+  nav ul li a:hover {
+    background-color: #FF8C42;
+    color: #0A2540;
+  }
+  .card-box {
+    background-color: #ffffff;
+    border: 1px solid #DCE4EC;
+    border-radius: 10px;
+    padding: 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 14px rgba(18, 60, 105, 0.08);
+  }
+  .form-row {
+    margin-bottom: 16px;
+  }
+  .form-row label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #1E293B;
+  }
+  .form-row input {
+    width: 100%;
+    max-width: 340px;
+    padding: 8px 10px;
+    border: 1px solid #C7D3DE;
+    border-radius: 6px;
+    font-size: 0.95em;
+    transition: border 0.2s;
+  }
+  .form-row input.valid-input {
+    border-color: #16A34A;
+    background-color: #F0FDF4;
+  }
+  .form-row input.invalid-input {
+    border-color: #DC2626;
+    background-color: #FEF2F2;
+  }
+  .err-msg {
+    color: #DC2626;
+    font-size: 0.85rem;
+    display: block;
+    margin-top: 4px;
+    font-weight: 500;
+  }
+  .btn {
+    background: linear-gradient(135deg, #123C69, #1F6F8B);
+    color: white;
+    padding: 10px 22px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+  .btn:hover {
+    opacity: 0.9;
+  }
+  .rule-box {
+    background-color: #F0F6FA;
+    border-left: 4px solid #123C69;
+    padding: 14px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+  }
+  .rule-box ul {
+    margin: 6px 0 0 20px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Smart Irrigation Advisory System (KJS-AGR-01)</h1>
+  <p>Experiment 4 &mdash; Task 5: Farmer &amp; Plot Validation Engine</p>
+</header>
+
+<nav>
+  <ul>
+    <li><a href="index.html">Portal Dashboard</a></li>
+    <li><a href="task1_calculator.html">Task 1: Calculator</a></li>
+    <li><a href="task2_advisory.html">Task 2: Advisory</a></li>
+    <li><a href="task3_farm_object.html">Task 3: Farm Object</a></li>
+    <li><a href="task4_sensor_array.html">Task 4: Sensor Array</a></li>
+    <li><a href="task5_validation.html">Task 5: Validation</a></li>
+    <li><a href="task6_registration_form.html">Task 6: Registration Form</a></li>
+  </ul>
+</nav>
+
+<section>
+  <h2>Task 5: Field Validation for Smart Irrigation Portal</h2>
+
+  <div class="card-box">
+    <div class="rule-box">
+      <strong>Validation Rules Applied:</strong>
+      <ul>
+        <li><strong>Farmer Name:</strong> Only alphabets and spaces</li>
+        <li><strong>Mobile Number:</strong> Exactly 10 digits</li>
+        <li><strong>Plot ID:</strong> Format <code>AGR-1234</code> (Case-insensitive 'AGR-' followed by 4 digits)</li>
+      </ul>
+    </div>
+
+    <form onsubmit="return validateTask5(event)">
+      <div class="form-row">
+        <label for="farmerNameInput">Farmer Name:</label>
+        <input type="text" id="farmerNameInput" placeholder="e.g. Ramesh Patil">
+        <span id="nameErr" class="err-msg"></span>
+      </div>
+
+      <div class="form-row">
+        <label for="mobileInput">Mobile Number:</label>
+        <input type="text" id="mobileInput" placeholder="e.g. 9876543210">
+        <span id="mobileErr" class="err-msg"></span>
+      </div>
+
+      <div class="form-row">
+        <label for="plotIdInput">Plot ID:</label>
+        <input type="text" id="plotIdInput" placeholder="e.g. AGR-1234">
+        <span id="plotErr" class="err-msg"></span>
+      </div>
+
+      <button type="submit" class="btn">Validate Parameters</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2026 Smart Irrigation Advisory System | Experiment 4: JavaScript</p>
+</footer>
+
+<script>
+  function validateTask5(e) {
+    e.preventDefault();
+
+    var name = document.getElementById("farmerNameInput").value.trim();
+    var mobile = document.getElementById("mobileInput").value.trim();
+    var plot = document.getElementById("plotIdInput").value.trim();
+
+    // Reset error messages and borders
+    clearErrors();
+
+    var isValid = true;
+
+    // 1. Farmer Name: Only alphabets and spaces
+    var namePattern = /^[A-Za-z\s]+$/;
+    if (name === "") {
+      setError("farmerNameInput", "nameErr", "Farmer name cannot be empty.");
+      isValid = false;
+    } else if (!namePattern.test(name)) {
+      setError("farmerNameInput", "nameErr", "Farmer name must contain only alphabets and spaces.");
+      isValid = false;
+    } else {
+      setSuccess("farmerNameInput");
+    }
+
+    // 2. Mobile Number: Exactly 10 digits
+    var mobilePattern = /^[0-9]{10}$/;
+    if (mobile === "") {
+      setError("mobileInput", "mobileErr", "Mobile number cannot be empty.");
+      isValid = false;
+    } else if (!mobilePattern.test(mobile)) {
+      setError("mobileInput", "mobileErr", "Mobile number must be exactly 10 numeric digits.");
+      isValid = false;
+    } else {
+      setSuccess("mobileInput");
+    }
+
+    // 3. Plot ID: Format AGR-1234
+    var plotPattern = /^AGR-[0-9]{4}$/i;
+    if (plot === "") {
+      setError("plotIdInput", "plotErr", "Plot ID cannot be empty.");
+      isValid = false;
+    } else if (!plotPattern.test(plot)) {
+      setError("plotIdInput", "plotErr", "Plot ID must follow format AGR-1234 (e.g. AGR-1024).");
+      isValid = false;
+    } else {
+      setSuccess("plotIdInput");
+    }
+
+    if (isValid) {
+      alert("All parameters validated successfully!\n\nFarmer: " + name + "\nMobile: " + mobile + "\nPlot ID: " + plot.toUpperCase());
+    }
+
+    return isValid;
+  }
+
+  function setError(inputId, spanId, msg) {
+    var el = document.getElementById(inputId);
+    el.classList.add("invalid-input");
+    el.classList.remove("valid-input");
+    document.getElementById(spanId).innerText = msg;
+  }
+
+  function setSuccess(inputId) {
+    var el = document.getElementById(inputId);
+    el.classList.remove("invalid-input");
+    el.classList.add("valid-input");
+  }
+
+  function clearErrors() {
+    var spans = document.querySelectorAll(".err-msg");
+    for (var i = 0; i < spans.length; i++) {
+      spans[i].innerText = "";
+    }
+    var inputs = document.querySelectorAll("input");
+    for (var j = 0; j < inputs.length; j++) {
+      inputs[j].classList.remove("invalid-input");
+      inputs[j].classList.remove("valid-input");
+    }
+  }
+</script>
+
+</body>
+</html>
