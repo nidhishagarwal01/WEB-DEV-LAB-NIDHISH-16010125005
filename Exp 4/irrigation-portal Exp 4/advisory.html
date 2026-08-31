@@ -2,8 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Task 2: Irrigation Recommendation Engine</title>
+<title>Irrigation Advisory</title>
 <link rel="stylesheet" href="style.css">
+
+<!-- Task 2 (Exp 2): Internal CSS for navigation menu -->
 <style>
   nav {
     background-color: #123C69;
@@ -27,32 +29,30 @@
     background-color: #FF8C42;
     color: #0A2540;
   }
-  .card-box {
+  .engine-card {
     background-color: #ffffff;
     border: 1px solid #DCE4EC;
-    border-radius: 10px;
-    padding: 24px;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 14px rgba(18, 60, 105, 0.08);
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 25px;
+    box-shadow: 0 4px 12px rgba(18, 60, 105, 0.08);
   }
-  .form-row {
+  .form-group {
     margin-bottom: 14px;
   }
-  .form-row label {
+  .form-group label {
     display: block;
     font-weight: 600;
-    margin-bottom: 5px;
-    color: #1E293B;
+    margin-bottom: 4px;
   }
-  .form-row input, .form-row select {
+  .form-group input, .form-group select {
     width: 100%;
     max-width: 320px;
     padding: 8px 10px;
     border: 1px solid #C7D3DE;
     border-radius: 6px;
-    font-size: 0.95em;
   }
-  .btn {
+  .btn-eval {
     background: linear-gradient(135deg, #123C69, #1F6F8B);
     color: white;
     padding: 10px 22px;
@@ -60,56 +60,24 @@
     border-radius: 6px;
     cursor: pointer;
     font-weight: 600;
-    font-size: 0.95rem;
   }
-  .btn:hover {
-    opacity: 0.9;
-  }
-  .decision-table {
+  .rules-table {
     border-collapse: collapse;
     width: 100%;
-    max-width: 600px;
-    margin-bottom: 20px;
+    max-width: 550px;
+    margin: 15px 0;
   }
-  .decision-table th, .decision-table td {
+  .rules-table th, .rules-table td {
     border: 1px solid #DCE4EC;
-    padding: 8px 12px;
-    text-align: left;
+    padding: 6px 10px;
+    font-size: 0.9em;
   }
-  .decision-table th {
+  .rules-table th {
     background-color: #123C69;
     color: white;
   }
-  .decision-table tr:nth-child(even) {
+  .rules-table tr:nth-child(even) {
     background-color: #F0F6FA;
-  }
-  .advisory-badge {
-    display: inline-block;
-    padding: 12px 18px;
-    border-radius: 8px;
-    font-size: 1.15rem;
-    font-weight: bold;
-    margin-top: 15px;
-  }
-  .badge-danger {
-    background-color: #fee2e2;
-    color: #991b1b;
-    border: 1.5px solid #f87171;
-  }
-  .badge-warning {
-    background-color: #fef3c7;
-    color: #92400e;
-    border: 1.5px solid #fcd34d;
-  }
-  .badge-info {
-    background-color: #e0f2fe;
-    color: #075985;
-    border: 1.5px solid #7dd3fc;
-  }
-  .badge-success {
-    background-color: #dcfce7;
-    color: #166534;
-    border: 1.5px solid #86efac;
   }
 </style>
 </head>
@@ -117,137 +85,132 @@
 
 <header>
   <h1>Smart Irrigation Advisory System (KJS-AGR-01)</h1>
-  <p>Experiment 4 &mdash; Task 2: Irrigation Recommendation Engine</p>
+  <p>Smart Irrigation using AI &amp; Sensor Technology</p>
 </header>
 
 <nav>
   <ul>
-    <li><a href="index.html">Portal Dashboard</a></li>
-    <li><a href="task1_calculator.html">Task 1: Calculator</a></li>
-    <li><a href="task2_advisory.html">Task 2: Advisory</a></li>
-    <li><a href="task3_farm_object.html">Task 3: Farm Object</a></li>
-    <li><a href="task4_sensor_array.html">Task 4: Sensor Array</a></li>
-    <li><a href="task5_validation.html">Task 5: Validation</a></li>
-    <li><a href="task6_registration_form.html">Task 6: Registration Form</a></li>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="farm-info.html">Farm Dashboard</a></li>
+    <li><a href="advisory.html">Irrigation Advisory</a></li>
+    <li><a href="irrigation-table.html">Sensor Data</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
   </ul>
 </nav>
 
 <section>
-  <h2>Task 2: Irrigation Decision Rules &amp; Advisory Engine</h2>
+  <h2>Today's Irrigation Recommendation</h2>
 
-  <!-- Decision Rules Reference Table -->
-  <div class="card-box">
-    <h3>Decision Rules Applied</h3>
-    <table class="decision-table">
-      <thead>
-        <tr>
-          <th>Condition</th>
-          <th>Recommendation</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Soil moisture &lt; 30%</td>
-          <td><strong>Irrigation Required Immediately</strong></td>
-        </tr>
-        <tr>
-          <td>Soil moisture between 30% and 50%</td>
-          <td><strong>Monitor Soil Moisture</strong></td>
-        </tr>
-        <tr>
-          <td>Rain expected</td>
-          <td><strong>Postpone Irrigation</strong></td>
-        </tr>
-        <tr>
-          <td>Soil moisture &gt; 50%</td>
-          <td><strong>Irrigation Not Required</strong></td>
-        </tr>
-      </tbody>
-    </table>
+  <!-- Task 10 (Exp 2): CSS effects and highlighting (glowing alert box) -->
+  <div id="liveAlertBox" class="alert-box">
+    Water Stress Level: Moderate &mdash; Irrigation Needed Soon
   </div>
 
-  <!-- Interactive Recommendation Form -->
-  <div class="card-box">
-    <h3>Check Recommendation for Field</h3>
+  <p><strong>Plot ID:</strong> AGR-1024<br>
+  <strong>Farmer Name:</strong> Ramesh Patil<br>
+  <strong>Soil Moisture:</strong> <mark>28%</mark> <small>(measured at 6:00 AM)</small></p>
 
-    <div class="form-row">
-      <label for="moistureInput">Soil Moisture (%):</label>
-      <input type="number" id="moistureInput" value="22" min="0" max="100">
+  <hr>
+
+  <p><strong>Recommended Irrigation Duration:</strong> <em>45 minutes</em> (drip irrigation)<br>
+  <strong>Water Stress Level:</strong> <mark id="waterStressMark">Moderate</mark></p>
+
+  <!-- Exp 4 - Task 2: Irrigation Recommendation Engine -->
+  <div class="engine-card">
+    <h3>Task 2: AI-Driven Irrigation Advisory Engine (Decision Rules)</h3>
+    
+    <table class="rules-table">
+      <thead>
+        <tr><th>Condition</th><th>Recommendation</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Soil moisture &lt; 30%</td><td>Irrigation Required Immediately</td></tr>
+        <tr><td>Soil moisture 30% - 50%</td><td>Monitor Soil Moisture</td></tr>
+        <tr><td>Rain expected</td><td>Postpone Irrigation</td></tr>
+        <tr><td>Soil moisture &gt; 50%</td><td>Irrigation Not Required</td></tr>
+      </tbody>
+    </table>
+
+    <div class="form-group">
+      <label for="evalMoisture">Current Soil Moisture (%):</label>
+      <input type="number" id="evalMoisture" value="28" min="0" max="100">
     </div>
 
-    <div class="form-row">
-      <label for="rainForecast">Rainfall Forecast:</label>
-      <select id="rainForecast">
+    <div class="form-group">
+      <label for="evalRain">Rainfall Forecast:</label>
+      <select id="evalRain">
         <option value="No">No Rain (Clear / Sunny)</option>
-        <option value="Yes">Rain Expected (Overcast / Rain Forecast)</option>
+        <option value="Yes">Rain Expected (Heavy Rain / Overcast)</option>
       </select>
     </div>
 
-    <div class="form-row">
-      <label for="cropStage">Sugarcane Crop Growth Stage:</label>
-      <select id="cropStage">
+    <div class="form-group">
+      <label for="evalStage">Crop Stage:</label>
+      <select id="evalStage">
         <option value="Germination">Germination</option>
         <option value="Tillering">Tillering</option>
-        <option value="Grand Growth" selected>Grand Growth (Peak Water Demand)</option>
+        <option value="Grand Growth" selected>Grand Growth</option>
         <option value="Maturity">Maturity</option>
       </select>
     </div>
 
-    <button class="btn" onclick="getIrrigationRecommendation()">Evaluate Recommendation</button>
+    <button class="btn-eval" onclick="runRecommendationEngine()">Evaluate Decision Rules</button>
 
-    <div id="recommendationResult" style="display:none; margin-top:15px;">
-      <div id="badgeElement" class="advisory-badge"></div>
-      <p id="detailsText" style="margin-top:10px; color:#475569;"></p>
-    </div>
+    <div id="evalSummary" style="display:none; margin-top:15px; padding:12px; background:#f0f6fa; border-radius:6px;"></div>
   </div>
+
 </section>
 
 <footer>
-  <p>&copy; 2026 Smart Irrigation Advisory System | Experiment 4: JavaScript</p>
+  <p>&copy; 2026 Smart Irrigation Advisory System</p>
 </footer>
 
 <script>
-  function getIrrigationRecommendation() {
-    var moisture = parseFloat(document.getElementById("moistureInput").value);
-    var rainExpected = document.getElementById("rainForecast").value === "Yes";
-    var stage = document.getElementById("cropStage").value;
+  // Exp 4 - Task 2: Decision Rules Function
+  function runRecommendationEngine() {
+    var moisture = parseFloat(document.getElementById("evalMoisture").value);
+    var rainExpected = document.getElementById("evalRain").value === "Yes";
+    var stage = document.getElementById("evalStage").value;
 
     if (isNaN(moisture)) {
-      alert("Please enter a valid soil moisture number.");
+      alert("Please enter a valid number for soil moisture.");
       return;
     }
 
     var recommendation = "";
-    var badgeClass = "";
+    var stressLevel = "";
     var explanation = "";
 
-    // Decision rules according to writeup
+    // Decision Rules
     if (rainExpected) {
       recommendation = "Postpone Irrigation";
-      badgeClass = "badge-info";
-      explanation = "Rain is forecast for your area. Delay irrigation to prevent waterlogging and conserve resources.";
+      stressLevel = "Low (Rain Incoming)";
+      explanation = "Rain is forecast. Postponing irrigation will prevent over-saturation and save water.";
     } else if (moisture < 30) {
       recommendation = "Irrigation Required Immediately";
-      badgeClass = "badge-danger";
-      explanation = "Soil moisture is critically low (" + moisture + "%). For " + stage + " stage, immediate water supply is recommended.";
+      stressLevel = "Critical / High";
+      explanation = "Moisture is below 30% critical threshold for sugarcane in " + stage + " stage.";
     } else if (moisture >= 30 && moisture <= 50) {
       recommendation = "Monitor Soil Moisture";
-      badgeClass = "badge-warning";
-      explanation = "Soil moisture is in moderate range (" + moisture + "%). Monitor field sensor trends over the next 12 hours.";
+      stressLevel = "Moderate";
+      explanation = "Moisture is between 30% and 50%. Keep monitoring hourly sensor trends.";
     } else {
       recommendation = "Irrigation Not Required";
-      badgeClass = "badge-success";
-      explanation = "Soil moisture is optimal (" + moisture + "%). Adequate moisture available for " + stage + " stage.";
+      stressLevel = "Optimal";
+      explanation = "Moisture is above 50%. Adequate moisture available for crop growth.";
     }
 
-    var resultDiv = document.getElementById("recommendationResult");
-    var badgeEl = document.getElementById("badgeElement");
-    var textEl = document.getElementById("detailsText");
+    // Update glowing alert box (Task 10 from Exp 2) dynamically
+    var alertBox = document.getElementById("liveAlertBox");
+    alertBox.innerHTML = "Advisory: " + recommendation + " (" + stressLevel + ")";
+    document.getElementById("waterStressMark").innerText = stressLevel;
 
-    badgeEl.className = "advisory-badge " + badgeClass;
-    badgeEl.innerHTML = recommendation;
-    textEl.innerHTML = "<strong>Stage Context:</strong> " + stage + "<br><strong>Advisory Note:</strong> " + explanation;
-    resultDiv.style.display = "block";
+    // Display summary
+    var sumDiv = document.getElementById("evalSummary");
+    sumDiv.style.display = "block";
+    sumDiv.innerHTML = "<strong>Engine Result:</strong> <span style='color:#123C69; font-weight:bold;'>" + recommendation + "</span><br>" +
+                       "&bull; <strong>Crop Stage:</strong> " + stage + "<br>" +
+                       "&bull; <strong>Context:</strong> " + explanation;
   }
 </script>
 

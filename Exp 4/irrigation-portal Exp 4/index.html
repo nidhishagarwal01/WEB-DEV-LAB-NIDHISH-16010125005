@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Smart Irrigation Advisory System - Experiment 4</title>
+<title>Smart Irrigation Advisory System - Home</title>
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="layout.css">
 
-<!-- Internal CSS for navigation menu -->
+<!-- Task 2 (Exp 2): Internal CSS for navigation menu -->
 <style>
   nav {
     background-color: #123C69;
@@ -30,54 +30,51 @@
     background-color: #FF8C42;
     color: #0A2540;
   }
-  .task-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 18px;
-    margin-top: 20px;
-  }
-  .task-card {
-    background-color: #ffffff;
+  .calculator-card {
+    background-color: #f8fafc;
     border: 1px solid #DCE4EC;
-    border-top: 4px solid #1F6F8B;
+    border-left: 4px solid #1F6F8B;
     border-radius: 8px;
-    padding: 18px;
-    box-shadow: 0 4px 12px rgba(18, 60, 105, 0.08);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    transition: transform 0.2s, box-shadow 0.2s;
+    padding: 20px;
+    margin: 20px 0;
   }
-  .task-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 20px rgba(18, 60, 105, 0.14);
+  .form-row {
+    margin-bottom: 12px;
   }
-  .task-card h3 {
-    margin-top: 0;
-    color: #123C69;
-    font-size: 1.15rem;
+  .form-row label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: #1E293B;
+    font-size: 0.95em;
   }
-  .task-card p {
-    color: #475569;
-    font-size: 0.92rem;
-    line-height: 1.5;
-    flex-grow: 1;
+  .form-row input {
+    width: 100%;
+    max-width: 300px;
+    padding: 8px 10px;
+    border: 1px solid #C7D3DE;
+    border-radius: 6px;
   }
-  .task-card .task-link {
-    display: inline-block;
+  .calc-btn {
     background: linear-gradient(135deg, #123C69, #1F6F8B);
     color: white;
-    text-decoration: none;
-    padding: 8px 16px;
+    padding: 9px 20px;
+    border: none;
     border-radius: 6px;
-    font-size: 0.9rem;
+    cursor: pointer;
     font-weight: 600;
-    text-align: center;
-    margin-top: 12px;
+    margin-top: 8px;
   }
-  .task-card .task-link:hover {
-    background: #FF8C42;
-    color: #0A2540;
+  .calc-btn:hover {
+    opacity: 0.92;
+  }
+  .result-output {
+    display: none;
+    margin-top: 14px;
+    padding: 12px 16px;
+    background-color: #eef4f9;
+    border-radius: 6px;
+    border-left: 3px solid #FF8C42;
   }
 </style>
 </head>
@@ -85,83 +82,88 @@
 
 <div class="page-wrapper">
 
-<!-- Inline CSS on homepage header (continuing Exp 2) -->
+<!-- Task 1 (Exp 2): Inline CSS on homepage header -->
 <header style="background:linear-gradient(135deg,#123C69,#1F6F8B); padding:28px 30px; border-bottom:4px solid #FF8C42;">
   <h1 style="color:white; margin:0 0 6px 0; font-size:2rem; letter-spacing:0.5px;">Smart Irrigation Advisory System (KJS-AGR-01)</h1>
-  <p style="text-align:center; color:#dcecf5; margin:0; font-style:italic;">Experiment 4 &mdash; Client-Side JavaScript Logic, Analytics &amp; Form Validation</p>
+  <p style="text-align:center; color:#dcecf5; margin:0; font-style:italic;">Smart Irrigation using AI &amp; Sensor Technology</p>
 </header>
 
 <nav>
   <ul>
     <li><a href="index.html">Home</a></li>
-    <li><a href="task1_calculator.html">Task 1: Calculator</a></li>
-    <li><a href="task2_advisory.html">Task 2: Advisory</a></li>
-    <li><a href="task3_farm_object.html">Task 3: Farm Object</a></li>
-    <li><a href="task4_sensor_array.html">Task 4: Sensor Array</a></li>
-    <li><a href="task5_validation.html">Task 5: Validation</a></li>
-    <li><a href="task6_registration_form.html">Task 6: Registration Form</a></li>
+    <li><a href="farm-info.html">Farm Dashboard</a></li>
+    <li><a href="advisory.html">Irrigation Advisory</a></li>
+    <li><a href="irrigation-table.html">Sensor Data</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
   </ul>
 </nav>
 
 <div class="main-area">
   <aside>
-    <h3>Experiment 4 Modules</h3>
+    <h3>Other Pages</h3>
     <ul>
-      <li><a href="task1_calculator.html">Task 1: Moisture Deficit</a></li>
-      <li><a href="task2_advisory.html">Task 2: Decision Rules</a></li>
-      <li><a href="task3_farm_object.html">Task 3: Farm Object</a></li>
-      <li><a href="task4_sensor_array.html">Task 4: Hourly Analytics</a></li>
-      <li><a href="task5_validation.html">Task 5: Field Validator</a></li>
-      <li><a href="task6_registration_form.html">Task 6: Request Form</a></li>
+      <li><a href="farm-info.html">Farm Information</a></li>
+      <li><a href="advisory.html">Today's Advisory</a></li>
+      <li><a href="gallery.html">Photo Gallery</a></li>
+      <li><a href="plot-map.html">Plot Map</a></li>
+      <li><a href="irrigation-table.html">Irrigation Table</a></li>
+      <li><a href="registration.html">Farmer Registration</a></li>
+      <li><a href="weather.html">Weather Forecast</a></li>
+      <li><a href="media.html">Awareness Video</a></li>
     </ul>
   </aside>
 
   <article>
-    <h2>Experiment 4: JavaScript Advisory &amp; Analytics Hub</h2>
-    <p>This module implements all client-side JavaScript logic for the Smart Irrigation Advisory System for Sugarcane Crop (KJS-AGR-01), extending the HTML5 layout (Exp 1) and CSS3 styling (Exp 2).</p>
+    <h2>About this System</h2>
+    <p>This is a smart irrigation advisory portal made for sugarcane farmers.
+    It uses soil moisture, temperature, humidity and rainfall sensors to
+    suggest when and how much to irrigate. This helps save water and
+    increase crop yield.</p>
 
-    <div class="task-grid">
-      <!-- Task 1 -->
-      <div class="task-card">
-        <h3>Task 1: Moisture &amp; Water Calculator</h3>
-        <p>Accepts soil moisture, calculates deficit, and displays water requirement status using <code>alert()</code> and <code>document.write()</code>.</p>
-        <a href="task1_calculator.html" class="task-link">Open Task 1 &rarr;</a>
+    <!-- Exp 4 - Task 1: Soil Moisture & Water Deficit Calculator -->
+    <h2>Quick Moisture &amp; Water Deficit Calculator (Task 1)</h2>
+    
+    <div class="calculator-card">
+      <h3>1. Live System Baseline (document.write demo)</h3>
+      <script>
+        // Task 1: Variables Declaration & Moisture Deficit Calculation
+        var defaultFarmer = "Ramesh Patil";
+        var defaultPlot = "AGR-1024";
+        var currentMoisture = 24.5;
+        var requiredMoisture = 45.0;
+
+        var deficit = requiredMoisture - currentMoisture;
+
+        document.write("<p style='margin:0;'>");
+        document.write("<strong>Farmer:</strong> " + defaultFarmer + " | <strong>Plot ID:</strong> " + defaultPlot + "<br>");
+        document.write("<strong>Current Moisture:</strong> " + currentMoisture + "% | <strong>Required:</strong> " + requiredMoisture + "%<br>");
+        document.write("<strong>Calculated Deficit:</strong> <span style='color:#BA532B; font-weight:bold;'>" + deficit.toFixed(1) + "%</span> (Status: Irrigation Required)");
+        document.write("</p>");
+      </script>
+    </div>
+
+    <div class="calculator-card">
+      <h3>2. Interactive Field Calculator (alert demo)</h3>
+      <div class="form-row">
+        <label for="farmerInput">Farmer Name:</label>
+        <input type="text" id="farmerInput" value="Ramesh Patil">
+      </div>
+      <div class="form-row">
+        <label for="plotInput">Plot ID:</label>
+        <input type="text" id="plotInput" value="AGR-1024">
+      </div>
+      <div class="form-row">
+        <label for="curMoistInput">Current Soil Moisture (%):</label>
+        <input type="number" id="curMoistInput" value="24.5" min="0" max="100">
+      </div>
+      <div class="form-row">
+        <label for="reqMoistInput">Target Required Moisture (%):</label>
+        <input type="number" id="reqMoistInput" value="45.0" min="0" max="100">
       </div>
 
-      <!-- Task 2 -->
-      <div class="task-card">
-        <h3>Task 2: Decision Rules &amp; Advisory</h3>
-        <p>Recommends irrigation actions based on soil moisture thresholds, rainfall forecast, and sugarcane growth stage.</p>
-        <a href="task2_advisory.html" class="task-link">Open Task 2 &rarr;</a>
-      </div>
+      <button class="calc-btn" onclick="calculateDeficitAndAlert()">Calculate Deficit &amp; Alert Status</button>
 
-      <!-- Task 3 -->
-      <div class="task-card">
-        <h3>Task 3: Sugarcane Farm Object</h3>
-        <p>JavaScript farm object with properties and methods to display farm info, check irrigation need, and update pump status.</p>
-        <a href="task3_farm_object.html" class="task-link">Open Task 3 &rarr;</a>
-      </div>
-
-      <!-- Task 4 -->
-      <div class="task-card">
-        <h3>Task 4: Hourly Sensor Array</h3>
-        <p>Analyzes 24-hour sensor logs to compute minimum, maximum, average moisture, and count readings below critical limit.</p>
-        <a href="task4_sensor_array.html" class="task-link">Open Task 4 &rarr;</a>
-      </div>
-
-      <!-- Task 5 -->
-      <div class="task-card">
-        <h3>Task 5: Farmer &amp; Plot Validation</h3>
-        <p>Validates Farmer Name (alphabets only), Mobile Number (10 digits), and Plot ID (pattern: AGR-1234).</p>
-        <a href="task5_validation.html" class="task-link">Open Task 5 &rarr;</a>
-      </div>
-
-      <!-- Task 6 -->
-      <div class="task-card">
-        <h3>Task 6: Registration &amp; Request Form</h3>
-        <p>Complete HTML form for farmer registration and irrigation requests with client-side JavaScript validation.</p>
-        <a href="task6_registration_form.html" class="task-link">Open Task 6 &rarr;</a>
-      </div>
+      <div id="calcOutput" class="result-output"></div>
     </div>
 
     <h2 id="contact">Contact</h2>
@@ -171,10 +173,50 @@
 </div>
 
 <footer>
-  <p>&copy; 2026 Smart Irrigation Advisory System | Experiment 4: JavaScript</p>
+  <p>&copy; 2026 Smart Irrigation Advisory System</p>
 </footer>
 
 </div>
+
+<script>
+  // Exp 4 - Task 1 Function
+  function calculateDeficitAndAlert() {
+    var farmer = document.getElementById("farmerInput").value;
+    var plot = document.getElementById("plotInput").value;
+    var current = parseFloat(document.getElementById("curMoistInput").value);
+    var required = parseFloat(document.getElementById("reqMoistInput").value);
+
+    if (isNaN(current) || isNaN(required)) {
+      alert("Please enter valid numerical soil moisture values.");
+      return;
+    }
+
+    var moistureDeficit = required - current;
+    var status = "";
+
+    if (moistureDeficit > 0) {
+      status = "Irrigation Required (" + Math.round(moistureDeficit * 2) + " min drip cycle)";
+    } else {
+      moistureDeficit = 0;
+      status = "Optimal Moisture Level &mdash; No Irrigation Required";
+    }
+
+    // Display alert() as required by Task 1
+    alert("Irrigation Advisory Status:\n" +
+          "Farmer: " + farmer + "\n" +
+          "Plot ID: " + plot + "\n" +
+          "Current Moisture: " + current + "%\n" +
+          "Moisture Deficit: " + moistureDeficit.toFixed(1) + "%\n" +
+          "Status: " + status);
+
+    // Update on-page DOM
+    var outDiv = document.getElementById("calcOutput");
+    outDiv.style.display = "block";
+    outDiv.innerHTML = "<strong>Result for " + plot + " (" + farmer + "):</strong><br>" +
+      "Current: " + current + "% | Required: " + required + "% | Deficit: <strong>" + moistureDeficit.toFixed(1) + "%</strong><br>" +
+      "<strong>Action:</strong> " + status;
+  }
+</script>
 
 </body>
 </html>

@@ -5,7 +5,7 @@
 <title>Farm Information</title>
 <link rel="stylesheet" href="style.css">
 
-<!-- Task 2: Internal CSS for navigation menu -->
+<!-- Task 2 (Exp 2): Internal CSS for navigation menu -->
 <style>
   nav {
     background-color: #123C69;
@@ -29,12 +29,56 @@
     background-color: #FF8C42;
     color: #0A2540;
   }
+  .object-card {
+    background-color: #ffffff;
+    border: 1px solid #DCE4EC;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 4px 12px rgba(18, 60, 105, 0.08);
+  }
+  .btn-obj {
+    background: linear-gradient(135deg, #123C69, #1F6F8B);
+    color: white;
+    padding: 9px 18px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    margin-right: 8px;
+    margin-bottom: 8px;
+  }
+  .btn-obj:hover {
+    opacity: 0.9;
+  }
+  .obj-display {
+    margin-top: 14px;
+    padding: 14px 18px;
+    background-color: #F0F6FA;
+    border-left: 4px solid #1F6F8B;
+    border-radius: 6px;
+    line-height: 1.7;
+  }
+  .pump-on {
+    color: #166534;
+    background-color: #DCFCE7;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+  }
+  .pump-off {
+    color: #991B1B;
+    background-color: #FEE2E2;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+  }
 </style>
 </head>
 <body>
 
 <header>
-  <h1>Smart Irrigation Advisory System</h1>
+  <h1>Smart Irrigation Advisory System (KJS-AGR-01)</h1>
   <p>Smart Irrigation using AI &amp; Sensor Technology</p>
 </header>
 
@@ -63,7 +107,7 @@
 <section>
   <h2>Sensors Used</h2>
 
-  <!-- Task 5: Card layout using CSS box model -->
+  <!-- Task 5 (Exp 2): Card layout using CSS box model -->
   <div class="sensor-card">
     <h3>Soil Moisture Sensor</h3>
     <p>Checks water level in soil.</p>
@@ -82,6 +126,23 @@
   <div class="sensor-card">
     <h3>Rainfall Sensor</h3>
     <p><mark>Detects rainfall</mark> in the field.</p>
+  </div>
+</section>
+
+<!-- Exp 4 - Task 3: Sugarcane Farm JavaScript Object -->
+<section>
+  <h2>Sugarcane Farm Object &amp; Pump Controller (Task 3)</h2>
+
+  <div class="object-card">
+    <p>Manage and inspect the live sugarcane farm JavaScript object using its encapsulated methods:</p>
+
+    <button class="btn-obj" onclick="showFarmDetails()">1. displayFarmInfo()</button>
+    <button class="btn-obj" onclick="checkFarmIrrigation()">2. checkIrrigationRequirement()</button>
+    <button class="btn-obj" onclick="toggleFarmPump()">3. updatePumpStatus()</button>
+
+    <div id="objectOutputBox" class="obj-display">
+      Click a button above to execute the farm object methods.
+    </div>
   </div>
 </section>
 
@@ -105,6 +166,68 @@
 <footer>
   <p>&copy; 2026 Smart Irrigation Advisory System</p>
 </footer>
+
+<script>
+  // Exp 4 - Task 3: Sugarcane Farm Object
+  var sugarcaneFarm = {
+    // Object Properties
+    farmerName: "Anita More",
+    plotId: "AGR-3056",
+    cropStage: "Grand Growth",
+    soilMoisture: 26.5,
+    area: "3.2 Hectares",
+    pumpStatus: "OFF",
+
+    // Method 1: Display farm information
+    displayFarmInfo: function() {
+      var pumpTag = this.pumpStatus === "ON" 
+        ? "<span class='pump-on'>ON (Active)</span>" 
+        : "<span class='pump-off'>OFF (Standby)</span>";
+
+      return "<strong>=== Sugarcane Farm Object Info ===</strong><br>" +
+             "&bull; <strong>Farmer:</strong> " + this.farmerName + "<br>" +
+             "&bull; <strong>Plot ID:</strong> " + this.plotId + "<br>" +
+             "&bull; <strong>Crop Growth Stage:</strong> " + this.cropStage + "<br>" +
+             "&bull; <strong>Current Soil Moisture:</strong> " + this.soilMoisture + "%<br>" +
+             "&bull; <strong>Farm Area:</strong> " + this.area + "<br>" +
+             "&bull; <strong>Pump Status:</strong> " + pumpTag;
+    },
+
+    // Method 2: Check irrigation requirement
+    checkIrrigationRequirement: function() {
+      if (this.soilMoisture < 30) {
+        return "<strong>Irrigation Check:</strong> <span style='color:#991B1B; font-weight:bold;'>CRITICAL &mdash; Irrigation Required Immediately.</span> (Moisture: " + this.soilMoisture + "%)";
+      } else if (this.soilMoisture <= 50) {
+        return "<strong>Irrigation Check:</strong> <span style='color:#92400E; font-weight:bold;'>MODERATE &mdash; Monitor Soil Moisture.</span>";
+      } else {
+        return "<strong>Irrigation Check:</strong> <span style='color:#166534; font-weight:bold;'>OPTIMAL &mdash; Irrigation Not Required.</span>";
+      }
+    },
+
+    // Method 3: Update pump status
+    updatePumpStatus: function(newStatus) {
+      this.pumpStatus = newStatus;
+      if (newStatus === "ON") {
+        this.soilMoisture = Math.min(100, this.soilMoisture + 15);
+      }
+      return "Pump status updated to: <strong>" + this.pumpStatus + "</strong> | Soil Moisture: <strong>" + this.soilMoisture + "%</strong>";
+    }
+  };
+
+  function showFarmDetails() {
+    document.getElementById("objectOutputBox").innerHTML = sugarcaneFarm.displayFarmInfo();
+  }
+
+  function checkFarmIrrigation() {
+    document.getElementById("objectOutputBox").innerHTML = sugarcaneFarm.checkIrrigationRequirement();
+  }
+
+  function toggleFarmPump() {
+    var next = sugarcaneFarm.pumpStatus === "OFF" ? "ON" : "OFF";
+    var msg = sugarcaneFarm.updatePumpStatus(next);
+    document.getElementById("objectOutputBox").innerHTML = msg + "<br><br>" + sugarcaneFarm.displayFarmInfo();
+  }
+</script>
 
 </body>
 </html>
