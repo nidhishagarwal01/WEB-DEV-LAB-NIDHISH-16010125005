@@ -2,14 +2,13 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Irrigation Table & Sensor Analytics</title>
+<title>Irrigation Table</title>
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="table.css">
 
-<!-- Task 2 (Exp 2): Internal CSS for navigation menu -->
 <style>
   nav {
-    background-color: #123C69;
+    background-color: #003366;
   }
   nav ul {
     list-style-type: none;
@@ -20,83 +19,42 @@
   }
   nav ul li a {
     display: block;
-    padding: 14px 20px;
+    padding: 12px 18px;
     text-decoration: none;
     color: #ffffff;
     font-weight: 500;
-    transition: background-color 0.2s;
   }
   nav ul li a:hover {
-    background-color: #FF8C42;
-    color: #0A2540;
+    background-color: #0056b3;
+    color: #ffffff;
   }
-  .analytics-box {
+  .box-card {
     background-color: #ffffff;
-    border: 1px solid #DCE4EC;
-    border-radius: 8px;
-    padding: 22px;
-    margin-top: 30px;
-    box-shadow: 0 4px 12px rgba(18, 60, 105, 0.08);
+    border: 1px solid #dcdcdc;
+    border-radius: 6px;
+    padding: 16px;
+    margin-top: 24px;
   }
-  .btn-analytics {
-    background: linear-gradient(135deg, #123C69, #1F6F8B);
+  .btn-blue {
+    background-color: #0056b3;
     color: white;
-    padding: 9px 20px;
+    padding: 8px 16px;
     border: none;
-    border-radius: 6px;
+    border-radius: 4px;
     cursor: pointer;
-    font-weight: 600;
-  }
-  .chips-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin: 12px 0 18px 0;
-  }
-  .chip {
-    padding: 4px 10px;
-    background: #F0F6FA;
-    border: 1px solid #C7D3DE;
-    border-radius: 16px;
-    font-size: 0.88em;
-    font-family: monospace;
-  }
-  .chip-alert {
-    background: #FEE2E2;
-    border-color: #F87171;
-    color: #991B1B;
     font-weight: bold;
+    font-size: 0.9em;
   }
-  .metrics-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 12px;
+  .btn-blue:hover {
+    background-color: #004085;
+  }
+  .summary-box {
     margin-top: 14px;
-  }
-  .metric-card {
-    background: #F8FAFC;
-    border: 1px solid #E2E8F0;
-    border-left: 4px solid #1F6F8B;
-    padding: 12px;
-    border-radius: 6px;
-    text-align: center;
-  }
-  .metric-card h4 {
-    margin: 0 0 4px 0;
-    font-size: 0.8rem;
-    color: #64748B;
-    text-transform: uppercase;
-  }
-  .metric-val {
-    font-size: 1.4rem;
-    font-weight: bold;
-    color: #123C69;
-  }
-  .metric-card.alert-card {
-    border-left-color: #BA532B;
-  }
-  .metric-card.alert-card .metric-val {
-    color: #BA532B;
+    padding: 12px 16px;
+    background-color: #f0f4f8;
+    border-left: 3px solid #0056b3;
+    font-size: 0.95em;
+    line-height: 1.7;
   }
 </style>
 </head>
@@ -120,7 +78,6 @@
 <section>
   <h2>Irrigation Recommendations for Multiple Plots</h2>
 
-  <!-- Task 7 (Exp 2): Styled table with zebra striping -->
   <table>
     <caption>Soil Moisture and Irrigation Recommendation - August 2026</caption>
     <thead>
@@ -174,40 +131,13 @@
     </tfoot>
   </table>
 
-  <!-- Exp 4 - Task 4: Hourly Soil Moisture Sensor Array Analytics -->
-  <div class="analytics-box">
-    <h3>Hourly Soil Moisture Sensor Analytics (24-Hour Log)</h3>
-    <p>A field sensor collects moisture readings every hour. Click below to analyze the 24-hour sensor array:</p>
+  <div class="box-card">
+    <h3>24-Hour Soil Moisture Sensor Log Analysis</h3>
+    <p>Hourly moisture readings collected from field sensor. Click below to view the statistical summary:</p>
 
-    <button class="btn-analytics" onclick="processSensorArray()">Analyze 24-Hour Sensor Array</button>
+    <button class="btn-blue" onclick="processSensorData()">Calculate Sensor Summary</button>
 
-    <div id="sensorReport" style="display:none; margin-top:16px;">
-      <strong>1. All 24-Hour Sensor Readings (Hourly Array):</strong>
-      <div id="chipsDiv" class="chips-container"></div>
-
-      <strong>2. Statistical Analysis &amp; Threshold Count:</strong>
-      <div class="metrics-grid">
-        <div class="metric-card">
-          <h4>Minimum Moisture</h4>
-          <div id="minDisplay" class="metric-val">--</div>
-        </div>
-
-        <div class="metric-card">
-          <h4>Maximum Moisture</h4>
-          <div id="maxDisplay" class="metric-val">--</div>
-        </div>
-
-        <div class="metric-card">
-          <h4>Average Moisture</h4>
-          <div id="avgDisplay" class="metric-val">--</div>
-        </div>
-
-        <div class="metric-card alert-card">
-          <h4>Below Critical (&lt; 25%)</h4>
-          <div id="critDisplay" class="metric-val">--</div>
-        </div>
-      </div>
-    </div>
+    <div id="sensorSummaryDiv" class="summary-box" style="display:none;"></div>
   </div>
 
 </section>
@@ -217,7 +147,7 @@
 </footer>
 
 <script>
-  // Exp 4 - Task 4: Sensor Array Operations
+  // Hourly Sensor Array (Task 4)
   var sensorReadings = [
     28, 27, 26, 25, 24, 22, 
     20, 19, 21, 23, 27, 31, 
@@ -227,18 +157,8 @@
 
   var criticalLimit = 25;
 
-  function processSensorArray() {
-    // 1. Display all sensor readings
-    var chipsHtml = "";
-    for (var i = 0; i < sensorReadings.length; i++) {
-      var val = sensorReadings[i];
-      var isLow = val < criticalLimit;
-      chipsHtml += "<span class='chip " + (isLow ? "chip-alert" : "") + "'>" +
-                   "H" + (i + 1) + ": " + val + "%</span>";
-    }
-    document.getElementById("chipsDiv").innerHTML = chipsHtml;
-
-    // 2. Minimum moisture
+  function processSensorData() {
+    // 1. Minimum moisture
     var minVal = sensorReadings[0];
     for (var a = 1; a < sensorReadings.length; a++) {
       if (sensorReadings[a] < minVal) {
@@ -246,7 +166,7 @@
       }
     }
 
-    // 3. Maximum moisture
+    // 2. Maximum moisture
     var maxVal = sensorReadings[0];
     for (var b = 1; b < sensorReadings.length; b++) {
       if (sensorReadings[b] > maxVal) {
@@ -254,14 +174,14 @@
       }
     }
 
-    // 4. Average soil moisture
+    // 3. Average moisture
     var sum = 0;
     for (var c = 0; c < sensorReadings.length; c++) {
       sum += sensorReadings[c];
     }
     var avgVal = (sum / sensorReadings.length).toFixed(2);
 
-    // 5. Count readings below critical value (< 25%)
+    // 4. Count readings below critical limit (< 25%)
     var criticalCount = 0;
     for (var d = 0; d < sensorReadings.length; d++) {
       if (sensorReadings[d] < criticalLimit) {
@@ -269,13 +189,14 @@
       }
     }
 
-    // Update UI elements
-    document.getElementById("minDisplay").innerText = minVal + "%";
-    document.getElementById("maxDisplay").innerText = maxVal + "%";
-    document.getElementById("avgDisplay").innerText = avgVal + "%";
-    document.getElementById("critDisplay").innerText = criticalCount + " / 24 hrs";
-
-    document.getElementById("sensorReport").style.display = "block";
+    var out = document.getElementById("sensorSummaryDiv");
+    out.style.display = "block";
+    out.innerHTML = "<b>24-Hour Sensor Readings (%):</b><br>" + sensorReadings.join(", ") + "<br><br>" +
+                    "<b>Analysis Summary:</b><br>" +
+                    "&bull; Minimum Soil Moisture: <b>" + minVal + "%</b><br>" +
+                    "&bull; Maximum Soil Moisture: <b>" + maxVal + "%</b><br>" +
+                    "&bull; Average Soil Moisture: <b>" + avgVal + "%</b><br>" +
+                    "&bull; Hourly Readings Below Critical (&lt; 25%): <b>" + criticalCount + " out of 24</b>";
   }
 </script>
 

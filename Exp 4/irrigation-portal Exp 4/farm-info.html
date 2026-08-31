@@ -5,10 +5,9 @@
 <title>Farm Information</title>
 <link rel="stylesheet" href="style.css">
 
-<!-- Task 2 (Exp 2): Internal CSS for navigation menu -->
 <style>
   nav {
-    background-color: #123C69;
+    background-color: #003366;
   }
   nav ul {
     list-style-type: none;
@@ -19,59 +18,44 @@
   }
   nav ul li a {
     display: block;
-    padding: 14px 20px;
+    padding: 12px 18px;
     text-decoration: none;
     color: #ffffff;
     font-weight: 500;
-    transition: background-color 0.2s;
   }
   nav ul li a:hover {
-    background-color: #FF8C42;
-    color: #0A2540;
+    background-color: #0056b3;
+    color: #ffffff;
   }
-  .object-card {
+  .box-card {
     background-color: #ffffff;
-    border: 1px solid #DCE4EC;
-    border-radius: 8px;
-    padding: 20px;
-    margin: 20px 0;
-    box-shadow: 0 4px 12px rgba(18, 60, 105, 0.08);
+    border: 1px solid #dcdcdc;
+    border-radius: 6px;
+    padding: 16px;
+    margin: 18px 0;
   }
-  .btn-obj {
-    background: linear-gradient(135deg, #123C69, #1F6F8B);
+  .btn-blue {
+    background-color: #0056b3;
     color: white;
-    padding: 9px 18px;
+    padding: 8px 14px;
     border: none;
-    border-radius: 6px;
+    border-radius: 4px;
     cursor: pointer;
-    font-weight: 600;
-    margin-right: 8px;
-    margin-bottom: 8px;
-  }
-  .btn-obj:hover {
-    opacity: 0.9;
-  }
-  .obj-display {
-    margin-top: 14px;
-    padding: 14px 18px;
-    background-color: #F0F6FA;
-    border-left: 4px solid #1F6F8B;
-    border-radius: 6px;
-    line-height: 1.7;
-  }
-  .pump-on {
-    color: #166534;
-    background-color: #DCFCE7;
-    padding: 3px 8px;
-    border-radius: 4px;
     font-weight: bold;
+    font-size: 0.9em;
+    margin-right: 6px;
+    margin-bottom: 6px;
   }
-  .pump-off {
-    color: #991B1B;
-    background-color: #FEE2E2;
-    padding: 3px 8px;
-    border-radius: 4px;
-    font-weight: bold;
+  .btn-blue:hover {
+    background-color: #004085;
+  }
+  .obj-output {
+    margin-top: 12px;
+    padding: 12px 14px;
+    background-color: #f0f4f8;
+    border-left: 3px solid #0056b3;
+    font-size: 0.95em;
+    line-height: 1.6;
   }
 </style>
 </head>
@@ -107,7 +91,6 @@
 <section>
   <h2>Sensors Used</h2>
 
-  <!-- Task 5 (Exp 2): Card layout using CSS box model -->
   <div class="sensor-card">
     <h3>Soil Moisture Sensor</h3>
     <p>Checks water level in soil.</p>
@@ -129,19 +112,18 @@
   </div>
 </section>
 
-<!-- Exp 4 - Task 3: Sugarcane Farm JavaScript Object -->
 <section>
-  <h2>Sugarcane Farm Live Object &amp; Pump Controller</h2>
+  <h2>Farm Status &amp; Pump Control</h2>
 
-  <div class="object-card">
-    <p>Manage and inspect the live sugarcane farm JavaScript object using its encapsulated methods:</p>
+  <div class="box-card">
+    <p>Manage and inspect the farm object status:</p>
 
-    <button class="btn-obj" onclick="showFarmDetails()">1. displayFarmInfo()</button>
-    <button class="btn-obj" onclick="checkFarmIrrigation()">2. checkIrrigationRequirement()</button>
-    <button class="btn-obj" onclick="toggleFarmPump()">3. updatePumpStatus()</button>
+    <button class="btn-blue" onclick="showFarmInfo()">Display Farm Details</button>
+    <button class="btn-blue" onclick="checkIrrigation()">Check Irrigation Need</button>
+    <button class="btn-blue" onclick="togglePump()">Toggle Pump Status</button>
 
-    <div id="objectOutputBox" class="obj-display">
-      Click a button above to execute the farm object methods.
+    <div id="outputArea" class="obj-output">
+      Click any button above to view or update farm details.
     </div>
   </div>
 </section>
@@ -168,9 +150,8 @@
 </footer>
 
 <script>
-  // Exp 4 - Task 3: Sugarcane Farm Object
+  // Sugarcane Farm Object (Task 3)
   var sugarcaneFarm = {
-    // Object Properties
     farmerName: "Anita More",
     plotId: "AGR-3056",
     cropStage: "Grand Growth",
@@ -178,54 +159,47 @@
     area: "3.2 Hectares",
     pumpStatus: "OFF",
 
-    // Method 1: Display farm information
     displayFarmInfo: function() {
-      var pumpTag = this.pumpStatus === "ON" 
-        ? "<span class='pump-on'>ON (Active)</span>" 
-        : "<span class='pump-off'>OFF (Standby)</span>";
-
-      return "<strong>=== Sugarcane Farm Object Info ===</strong><br>" +
-             "&bull; <strong>Farmer:</strong> " + this.farmerName + "<br>" +
-             "&bull; <strong>Plot ID:</strong> " + this.plotId + "<br>" +
-             "&bull; <strong>Crop Growth Stage:</strong> " + this.cropStage + "<br>" +
-             "&bull; <strong>Current Soil Moisture:</strong> " + this.soilMoisture + "%<br>" +
-             "&bull; <strong>Farm Area:</strong> " + this.area + "<br>" +
-             "&bull; <strong>Pump Status:</strong> " + pumpTag;
+      return "<b>Farm Information:</b><br>" +
+             "Farmer Name: " + this.farmerName + "<br>" +
+             "Plot ID: " + this.plotId + "<br>" +
+             "Crop Stage: " + this.cropStage + "<br>" +
+             "Soil Moisture: " + this.soilMoisture + "%<br>" +
+             "Farm Area: " + this.area + "<br>" +
+             "Pump Status: <b>" + this.pumpStatus + "</b>";
     },
 
-    // Method 2: Check irrigation requirement
     checkIrrigationRequirement: function() {
       if (this.soilMoisture < 30) {
-        return "<strong>Irrigation Check:</strong> <span style='color:#991B1B; font-weight:bold;'>CRITICAL &mdash; Irrigation Required Immediately.</span> (Moisture: " + this.soilMoisture + "%)";
+        return "<b>Status for " + this.plotId + ":</b> Soil moisture is low (" + this.soilMoisture + "%). Irrigation is required immediately.";
       } else if (this.soilMoisture <= 50) {
-        return "<strong>Irrigation Check:</strong> <span style='color:#92400E; font-weight:bold;'>MODERATE &mdash; Monitor Soil Moisture.</span>";
+        return "<b>Status for " + this.plotId + ":</b> Soil moisture is moderate (" + this.soilMoisture + "%). Monitor field.";
       } else {
-        return "<strong>Irrigation Check:</strong> <span style='color:#166534; font-weight:bold;'>OPTIMAL &mdash; Irrigation Not Required.</span>";
+        return "<b>Status for " + this.plotId + ":</b> Soil moisture is optimal (" + this.soilMoisture + "%). No irrigation required.";
       }
     },
 
-    // Method 3: Update pump status
     updatePumpStatus: function(newStatus) {
       this.pumpStatus = newStatus;
       if (newStatus === "ON") {
         this.soilMoisture = Math.min(100, this.soilMoisture + 15);
       }
-      return "Pump status updated to: <strong>" + this.pumpStatus + "</strong> | Soil Moisture: <strong>" + this.soilMoisture + "%</strong>";
+      return "Pump status updated to <b>" + this.pumpStatus + "</b> (Soil Moisture: " + this.soilMoisture + "%)";
     }
   };
 
-  function showFarmDetails() {
-    document.getElementById("objectOutputBox").innerHTML = sugarcaneFarm.displayFarmInfo();
+  function showFarmInfo() {
+    document.getElementById("outputArea").innerHTML = sugarcaneFarm.displayFarmInfo();
   }
 
-  function checkFarmIrrigation() {
-    document.getElementById("objectOutputBox").innerHTML = sugarcaneFarm.checkIrrigationRequirement();
+  function checkIrrigation() {
+    document.getElementById("outputArea").innerHTML = sugarcaneFarm.checkIrrigationRequirement();
   }
 
-  function toggleFarmPump() {
+  function togglePump() {
     var next = sugarcaneFarm.pumpStatus === "OFF" ? "ON" : "OFF";
     var msg = sugarcaneFarm.updatePumpStatus(next);
-    document.getElementById("objectOutputBox").innerHTML = msg + "<br><br>" + sugarcaneFarm.displayFarmInfo();
+    document.getElementById("outputArea").innerHTML = msg + "<br><br>" + sugarcaneFarm.displayFarmInfo();
   }
 </script>
 

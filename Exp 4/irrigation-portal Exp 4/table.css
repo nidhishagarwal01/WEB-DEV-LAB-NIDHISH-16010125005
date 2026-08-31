@@ -1,40 +1,38 @@
-/* Task 7: Table styling */
 table {
   border-collapse: collapse;
   width: 100%;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 4px 14px rgba(18, 60, 105, 0.10);
+  border: 1px solid #cccccc;
+  background-color: #ffffff;
 }
 
 caption {
-  font-weight: 600;
-  color: #123C69;
-  padding: 10px 0;
-  font-size: 1.05em;
+  font-weight: bold;
+  color: #003366;
+  padding: 8px 0;
+  font-size: 1em;
 }
 
 th, td {
-  border: 1px solid #DCE4EC;
-  padding: 10px 12px;
+  border: 1px solid #dcdcdc;
+  padding: 8px 10px;
   text-align: center;
 }
 
 thead {
-  background-color: #123C69;
-  color: white;
+  background-color: #003366;
+  color: #ffffff;
 }
 
 tbody tr:nth-child(even) {
-  background-color: #F0F6FA;
+  background-color: #f8f9fa;
 }
 
 tbody tr:hover {
-  background-color: #E4EEF5;
+  background-color: #e9ecef;
 }
 
 tfoot {
   font-weight: bold;
-  background-color: #DCEAF2;
-  color: #0A2540;
+  background-color: #e9f0f8;
+  color: #003366;
 }

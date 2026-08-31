@@ -6,10 +6,9 @@
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="form.css">
 
-<!-- Task 2 (Exp 2): Internal CSS for navigation menu -->
 <style>
   nav {
-    background-color: #123C69;
+    background-color: #003366;
   }
   nav ul {
     list-style-type: none;
@@ -20,41 +19,21 @@
   }
   nav ul li a {
     display: block;
-    padding: 14px 20px;
+    padding: 12px 18px;
     text-decoration: none;
     color: #ffffff;
     font-weight: 500;
-    transition: background-color 0.2s;
   }
   nav ul li a:hover {
-    background-color: #FF8C42;
-    color: #0A2540;
+    background-color: #0056b3;
+    color: #ffffff;
   }
-  .err-msg {
-    color: #DC2626;
-    font-size: 0.85em;
+  .error-msg {
+    color: red;
+    font-size: 13px;
     display: block;
     margin-top: -8px;
-    margin-bottom: 12px;
-    font-weight: 500;
-  }
-  .input-invalid {
-    border-color: #DC2626 !important;
-    background-color: #FEF2F2 !important;
-  }
-  .input-valid {
-    border-color: #16A34A !important;
-    background-color: #F0FDF4 !important;
-  }
-  .success-banner {
-    display: none;
-    background-color: #DCFCE7;
-    border: 1.5px solid #86EFAC;
-    color: #166534;
-    padding: 16px 20px;
-    border-radius: 8px;
-    margin-top: 20px;
-    line-height: 1.6;
+    margin-bottom: 10px;
   }
 </style>
 </head>
@@ -78,67 +57,62 @@
 <section>
   <h2>Farmer Registration Form</h2>
 
-  <!-- Exp 4 - Task 6: Interactive Form with JavaScript Client Validation -->
-  <form id="farmerRegForm" onsubmit="return validateFarmerRegistration(event)" onreset="clearFormValidation()">
+  <form id="regForm" onsubmit="return validateForm()">
 
     <fieldset>
       <legend>Personal Details</legend>
 
       <label for="name">Farmer Name:</label><br>
-      <input type="text" id="name" name="name" placeholder="Enter your full name" autofocus><br>
-      <span id="nameErr" class="err-msg"></span>
+      <input type="text" id="name" name="name" placeholder="Enter full name"><br>
+      <span id="nameErr" class="error-msg"></span>
 
       <label for="mobile">Mobile Number:</label><br>
-      <input type="tel" id="mobile" name="mobile" placeholder="10 digit number"><br>
-      <span id="mobileErr" class="err-msg"></span>
+      <input type="text" id="mobile" name="mobile" placeholder="10-digit number"><br>
+      <span id="mobileErr" class="error-msg"></span>
 
       <label for="email">Email:</label><br>
-      <input type="email" id="email" name="email" placeholder="you@example.com"><br>
-      <span id="emailErr" class="err-msg"></span>
+      <input type="text" id="email" name="email" placeholder="you@example.com"><br>
+      <span id="emailErr" class="error-msg"></span>
     </fieldset>
 
     <fieldset>
       <legend>Farm &amp; Irrigation Details</legend>
 
-      <label for="plotid">Plot ID (Pattern: AGR-1234):</label><br>
-      <input type="text" id="plotid" name="plotid" placeholder="e.g. AGR-1024"><br>
-      <span id="plotErr" class="err-msg"></span>
+      <label for="plotid">Plot ID (e.g. AGR-1024):</label><br>
+      <input type="text" id="plotid" name="plotid" placeholder="AGR-1234"><br>
+      <span id="plotErr" class="error-msg"></span>
 
       <label for="moisture">Current Soil Moisture (%):</label><br>
       <input type="number" id="moisture" name="moisture" placeholder="0 to 100"><br>
-      <span id="moistureErr" class="err-msg"></span>
+      <span id="moistureErr" class="error-msg"></span>
 
       <label for="cropstage">Crop Stage:</label><br>
       <select id="cropstage" name="cropstage">
-        <option value="">--Select--</option>
-        <option value="germination">Germination</option>
-        <option value="tillering">Tillering</option>
-        <option value="grand-growth">Grand Growth</option>
-        <option value="maturity">Maturity</option>
+        <option value="">-- Select --</option>
+        <option value="Germination">Germination</option>
+        <option value="Tillering">Tillering</option>
+        <option value="Grand Growth">Grand Growth</option>
+        <option value="Maturity">Maturity</option>
       </select><br>
-      <span id="stageErr" class="err-msg"></span>
+      <span id="stageErr" class="error-msg"></span>
 
-      <label for="irrigation-method">Irrigation Method:</label><br>
-      <select id="irrigation-method" name="irrigation-method">
-        <option value="">--Select--</option>
-        <option value="drip">Drip Irrigation</option>
-        <option value="sprinkler">Sprinkler</option>
-        <option value="flood">Flood/Furrow</option>
+      <label for="method">Irrigation Method:</label><br>
+      <select id="method" name="method">
+        <option value="">-- Select --</option>
+        <option value="Drip">Drip Irrigation</option>
+        <option value="Sprinkler">Sprinkler</option>
+        <option value="Flood">Flood/Furrow</option>
       </select><br>
-      <span id="methodErr" class="err-msg"></span>
+      <span id="methodErr" class="error-msg"></span>
 
       <label for="regdate">Irrigation Date:</label><br>
       <input type="date" id="regdate" name="regdate"><br>
-      <span id="dateErr" class="err-msg"></span>
+      <span id="dateErr" class="error-msg"></span>
     </fieldset>
 
-    <input type="submit" value="Register &amp; Request Advisory">
-    <input type="reset" value="Clear" style="background:#CBD5E1; color:#1E293B; width:auto; padding:10px 20px; border:none; border-radius:6px; cursor:pointer; font-weight:600; margin-left:10px;">
-
+    <input type="submit" value="Register Farmer">
   </form>
 
-  <!-- Success Notification Box -->
-  <div id="successBanner" class="success-banner"></div>
 </section>
 
 <footer>
@@ -146,150 +120,102 @@
 </footer>
 
 <script>
-  // Exp 4 - Tasks 5 & 6 Validation Logic
-  function validateFarmerRegistration(event) {
-    event.preventDefault();
-
-    // Clear previous errors
-    clearErrors();
-
+  function validateForm() {
     var name = document.getElementById("name").value.trim();
     var mobile = document.getElementById("mobile").value.trim();
     var email = document.getElementById("email").value.trim();
     var plotid = document.getElementById("plotid").value.trim();
     var moisture = document.getElementById("moisture").value.trim();
     var cropstage = document.getElementById("cropstage").value;
-    var method = document.getElementById("irrigation-method").value;
+    var method = document.getElementById("method").value;
     var regdate = document.getElementById("regdate").value;
+
+    // Reset error messages
+    document.getElementById("nameErr").innerHTML = "";
+    document.getElementById("mobileErr").innerHTML = "";
+    document.getElementById("emailErr").innerHTML = "";
+    document.getElementById("plotErr").innerHTML = "";
+    document.getElementById("moistureErr").innerHTML = "";
+    document.getElementById("stageErr").innerHTML = "";
+    document.getElementById("methodErr").innerHTML = "";
+    document.getElementById("dateErr").innerHTML = "";
 
     var isValid = true;
 
-    // 1. Farmer Name: Only alphabets and spaces (Task 5 & 6)
+    // 1. Farmer Name: alphabets and spaces only
     var nameRegex = /^[A-Za-z\s]+$/;
     if (name === "") {
-      setErrorField("name", "nameErr", "Farmer Name is required.");
+      document.getElementById("nameErr").innerHTML = "Farmer name is required.";
       isValid = false;
     } else if (!nameRegex.test(name)) {
-      setErrorField("name", "nameErr", "Farmer Name must contain only alphabets and spaces.");
+      document.getElementById("nameErr").innerHTML = "Name must contain only alphabets and spaces.";
       isValid = false;
-    } else {
-      setValidField("name");
     }
 
-    // 2. Mobile Number: Exactly 10 digits (Task 5 & 6)
-    var mobileRegex = /^[0-9]{10}$/;
+    // 2. Mobile: 10 digits
     if (mobile === "") {
-      setErrorField("mobile", "mobileErr", "Mobile Number is required.");
+      document.getElementById("mobileErr").innerHTML = "Mobile number is required.";
       isValid = false;
-    } else if (!mobileRegex.test(mobile)) {
-      setErrorField("mobile", "mobileErr", "Mobile Number must contain exactly 10 digits.");
+    } else if (isNaN(mobile) || mobile.length !== 10) {
+      document.getElementById("mobileErr").innerHTML = "Mobile number must be a 10-digit number.";
       isValid = false;
-    } else {
-      setValidField("mobile");
     }
 
-    // 3. Email check
+    // 3. Email
+    var atpos = email.indexOf("@");
+    var dotpos = email.lastIndexOf(".");
     if (email === "") {
-      setErrorField("email", "emailErr", "Email is required.");
+      document.getElementById("emailErr").innerHTML = "Email is required.";
       isValid = false;
-    } else {
-      setValidField("email");
+    } else if (atpos < 1 || dotpos - atpos < 2 || dotpos + 2 >= email.length) {
+      document.getElementById("emailErr").innerHTML = "Please enter a valid email address.";
+      isValid = false;
     }
 
-    // 4. Plot ID: Pattern AGR-1234 (Task 5 & 6)
+    // 4. Plot ID: AGR-1234
     var plotRegex = /^AGR-[0-9]{4}$/i;
     if (plotid === "") {
-      setErrorField("plotid", "plotErr", "Plot ID is required.");
+      document.getElementById("plotErr").innerHTML = "Plot ID is required.";
       isValid = false;
     } else if (!plotRegex.test(plotid)) {
-      setErrorField("plotid", "plotErr", "Plot ID must follow pattern AGR-1234 (e.g. AGR-1024).");
+      document.getElementById("plotErr").innerHTML = "Plot ID must follow format AGR-1234 (e.g. AGR-1024).";
       isValid = false;
-    } else {
-      setValidField("plotid");
     }
 
-    // 5. Soil Moisture: Between 0 and 100 (Task 6)
+    // 5. Soil Moisture: between 0 and 100
     var moistNum = parseFloat(moisture);
     if (moisture === "" || isNaN(moistNum)) {
-      setErrorField("moisture", "moistureErr", "Soil Moisture is required.");
+      document.getElementById("moistureErr").innerHTML = "Soil moisture is required.";
       isValid = false;
     } else if (moistNum < 0 || moistNum > 100) {
-      setErrorField("moisture", "moistureErr", "Soil Moisture must be between 0 and 100%.");
+      document.getElementById("moistureErr").innerHTML = "Soil moisture must be between 0 and 100%.";
       isValid = false;
-    } else {
-      setValidField("moisture");
     }
 
-    // 6. Crop Stage: Required (Task 6)
+    // 6. Crop Stage
     if (cropstage === "") {
-      setErrorField("cropstage", "stageErr", "Please select a Crop Stage.");
+      document.getElementById("stageErr").innerHTML = "Please select crop stage.";
       isValid = false;
-    } else {
-      setValidField("cropstage");
     }
 
-    // 7. Irrigation Method: Required
+    // 7. Method
     if (method === "") {
-      setErrorField("irrigation-method", "methodErr", "Please select an Irrigation Method.");
+      document.getElementById("methodErr").innerHTML = "Please select irrigation method.";
       isValid = false;
-    } else {
-      setValidField("irrigation-method");
     }
 
-    // 8. Irrigation Date: Required (Task 6)
+    // 8. Date
     if (regdate === "") {
-      setErrorField("regdate", "dateErr", "Irrigation Date is required.");
+      document.getElementById("dateErr").innerHTML = "Please select irrigation date.";
       isValid = false;
-    } else {
-      setValidField("regdate");
     }
 
-    // On Successful Validation
     if (isValid) {
-      var banner = document.getElementById("successBanner");
-      banner.style.display = "block";
-      banner.innerHTML = "<strong>&#10004; Registration Submitted &amp; Validated Successfully!</strong><br>" +
-        "&bull; <strong>Farmer:</strong> " + name + "<br>" +
-        "&bull; <strong>Mobile:</strong> " + mobile + "<br>" +
-        "&bull; <strong>Plot ID:</strong> " + plotid.toUpperCase() + "<br>" +
-        "&bull; <strong>Current Soil Moisture:</strong> " + moistNum + "% (" + (moistNum < 30 ? "Irrigate Immediately" : "Optimal") + ")<br>" +
-        "&bull; <strong>Crop Stage:</strong> " + cropstage + "<br>" +
-        "&bull; <strong>Scheduled Date:</strong> " + regdate;
-
-      alert("Success! Form validated and registered for " + name + " (Plot: " + plotid.toUpperCase() + ")");
+      alert("Registration Successful!\nFarmer: " + name + "\nPlot: " + plotid.toUpperCase() + "\nMoisture: " + moistNum + "%");
+      return true;
     }
 
-    return isValid;
-  }
-
-  function setErrorField(inputId, errId, msg) {
-    var el = document.getElementById(inputId);
-    el.classList.add("input-invalid");
-    el.classList.remove("input-valid");
-    document.getElementById(errId).innerText = msg;
-  }
-
-  function setValidField(inputId) {
-    var el = document.getElementById(inputId);
-    el.classList.remove("input-invalid");
-    el.classList.add("input-valid");
-  }
-
-  function clearErrors() {
-    var errs = document.querySelectorAll(".err-msg");
-    for (var i = 0; i < errs.length; i++) {
-      errs[i].innerText = "";
-    }
-    var inputs = document.querySelectorAll("input, select");
-    for (var j = 0; j < inputs.length; j++) {
-      inputs[j].classList.remove("input-invalid");
-      inputs[j].classList.remove("input-valid");
-    }
-  }
-
-  function clearFormValidation() {
-    clearErrors();
-    document.getElementById("successBanner").style.display = "none";
+    return false;
   }
 </script>
 

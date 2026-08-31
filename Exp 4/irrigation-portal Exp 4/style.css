@@ -1,75 +1,163 @@
-/* Task 3: External CSS - site wide theme */
-:root {
-  --primary: #123C69;
-  --primary-dark: #0A2540;
-  --secondary: #1F6F8B;
-  --accent: #FF8C42;
-  --bg: #F4F7FA;
-  --card-bg: #FFFFFF;
-  --text: #1E293B;
-  --muted: #64748B;
-  --border: #DCE4EC;
-}
-
 * {
   box-sizing: border-box;
 }
 
 body {
-  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  background-color: var(--bg);
-  color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f4f6f9;
+  color: #333333;
   margin: 0;
   line-height: 1.6;
 }
 
-h1, h2, h3 {
-  color: var(--primary);
-  font-weight: 600;
-}
-
-h2 {
-  border-bottom: 3px solid var(--secondary);
-  display: inline-block;
-  padding-bottom: 6px;
-  margin-bottom: 20px;
-}
-
-a {
-  color: var(--secondary);
-}
-
-footer {
-  background-color: var(--primary-dark);
-  color: #cfe3ee;
-  text-align: center;
-  padding: 16px;
-  font-size: 0.9em;
-  letter-spacing: 0.5px;
-}
-
 header {
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-  color: white;
-  padding: 24px 30px;
-  border-bottom: 4px solid var(--accent);
+  background-color: #003366;
+  color: #ffffff;
+  padding: 20px 30px;
+  border-bottom: 3px solid #0056b3;
 }
 
 header h1 {
-  margin: 0 0 6px 0;
-  font-size: 1.8rem;
-  color: white;
-  letter-spacing: 0.5px;
+  margin: 0 0 5px 0;
+  font-size: 1.6rem;
+  color: #ffffff;
 }
 
 header p {
   margin: 0;
-  color: #dcecf5;
-  font-style: italic;
+  color: #d0e1fd;
+  font-size: 0.95rem;
+}
+
+h1, h2, h3 {
+  color: #003366;
+}
+
+h2 {
+  border-bottom: 2px solid #0056b3;
+  display: inline-block;
+  padding-bottom: 4px;
+  margin-bottom: 15px;
+}
+
+a {
+  color: #0056b3;
 }
 
 section {
-  padding: 10px 30px;
+  padding: 15px 30px;
+}
+
+/* Sidebar styling */
+aside {
+  background-color: #ffffff;
+  border: 1px solid #dcdcdc;
+  border-top: 3px solid #0056b3;
+  border-radius: 6px;
+  padding: 15px;
+  width: 220px;
+}
+
+aside h3 {
+  margin-top: 0;
+  font-size: 1.1rem;
+}
+
+aside ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+aside li {
+  padding: 6px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+aside li a {
+  text-decoration: none;
+  color: #003366;
+  font-weight: 500;
+}
+
+aside li a:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+/* Sensor cards */
+.sensor-card {
+  display: inline-block;
+  width: 180px;
+  margin: 10px;
+  padding: 15px;
+  border: 1px solid #dcdcdc;
+  border-radius: 6px;
+  text-align: center;
+  background-color: #ffffff;
+  vertical-align: top;
+}
+
+.sensor-card h3 {
+  margin-top: 0;
+  font-size: 1rem;
+  color: #003366;
+}
+
+/* Gallery styling */
+.gallery-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.gallery-grid figure {
+  margin: 0;
+  border: 1px solid #dcdcdc;
+  border-radius: 6px;
+  background-color: #ffffff;
+  padding: 8px;
+}
+
+.gallery-grid img {
+  width: 220px;
+  height: 150px;
+  display: block;
+  transition: transform 0.3s;
+}
+
+.gallery-grid img:hover {
+  transform: scale(1.05);
+}
+
+.gallery-grid figcaption {
+  text-align: center;
+  padding-top: 8px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  color: #003366;
+}
+
+/* Alert notice box */
+.alert-box {
+  background-color: #fff8e6;
+  border: 1px solid #e6b800;
+  border-radius: 6px;
+  padding: 14px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  text-align: center;
+  color: #664d00;
+  margin-bottom: 20px;
+}
+
+footer {
+  background-color: #002244;
+  color: #cce0ff;
+  text-align: center;
+  padding: 14px;
+  font-size: 0.9rem;
+  margin-top: 30px;
 }
 
 @media (max-width: 700px) {
@@ -77,11 +165,11 @@ section {
     padding: 10px 15px;
   }
   header {
-    padding: 20px;
+    padding: 15px;
   }
   .sensor-card {
     width: 100%;
-    margin: 10px 0;
+    margin: 8px 0;
   }
   .gallery-grid figure {
     flex: 1 1 100%;
@@ -90,122 +178,4 @@ section {
     width: 100%;
     height: auto;
   }
-  table {
-    font-size: 0.85em;
-  }
-}
-
-/* Task 4: Sidebar styled as a card */
-aside {
-  background-color: var(--card-bg);
-  border: 1px solid var(--border);
-  border-top: 4px solid var(--accent);
-  border-radius: 10px;
-  box-shadow: 0 4px 14px rgba(18, 60, 105, 0.12);
-  padding: 20px;
-  width: 230px;
-}
-
-aside h3 {
-  margin-top: 0;
-}
-
-aside ul {
-  list-style: none;
-  padding: 0;
-}
-
-aside li {
-  padding: 8px 6px;
-  border-radius: 6px;
-  transition: background-color 0.2s, padding-left 0.2s;
-}
-
-aside li a {
-  text-decoration: none;
-  color: var(--primary);
-  font-weight: 500;
-}
-
-aside li:hover {
-  background-color: #eef4f9;
-  padding-left: 12px;
-}
-
-/* Task 5: Sensor cards using box model */
-.sensor-card {
-  display: inline-block;
-  width: 190px;
-  margin: 12px;
-  padding: 18px;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  text-align: center;
-  background-color: var(--card-bg);
-  box-shadow: 0 4px 12px rgba(18, 60, 105, 0.10);
-  transition: transform 0.25s, box-shadow 0.25s;
-  vertical-align: top;
-}
-
-.sensor-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 10px 22px rgba(18, 60, 105, 0.18);
-}
-
-.sensor-card h3 {
-  color: var(--secondary);
-  margin-top: 0;
-}
-
-/* Task 6: Image gallery hover zoom */
-.gallery-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
-.gallery-grid figure {
-  margin: 0;
-  overflow: hidden;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(18, 60, 105, 0.12);
-  background-color: var(--card-bg);
-}
-
-.gallery-grid img {
-  width: 240px;
-  height: 160px;
-  display: block;
-  transition: transform 0.4s ease;
-}
-
-.gallery-grid img:hover {
-  transform: scale(1.12);
-}
-
-.gallery-grid figcaption {
-  text-align: center;
-  padding: 8px;
-  font-weight: 500;
-  color: var(--primary);
-}
-
-/* Task 10: Alert / offer box - CSS effects and highlighting */
-.alert-box {
-  background: linear-gradient(135deg, #fff3e6, #ffe0bf);
-  border: 2px solid var(--accent);
-  border-radius: 8px;
-  padding: 16px;
-  font-size: 1.3em;
-  font-weight: 600;
-  text-align: center;
-  color: var(--primary-dark);
-  text-shadow: 1px 1px 1px #ffffff;
-  animation: glow 1.6s infinite alternate;
-  margin-bottom: 20px;
-}
-
-@keyframes glow {
-  from { box-shadow: 0 0 6px var(--accent); }
-  to   { box-shadow: 0 0 28px var(--accent); }
 }

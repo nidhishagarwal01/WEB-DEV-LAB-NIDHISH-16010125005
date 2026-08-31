@@ -5,10 +5,9 @@
 <title>Irrigation Advisory</title>
 <link rel="stylesheet" href="style.css">
 
-<!-- Task 2 (Exp 2): Internal CSS for navigation menu -->
 <style>
   nav {
-    background-color: #123C69;
+    background-color: #003366;
   }
   nav ul {
     list-style-type: none;
@@ -19,65 +18,68 @@
   }
   nav ul li a {
     display: block;
-    padding: 14px 20px;
+    padding: 12px 18px;
     text-decoration: none;
     color: #ffffff;
     font-weight: 500;
-    transition: background-color 0.2s;
   }
   nav ul li a:hover {
-    background-color: #FF8C42;
-    color: #0A2540;
+    background-color: #0056b3;
+    color: #ffffff;
   }
-  .engine-card {
+  .box-card {
     background-color: #ffffff;
-    border: 1px solid #DCE4EC;
-    border-radius: 8px;
-    padding: 20px;
-    margin-top: 25px;
-    box-shadow: 0 4px 12px rgba(18, 60, 105, 0.08);
+    border: 1px solid #dcdcdc;
+    border-radius: 6px;
+    padding: 16px;
+    margin-top: 20px;
   }
   .form-group {
-    margin-bottom: 14px;
+    margin-bottom: 12px;
   }
   .form-group label {
     display: block;
-    font-weight: 600;
-    margin-bottom: 4px;
+    font-weight: bold;
+    margin-bottom: 3px;
+    font-size: 0.9em;
   }
   .form-group input, .form-group select {
-    width: 100%;
-    max-width: 320px;
-    padding: 8px 10px;
-    border: 1px solid #C7D3DE;
-    border-radius: 6px;
+    width: 260px;
+    padding: 7px 9px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    box-sizing: border-box;
   }
-  .btn-eval {
-    background: linear-gradient(135deg, #123C69, #1F6F8B);
+  .btn-blue {
+    background-color: #0056b3;
     color: white;
-    padding: 10px 22px;
+    padding: 8px 16px;
     border: none;
-    border-radius: 6px;
+    border-radius: 4px;
     cursor: pointer;
-    font-weight: 600;
+    font-weight: bold;
+    font-size: 0.9em;
+  }
+  .btn-blue:hover {
+    background-color: #004085;
   }
   .rules-table {
     border-collapse: collapse;
     width: 100%;
-    max-width: 550px;
-    margin: 15px 0;
+    max-width: 500px;
+    margin: 10px 0 15px 0;
   }
   .rules-table th, .rules-table td {
-    border: 1px solid #DCE4EC;
+    border: 1px solid #dcdcdc;
     padding: 6px 10px;
     font-size: 0.9em;
   }
   .rules-table th {
-    background-color: #123C69;
+    background-color: #003366;
     color: white;
   }
   .rules-table tr:nth-child(even) {
-    background-color: #F0F6FA;
+    background-color: #f8f9fa;
   }
 </style>
 </head>
@@ -101,7 +103,6 @@
 <section>
   <h2>Today's Irrigation Recommendation</h2>
 
-  <!-- Task 10 (Exp 2): CSS effects and highlighting (glowing alert box) -->
   <div id="liveAlertBox" class="alert-box">
     Water Stress Level: Moderate &mdash; Irrigation Needed Soon
   </div>
@@ -115,9 +116,8 @@
   <p><strong>Recommended Irrigation Duration:</strong> <em>45 minutes</em> (drip irrigation)<br>
   <strong>Water Stress Level:</strong> <mark id="waterStressMark">Moderate</mark></p>
 
-  <!-- Exp 4 - Task 2: Irrigation Recommendation Engine -->
-  <div class="engine-card">
-    <h3>AI-Driven Irrigation Advisory Engine</h3>
+  <div class="box-card">
+    <h3>Check Irrigation Advice</h3>
     
     <table class="rules-table">
       <thead>
@@ -125,27 +125,27 @@
       </thead>
       <tbody>
         <tr><td>Soil moisture &lt; 30%</td><td>Irrigation Required Immediately</td></tr>
-        <tr><td>Soil moisture 30% - 50%</td><td>Monitor Soil Moisture</td></tr>
+        <tr><td>Soil moisture between 30% and 50%</td><td>Monitor Soil Moisture</td></tr>
         <tr><td>Rain expected</td><td>Postpone Irrigation</td></tr>
         <tr><td>Soil moisture &gt; 50%</td><td>Irrigation Not Required</td></tr>
       </tbody>
     </table>
 
     <div class="form-group">
-      <label for="evalMoisture">Current Soil Moisture (%):</label>
+      <label for="evalMoisture">Soil Moisture (%):</label>
       <input type="number" id="evalMoisture" value="28" min="0" max="100">
     </div>
 
     <div class="form-group">
       <label for="evalRain">Rainfall Forecast:</label>
       <select id="evalRain">
-        <option value="No">No Rain (Clear / Sunny)</option>
-        <option value="Yes">Rain Expected (Heavy Rain / Overcast)</option>
+        <option value="No">No Rain (Clear)</option>
+        <option value="Yes">Rain Expected</option>
       </select>
     </div>
 
     <div class="form-group">
-      <label for="evalStage">Crop Stage:</label>
+      <label for="evalStage">Crop Growth Stage:</label>
       <select id="evalStage">
         <option value="Germination">Germination</option>
         <option value="Tillering">Tillering</option>
@@ -154,9 +154,9 @@
       </select>
     </div>
 
-    <button class="btn-eval" onclick="runRecommendationEngine()">Evaluate Decision Rules</button>
+    <button class="btn-blue" onclick="getAdvisory()">Check Recommendation</button>
 
-    <div id="evalSummary" style="display:none; margin-top:15px; padding:12px; background:#f0f6fa; border-radius:6px;"></div>
+    <div id="evalSummary" style="display:none; margin-top:14px; padding:10px 14px; background:#f0f4f8; border-left:3px solid #0056b3; font-size:0.95em;"></div>
   </div>
 
 </section>
@@ -166,51 +166,46 @@
 </footer>
 
 <script>
-  // Exp 4 - Task 2: Decision Rules Function
-  function runRecommendationEngine() {
+  function getAdvisory() {
     var moisture = parseFloat(document.getElementById("evalMoisture").value);
     var rainExpected = document.getElementById("evalRain").value === "Yes";
     var stage = document.getElementById("evalStage").value;
 
     if (isNaN(moisture)) {
-      alert("Please enter a valid number for soil moisture.");
+      alert("Please enter a valid soil moisture number.");
       return;
     }
 
     var recommendation = "";
     var stressLevel = "";
-    var explanation = "";
+    var note = "";
 
-    // Decision Rules
     if (rainExpected) {
       recommendation = "Postpone Irrigation";
-      stressLevel = "Low (Rain Incoming)";
-      explanation = "Rain is forecast. Postponing irrigation will prevent over-saturation and save water.";
+      stressLevel = "Low (Rain Expected)";
+      note = "Rain is expected soon. Delay irrigation to save water.";
     } else if (moisture < 30) {
       recommendation = "Irrigation Required Immediately";
-      stressLevel = "Critical / High";
-      explanation = "Moisture is below 30% critical threshold for sugarcane in " + stage + " stage.";
+      stressLevel = "High";
+      note = "Soil moisture is under 30% for sugarcane in " + stage + " stage.";
     } else if (moisture >= 30 && moisture <= 50) {
       recommendation = "Monitor Soil Moisture";
       stressLevel = "Moderate";
-      explanation = "Moisture is between 30% and 50%. Keep monitoring hourly sensor trends.";
+      note = "Soil moisture is in moderate range. Check readings again in a few hours.";
     } else {
       recommendation = "Irrigation Not Required";
       stressLevel = "Optimal";
-      explanation = "Moisture is above 50%. Adequate moisture available for crop growth.";
+      note = "Adequate soil moisture is available.";
     }
 
-    // Update glowing alert box (Task 10 from Exp 2) dynamically
-    var alertBox = document.getElementById("liveAlertBox");
-    alertBox.innerHTML = "Advisory: " + recommendation + " (" + stressLevel + ")";
+    document.getElementById("liveAlertBox").innerHTML = "Advisory: " + recommendation;
     document.getElementById("waterStressMark").innerText = stressLevel;
 
-    // Display summary
     var sumDiv = document.getElementById("evalSummary");
     sumDiv.style.display = "block";
-    sumDiv.innerHTML = "<strong>Engine Result:</strong> <span style='color:#123C69; font-weight:bold;'>" + recommendation + "</span><br>" +
-                       "&bull; <strong>Crop Stage:</strong> " + stage + "<br>" +
-                       "&bull; <strong>Context:</strong> " + explanation;
+    sumDiv.innerHTML = "<b>Recommendation:</b> " + recommendation + "<br>" +
+                       "<b>Crop Stage:</b> " + stage + "<br>" +
+                       "<b>Note:</b> " + note;
   }
 </script>
 

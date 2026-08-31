@@ -6,10 +6,9 @@
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="layout.css">
 
-<!-- Task 2 (Exp 2): Internal CSS for navigation menu -->
 <style>
   nav {
-    background-color: #123C69;
+    background-color: #003366;
   }
   nav ul {
     list-style-type: none;
@@ -20,61 +19,57 @@
   }
   nav ul li a {
     display: block;
-    padding: 14px 20px;
+    padding: 12px 18px;
     text-decoration: none;
     color: #ffffff;
     font-weight: 500;
-    transition: background-color 0.2s;
   }
   nav ul li a:hover {
-    background-color: #FF8C42;
-    color: #0A2540;
+    background-color: #0056b3;
+    color: #ffffff;
   }
-  .calculator-card {
-    background-color: #f8fafc;
-    border: 1px solid #DCE4EC;
-    border-left: 4px solid #1F6F8B;
-    border-radius: 8px;
-    padding: 20px;
-    margin: 20px 0;
+  .calc-box {
+    background-color: #ffffff;
+    border: 1px solid #dcdcdc;
+    border-radius: 6px;
+    padding: 16px;
+    margin: 18px 0;
   }
   .form-row {
-    margin-bottom: 12px;
+    margin-bottom: 10px;
   }
   .form-row label {
     display: block;
-    font-weight: 600;
-    margin-bottom: 4px;
-    color: #1E293B;
-    font-size: 0.95em;
+    font-weight: bold;
+    margin-bottom: 3px;
+    font-size: 0.9em;
   }
   .form-row input {
-    width: 100%;
-    max-width: 300px;
-    padding: 8px 10px;
-    border: 1px solid #C7D3DE;
-    border-radius: 6px;
+    width: 260px;
+    padding: 7px 9px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
   }
-  .calc-btn {
-    background: linear-gradient(135deg, #123C69, #1F6F8B);
+  .btn-blue {
+    background-color: #0056b3;
     color: white;
-    padding: 9px 20px;
+    padding: 8px 16px;
     border: none;
-    border-radius: 6px;
+    border-radius: 4px;
     cursor: pointer;
-    font-weight: 600;
-    margin-top: 8px;
+    font-weight: bold;
+    font-size: 0.9em;
   }
-  .calc-btn:hover {
-    opacity: 0.92;
+  .btn-blue:hover {
+    background-color: #004085;
   }
-  .result-output {
+  .calc-output {
     display: none;
-    margin-top: 14px;
-    padding: 12px 16px;
-    background-color: #eef4f9;
-    border-radius: 6px;
-    border-left: 3px solid #FF8C42;
+    margin-top: 12px;
+    padding: 10px 14px;
+    background-color: #f0f4f8;
+    border-left: 3px solid #0056b3;
+    font-size: 0.95em;
   }
 </style>
 </head>
@@ -82,10 +77,9 @@
 
 <div class="page-wrapper">
 
-<!-- Task 1 (Exp 2): Inline CSS on homepage header -->
-<header style="background:linear-gradient(135deg,#123C69,#1F6F8B); padding:28px 30px; border-bottom:4px solid #FF8C42;">
-  <h1 style="color:white; margin:0 0 6px 0; font-size:2rem; letter-spacing:0.5px;">Smart Irrigation Advisory System (KJS-AGR-01)</h1>
-  <p style="text-align:center; color:#dcecf5; margin:0; font-style:italic;">Smart Irrigation using AI &amp; Sensor Technology</p>
+<header>
+  <h1>Smart Irrigation Advisory System (KJS-AGR-01)</h1>
+  <p>Smart Irrigation using AI &amp; Sensor Technology</p>
 </header>
 
 <nav>
@@ -120,30 +114,28 @@
     suggest when and how much to irrigate. This helps save water and
     increase crop yield.</p>
 
-    <!-- Exp 4 - Task 1: Soil Moisture & Water Deficit Calculator -->
-    <h2>Quick Moisture &amp; Water Deficit Calculator</h2>
+    <h2>Soil Moisture &amp; Water Requirement Calculator</h2>
     
-    <div class="calculator-card">
-      <h3>1. Live System Baseline (document.write demo)</h3>
+    <div class="calc-box">
+      <h3>Sample Calculation Output</h3>
       <script>
-        // Task 1: Variables Declaration & Moisture Deficit Calculation
-        var defaultFarmer = "Ramesh Patil";
-        var defaultPlot = "AGR-1024";
-        var currentMoisture = 24.5;
-        var requiredMoisture = 45.0;
+        var farmerName = "Ramesh Patil";
+        var plotId = "AGR-1024";
+        var currentSoilMoisture = 24.5;
+        var requiredSoilMoisture = 45.0;
 
-        var deficit = requiredMoisture - currentMoisture;
+        var moistureDeficit = requiredSoilMoisture - currentSoilMoisture;
 
         document.write("<p style='margin:0;'>");
-        document.write("<strong>Farmer:</strong> " + defaultFarmer + " | <strong>Plot ID:</strong> " + defaultPlot + "<br>");
-        document.write("<strong>Current Moisture:</strong> " + currentMoisture + "% | <strong>Required:</strong> " + requiredMoisture + "%<br>");
-        document.write("<strong>Calculated Deficit:</strong> <span style='color:#BA532B; font-weight:bold;'>" + deficit.toFixed(1) + "%</span> (Status: Irrigation Required)");
+        document.write("Farmer Name: <b>" + farmerName + "</b> | Plot ID: <b>" + plotId + "</b><br>");
+        document.write("Current Soil Moisture: " + currentSoilMoisture + "% | Required Soil Moisture: " + requiredSoilMoisture + "%<br>");
+        document.write("Moisture Deficit: <b>" + moistureDeficit.toFixed(1) + "%</b> (Irrigation Required)");
         document.write("</p>");
       </script>
     </div>
 
-    <div class="calculator-card">
-      <h3>2. Interactive Field Calculator (alert demo)</h3>
+    <div class="calc-box">
+      <h3>Calculate for Your Plot</h3>
       <div class="form-row">
         <label for="farmerInput">Farmer Name:</label>
         <input type="text" id="farmerInput" value="Ramesh Patil">
@@ -154,16 +146,16 @@
       </div>
       <div class="form-row">
         <label for="curMoistInput">Current Soil Moisture (%):</label>
-        <input type="number" id="curMoistInput" value="24.5" min="0" max="100">
+        <input type="number" id="curMoistInput" value="24.5" step="0.5">
       </div>
       <div class="form-row">
-        <label for="reqMoistInput">Target Required Moisture (%):</label>
-        <input type="number" id="reqMoistInput" value="45.0" min="0" max="100">
+        <label for="reqMoistInput">Required Soil Moisture (%):</label>
+        <input type="number" id="reqMoistInput" value="45.0" step="0.5">
       </div>
 
-      <button class="calc-btn" onclick="calculateDeficitAndAlert()">Calculate Deficit &amp; Alert Status</button>
+      <button class="btn-blue" onclick="calculateDeficit()">Calculate Deficit</button>
 
-      <div id="calcOutput" class="result-output"></div>
+      <div id="calcOutput" class="calc-output"></div>
     </div>
 
     <h2 id="contact">Contact</h2>
@@ -179,42 +171,35 @@
 </div>
 
 <script>
-  // Exp 4 - Task 1 Function
-  function calculateDeficitAndAlert() {
+  function calculateDeficit() {
     var farmer = document.getElementById("farmerInput").value;
     var plot = document.getElementById("plotInput").value;
     var current = parseFloat(document.getElementById("curMoistInput").value);
     var required = parseFloat(document.getElementById("reqMoistInput").value);
 
     if (isNaN(current) || isNaN(required)) {
-      alert("Please enter valid numerical soil moisture values.");
+      alert("Please enter numeric soil moisture values.");
       return;
     }
 
-    var moistureDeficit = required - current;
+    var deficit = required - current;
     var status = "";
 
-    if (moistureDeficit > 0) {
-      status = "Irrigation Required (" + Math.round(moistureDeficit * 2) + " min drip cycle)";
+    if (deficit > 0) {
+      status = "Irrigation is required (approx " + Math.round(deficit * 2) + " min drip duration).";
     } else {
-      moistureDeficit = 0;
-      status = "Optimal Moisture Level &mdash; No Irrigation Required";
+      deficit = 0;
+      status = "Soil moisture is sufficient. No irrigation required.";
     }
 
-    // Display alert() as required by Task 1
-    alert("Irrigation Advisory Status:\n" +
-          "Farmer: " + farmer + "\n" +
-          "Plot ID: " + plot + "\n" +
-          "Current Moisture: " + current + "%\n" +
-          "Moisture Deficit: " + moistureDeficit.toFixed(1) + "%\n" +
-          "Status: " + status);
+    alert("Irrigation Status:\nFarmer: " + farmer + "\nPlot ID: " + plot + "\nMoisture Deficit: " + deficit.toFixed(1) + "%\nStatus: " + status);
 
-    // Update on-page DOM
     var outDiv = document.getElementById("calcOutput");
     outDiv.style.display = "block";
-    outDiv.innerHTML = "<strong>Result for " + plot + " (" + farmer + "):</strong><br>" +
-      "Current: " + current + "% | Required: " + required + "% | Deficit: <strong>" + moistureDeficit.toFixed(1) + "%</strong><br>" +
-      "<strong>Action:</strong> " + status;
+    outDiv.innerHTML = "<b>Calculation Result:</b><br>" +
+      "Plot: " + plot + " (" + farmer + ")<br>" +
+      "Current: " + current + "% | Target: " + required + "% | Deficit: <b>" + deficit.toFixed(1) + "%</b><br>" +
+      "Recommendation: " + status;
   }
 </script>
 

@@ -1,56 +1,51 @@
-/* Task 8: Registration form styling */
 fieldset {
-  border: 1px solid #DCE4EC;
-  border-radius: 10px;
-  padding: 20px;
-  margin-bottom: 20px;
+  border: 1px solid #cccccc;
+  border-radius: 6px;
+  padding: 15px 20px;
+  margin-bottom: 15px;
   background-color: #ffffff;
-  box-shadow: 0 4px 14px rgba(18, 60, 105, 0.08);
 }
 
 legend {
-  color: #123C69;
-  font-weight: 600;
-  padding: 0 8px;
-  font-size: 1.05em;
+  color: #003366;
+  font-weight: bold;
+  padding: 0 6px;
 }
 
 label {
-  font-weight: 500;
-  color: #1E293B;
+  font-weight: bold;
+  color: #333333;
+  font-size: 0.95em;
 }
 
 input, select {
   width: 100%;
   max-width: 320px;
-  padding: 9px 10px;
-  margin: 6px 0 14px 0;
-  border: 1px solid #C7D3DE;
-  border-radius: 6px;
+  padding: 8px 10px;
+  margin: 5px 0 12px 0;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
   font-size: 0.95em;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
 }
 
 input:focus, select:focus {
-  border-color: #FF8C42;
+  border-color: #0056b3;
   outline: none;
-  box-shadow: 0 0 0 3px rgba(255, 140, 66, 0.25);
 }
 
 input[type="submit"] {
-  background: linear-gradient(135deg, #123C69, #1F6F8B);
-  color: white;
+  background-color: #0056b3;
+  color: #ffffff;
   width: auto;
-  padding: 10px 26px;
+  padding: 9px 20px;
   border: none;
-  border-radius: 6px;
-  font-size: 1em;
-  font-weight: 600;
+  border-radius: 4px;
+  font-size: 0.95em;
+  font-weight: bold;
   cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
 }
 
 input[type="submit"]:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(18, 60, 105, 0.3);
+  background-color: #004085;
 }
