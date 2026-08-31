@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Program 2 - Functions &amp; Events</title>
+</head>
+<body>
+    <h2>JavaScript Functions &amp; Events</h2>
+
+    <button onclick="greet()">Click Me</button>
+    <br><br>
+
+    <p id="hoverBox" onmouseover="mouseOver()" onmouseout="mouseOut()" style="background-color: lightyellow; padding: 10px; display: inline-block; border: 1px solid #ccc;">
+        Keep cursor over me
+    </p>
+
+    <script>
+        function greet() {
+            alert("Hello! Welcome to JavaScript.");
+        }
+
+        function mouseOver() {
+            document.getElementById("hoverBox").innerHTML = "Mouse is OVER me!";
+            document.getElementById("hoverBox").style.backgroundColor = "lightgreen";
+        }
+
+        function mouseOut() {
+            document.getElementById("hoverBox").innerHTML = "Keep cursor over me";
+            document.getElementById("hoverBox").style.backgroundColor = "lightyellow";
+        }
+    </script>
+</body>
+</html>
